@@ -1,12 +1,16 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import ActivityPenal from 'components/ActivityPenal';
 
 const MerchentScreen = () => {
   console.log('merchent...');
   return (
-    <View style={styles.container}>
-      <Text>MerchentScreen</Text>
-    </View>
+    <ActivityPenal styleChildren={styles.container} hiddenBack title="MerchentScreen">
+      <View>
+        <Text>MerchentScreen...</Text>
+      </View>
+    </ActivityPenal>
   );
 };
 

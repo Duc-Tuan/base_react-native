@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unstable-nested-components */
 import { BottomTabBarButtonProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -87,7 +88,7 @@ const BottomTab = () => {
             title: t('Trang chủ'),
             tabBarLabel: tabBarLabel(t('Trang chủ')),
             tabBarItemStyle: {
-              transform: [{ translateY: -10 }],
+              transform: [{ translateY: -14 }],
             },
           }}
           name="HomeScreen"
@@ -127,13 +128,12 @@ const styles = StyleSheet.create({
     top:
       heightFull -
       Platform.select({
-        ios: 59,
-        android: 89,
+        ios: 69,
+        android: 99,
         default: 0,
       }),
-    zIndex: 10000,
     borderStyle: 'solid',
-    borderBottomWidth: 10,
+    borderBottomWidth: 20,
     borderBottomColor: 'white',
     borderLeftWidth: widthFull * 0.5,
     borderRightWidth: widthFull * 0.5,

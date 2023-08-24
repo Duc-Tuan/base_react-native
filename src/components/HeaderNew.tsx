@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IconAdd, IconClose, IconLeft, IconSearch } from 'assets/icons';
 import { useBoolean } from 'hooks/useBoolean';

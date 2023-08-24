@@ -1,13 +1,17 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import ActivityPenal from 'components/ActivityPenal';
 
 const HeartScreen = () => {
   console.log('Heart...');
 
   return (
-    <View style={styles.container}>
-      <Text>HeartScreen</Text>
-    </View>
+    <ActivityPenal styleChildren={styles.container} hiddenBack title="HeartScreen">
+      <View>
+        <Text>HeartScreen...</Text>
+      </View>
+    </ActivityPenal>
   );
 };
 

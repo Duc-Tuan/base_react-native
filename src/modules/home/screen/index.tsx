@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useScrollToTop } from '@react-navigation/native';
 import { IconCart } from 'assets/icons';
 import ActivityPenal from 'components/ActivityPenal';
@@ -38,8 +39,8 @@ const HomeScreen = () => {
           setTextSearch={setTextSearch}
           rightIcon={<IconCart fill={Colors.white} />}
           // hiddenBack
-          title={t('Danh sách đơn hàng')}
-          placeholder={t('Mã đơn hàng, tên, sđt khách hàng')}
+          title={t('Trang chủ')}
+          placeholder={t('Tìm kiếm tên, mã sản phẩm...')}
         />
       }>
       <ScrollView

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useLayout } from '@react-native-community/hooks';
 import { IconLeft } from 'assets/icons';
 import NavigationService from 'naviagtion/stack/NavigationService';
@@ -15,7 +16,6 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import Colors from 'themes/Color';
-import { widthFull } from 'types/StyleGlobal';
 import { getStatusBarHeight } from 'utils/iphoneXHelper';
 import LoadingOverley from './LoadingOverley';
 
@@ -89,7 +89,7 @@ const ActivityPenal: FC<Props> = ({
               <View style={[styles.viewLeft, { width: widthHeaderLeft }]}>
                 {!hiddenBack && (
                   <TouchableOpacity onPress={onBackPress || NavigationService.goBack} style={styles.viewBack}>
-                    {leftIcon || <IconLeft />}
+                    {leftIcon || <IconLeft fill={Colors.white} />}
                   </TouchableOpacity>
                 )}
               </View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 120,
     borderBottomStartRadius: 120,
   },
-  viewImage: { height: '100%', width: widthFull + 40 },
+  viewImage: { height: '100%', width: '100%' },
   viewLeft: { width: '15%', height: 40 },
   viewRight: { minWidth: '15%', alignItems: 'flex-end' },
   textTitle: { fontSize: 17, fontWeight: '600', textAlign: 'center', color: '#FFFFFF', flex: 1 },

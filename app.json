@@ -1,4 +1,8 @@
 {
   "name": "FoodList",
-  "displayName": "FoodList"
+  "displayName": "FoodList",
+  "expo": {
+    "sdkVersion": "48.0.0",
+    "slug": "project_name"
+  }
 }
