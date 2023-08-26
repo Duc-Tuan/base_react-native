@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { useScrollToTop } from '@react-navigation/native';
-import { ButtonCustom } from 'components';
 import ActivityPenal from 'components/ActivityPenal';
 import HeaderNew from 'components/HeaderNew';
 import React from 'react';
@@ -39,10 +38,8 @@ const HomeScreen = () => {
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
         <View>
-          <Text>HomeScreenHomeScreenHomeScreenHomeScreenHomeScreen</Text>
+          <Text>HomeScreen</Text>
         </View>
-
-        <ButtonCustom text="ádadbnjk" />
       </ScrollView>
     </ActivityPenal>
   );

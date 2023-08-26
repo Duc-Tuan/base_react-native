@@ -53,6 +53,9 @@ export const styleGlobal = StyleSheet.create({
   justifyContent_wrap: {
     flexWrap: 'wrap',
   },
+  gap_6: {
+    gap: 6,
+  },
   gap_10: {
     gap: 10,
   },
@@ -109,5 +112,31 @@ export const styleGlobal = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  padding_6: {
+    paddingVertical: 6,
+    paddingHorizontal: 6,
+  },
+  padding_8: {
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+  },
+  padding_10: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  padding_12: {
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+  },
+  padding_14: {
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+  },
+});
+
+export const marginVerticalItemListView = StyleSheet.create({
+  container: {
+    marginVertical: 1,
   },
 });

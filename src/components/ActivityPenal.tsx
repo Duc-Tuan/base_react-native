@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   viewRight: { minWidth: '15%', alignItems: 'flex-end' },
   textTitle: { fontSize: 17, fontWeight: '600', textAlign: 'center', color: '#FFFFFF', flex: 1 },
   viewBack: { paddingLeft: 15, justifyContent: 'center', flex: 1, height: 40 },
-  viewChildren: { flex: 1, paddingHorizontal: 10 },
+  viewChildren: { flex: 1},
   viewContentHeader: { height: 40, flexDirection: 'row', alignItems: 'center' },
   borderHeader: { borderBottomWidth: 1, borderBottomColor: '#DCE0E0' },
   backgroundHidden: { backgroundColor: 'transparent' },

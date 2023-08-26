@@ -4,7 +4,7 @@ type Props = {
   width?: number;
   height?: number;
 };
-export default function IconCheck(props: Props) {
+export default function IconAddCart(props: Props) {
   const { fill = 'black', width = 24, height = 24 } = props;
   return (
     <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} {...props}>
