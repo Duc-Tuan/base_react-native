@@ -6,7 +6,7 @@ import ActivityPenal from 'components/ActivityPenal';
 const SettingScreen = () => {
   console.log('setting...');
   return (
-    <ActivityPenal styleChildren={styles.container} hiddenBack title="SettingScreen">
+    <ActivityPenal styleChildren={styles.container} hiddenBack title="Thông tin cá nhân">
       <View>
         <Text>SettingScreen...</Text>
       </View>

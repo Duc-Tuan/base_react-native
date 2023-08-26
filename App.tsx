@@ -20,7 +20,6 @@ import 'i18n';
 enableScreens();
 
 import { toastConfig } from './src/configs/toast';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 const NavigationApp = React.lazy(() => import('naviagtion'));
 
@@ -29,9 +28,7 @@ function App(): JSX.Element {
     <SafeAreaProvider>
       <ClickOutsideProvider>
         <Suspense fallback={undefined}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <NavigationApp />
-          </TouchableWithoutFeedback>
+          <NavigationApp />
         </Suspense>
       </ClickOutsideProvider>
       <Toast config={toastConfig} />

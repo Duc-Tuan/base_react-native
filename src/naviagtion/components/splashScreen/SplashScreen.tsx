@@ -5,8 +5,6 @@ import { Image, StyleSheet, View } from 'react-native';
 import { heightFull, styleGlobal, widthFull } from '../../../types/StyleGlobal';
 import NavigationService from 'naviagtion/stack/NavigationService';
 
-console.log(widthFull);
-
 const SplashScreen = () => {
 
   React.useEffect(() => {

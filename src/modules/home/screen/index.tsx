@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { useScrollToTop } from '@react-navigation/native';
-import { IconCart } from 'assets/icons';
+import { ButtonCustom } from 'components';
 import ActivityPenal from 'components/ActivityPenal';
 import HeaderNew from 'components/HeaderNew';
 import React from 'react';
@@ -27,28 +27,22 @@ const HomeScreen = () => {
     }
   }, []);
 
-  React.useEffect(() => {
-    console.log('HomeScreen...');
-  }, []);
+  console.log('HomeScreen...');
 
   return (
     <ActivityPenal
       styleChildren={styles.container}
       renderHeader={
-        <HeaderNew
-          setTextSearch={setTextSearch}
-          rightIcon={<IconCart fill={Colors.white} />}
-          // hiddenBack
-          title={t('Trang chủ')}
-          placeholder={t('Tìm kiếm tên, mã sản phẩm...')}
-        />
+        <HeaderNew setTextSearch={setTextSearch} hiddenBack isUser placeholder={t('Tìm kiếm tên, mã sản phẩm...')} />
       }>
       <ScrollView
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
         <View>
-          <Text>HomeScreen</Text>
+          <Text>HomeScreenHomeScreenHomeScreenHomeScreenHomeScreen</Text>
         </View>
+
+        <ButtonCustom text="ádadbnjk" />
       </ScrollView>
     </ActivityPenal>
   );

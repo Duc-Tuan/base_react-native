@@ -18,6 +18,7 @@ const Colors = {
   inputDisable: '#F7F8F8',
   warning: '#F6A609',
   green: '#16A34A',
+  error: '#fb4e4e',
 };
 
 export const setColorPrimary = (_value: string) => {

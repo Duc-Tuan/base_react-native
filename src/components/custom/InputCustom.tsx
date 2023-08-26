@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IconClose } from 'assets/icons';
+import { IconClose, IconEye, IconEyeOff } from 'assets/icons';
+import { useBoolean } from 'hooks/useBoolean';
 import React from 'react';
-import { KeyboardType, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { KeyboardType, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
@@ -12,8 +14,9 @@ type Props = {
   inputStyle?: ViewStyle;
   onChange?: (value: string) => void;
   type?: KeyboardType;
-  initialState?: any;
+  // initialState?: any;
   label?: string;
+  valueText?: string;
   icon?: any;
   iconLeft?: boolean;
   iconRight?: boolean;
@@ -21,7 +24,7 @@ type Props = {
   setFocused?: any;
   secureTextEntry?: any;
   close?: boolean;
-  typeInput?: string;
+  onBlur?: any;
 };
 
 const InputCustom = (props: Props) => {
@@ -30,7 +33,7 @@ const InputCustom = (props: Props) => {
     inputStyle,
     onChange,
     type,
-    initialState,
+    // initialState,
     label,
     icon,
     iconLeft,
@@ -39,54 +42,50 @@ const InputCustom = (props: Props) => {
     setFocused,
     secureTextEntry,
     close = true,
-    typeInput = 'text',
+    valueText,
+    onBlur,
   } = props;
   const [focus, setFocus] = React.useState<boolean>(false);
-  const [value, setValue] = React.useState<string>('');
+  const [value, setValue] = React.useState<string>(valueText ?? '');
+  const [showPassword, { on, off, toggle }] = useBoolean(secureTextEntry ?? false);
   const handleSearch = (value: string) => {
+    onChange && onChange(value);
     setValue(value);
   };
   React.useEffect(() => {
-    setValueSearch && setValueSearch(value);
-  }, [value]);
+    setValueSearch && setValueSearch(valueText ?? value);
+  }, [value, valueText]);
 
   return (
     <View style={{ position: 'relative' }}>
-      {label && <Text style={{ fontWeight: '600', fontSize: 16, marginBottom: 4 }}>{label}</Text>}
+      {label && <Text style={{ fontWeight: '600', color: Colors.black, fontSize: 16, marginBottom: 4 }}>{label}</Text>}
       <View
         style={[
           styleGlobal.dFlex_center,
           styleGlobal.flexDirection_row,
           styleGlobal.border,
           styles.container,
-          inputStyle,
           {
-            borderColor: focus || value !== '' ? hexToRgba(Colors.black, 0.6) : 'rgba(0, 0, 0, 0.3)',
+            borderColor: focus || value !== '' ? hexToRgba(Colors.primary, 0.6) : 'rgba(0, 0, 0, 0.1)',
           },
           {
             justifyContent: 'space-between',
           },
+          inputStyle,
         ]}>
         {iconLeft && icon}
         <TextInput
-          secureTextEntry={secureTextEntry}
+          secureTextEntry={showPassword}
           onFocus={() => {
             setFocused && setFocused(!focus);
             setFocus(true);
           }}
-          onBlur={() => {
-            setFocus(false);
-          }}
+          onBlur={onBlur}
           accessible={false}
-          style={{
-            padding: 4,
-            width: '100%',
-            zIndex: 10,
-            paddingRight: 30,
-          }}
+          style={styles.viewTextInput}
           onChangeText={handleSearch}
           placeholder={placeholder}
-          placeholderTextColor={'rgba(0, 0, 0, 0.6)'}
+          placeholderTextColor={'rgba(0, 0, 0, 0.4)'}
           keyboardType={type ?? undefined}
           value={value}
           numberOfLines={1}
@@ -96,13 +95,21 @@ const InputCustom = (props: Props) => {
             onPress={() => {
               setValue('');
             }}
-            style={{
-              position: 'absolute',
-              top: '26%',
-              right: 10,
-              zIndex: 100,
-            }}>
+            style={styles.viewIconRight}>
             <IconClose fill={Colors.primary} />
+          </TouchableOpacity>
+        )}
+        {!iconRight && secureTextEntry && (
+          <TouchableOpacity
+            onPress={() => {
+              toggle();
+            }}
+            style={styles.viewIconRight}>
+            {showPassword ? (
+              <IconEyeOff fill={hexToRgba(Colors.black, 0.4)} width={20} height={20} />
+            ) : (
+              <IconEye fill={hexToRgba(Colors.black, 0.4)} width={20} height={20} />
+            )}
           </TouchableOpacity>
         )}
         {iconRight && icon}
@@ -120,10 +127,20 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 4,
     backgroundColor: 'white',
-    paddingTop: 6,
+    paddingTop: Platform.select({
+      ios: 6,
+      android: 0,
+      default: 0,
+    }),
     paddingRight: 34,
-    paddingBottom: 6,
+    paddingBottom: Platform.select({
+      ios: 6,
+      android: 0,
+      default: 0,
+    }),
     fontSize: 18,
     width: '100%',
   },
+  viewTextInput: { padding: 4, width: '100%', zIndex: 10, paddingRight: 10 },
+  viewIconRight: { position: 'absolute', top: '20%', right: 10, zIndex: 100 },
 });

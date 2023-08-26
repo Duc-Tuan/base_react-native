@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IconAdd, IconClose, IconLeft, IconSearch } from 'assets/icons';
+import { dataCarts } from 'assets/data';
+import { IconAdd, IconCart, IconClose, IconLeft, IconSearch, IconUser } from 'assets/icons';
+import { PathName } from 'configs';
 import { useBoolean } from 'hooks/useBoolean';
 import useDebounce from 'hooks/useDebounce';
 import NavigationService from 'naviagtion/stack/NavigationService';
@@ -14,8 +16,9 @@ interface IProps {
   hiddenBack?: boolean;
   hiddenSearch?: boolean;
   hiddenAdd?: boolean;
-  leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  isRightIcon?: boolean;
+  isUser?: boolean;
   onBackPress?: () => void;
   setTextSearch?: (value: string) => void;
   title?: string;
@@ -27,7 +30,6 @@ interface IProps {
 
 const HeaderNew: React.FC<IProps> = ({
   hiddenBack,
-  leftIcon,
   onBackPress,
   setTextSearch,
   title,
@@ -37,6 +39,8 @@ const HeaderNew: React.FC<IProps> = ({
   hiddenAdd,
   handleAdd,
   rightIcon,
+  isRightIcon,
+  isUser,
   handleRight,
 }) => {
   const [isOpenSearch, { on, off }] = useBoolean();
@@ -90,13 +94,17 @@ const HeaderNew: React.FC<IProps> = ({
           styles.viewContentHeader,
         ]}>
         <View style={[styles.viewLeft, !!hiddenBack && !isOpenSearch && styles.pr0]}>
-          <TouchableOpacity onPress={handleBack} style={styles.viewBack}>
-            {leftIcon ? (
-              leftIcon
-            ) : isOpenSearch ? (
+          <TouchableOpacity onPress={handleBack} style={[styles.viewBack]}>
+            {isOpenSearch ? (
               <IconClose fill={Colors.white} />
             ) : (
-              <React.Fragment>{!hiddenBack && <IconLeft fill={Colors.white} />}</React.Fragment>
+              <React.Fragment>
+                {isUser ? (
+                  <IconUser fill={Colors.white} width={28} height={28} />
+                ) : (
+                  !hiddenBack && <IconLeft fill={Colors.white} />
+                )}
+              </React.Fragment>
             )}
           </TouchableOpacity>
         </View>
@@ -137,6 +145,25 @@ const HeaderNew: React.FC<IProps> = ({
             <TouchableOpacity onPress={handleRight} style={styles.viewButtonActions}>
               {rightIcon}
             </TouchableOpacity>
+          )}
+
+          {!isRightIcon && (
+            <View style={styles.ViewCart}>
+              <TouchableOpacity
+                onPress={() => NavigationService.navigate(PathName.CARTSCREEN)}
+                style={styles.viewButtonActions}>
+                <IconCart fill={Colors.white} />
+                <View
+                  style={[
+                    StyleSheet.absoluteFillObject,
+                    styleGlobal.dFlex_center,
+                    styleGlobal.border,
+                    styles.notification,
+                  ]}>
+                  <Text style={styles.ViewTextnotification}>{dataCarts.length}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           )}
         </View>
       </View>
@@ -186,5 +213,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
+  },
+  notification: {
+    left: 18,
+    top: -2,
+    backgroundColor: 'red',
+    borderRadius: 100,
+    height: 16,
+    width: 16,
+    borderColor: Colors.white,
+  },
+  ViewTextnotification: {
+    color: Colors.white,
+    fontSize: 8,
+    fontWeight: '700',
+  },
+  ViewCart: { position: 'relative' },
+  viewMenuCart: {
+    position: 'absolute',
+    top: 38,
+    right: 0,
+    backgroundColor: Colors.white,
+    height: 400,
+    width: 300,
+    borderRadius: 4,
+    padding: 10,
+    zIndex: 1000,
+  },
+  viewMenu: {
+    height: '90%',
   },
 });

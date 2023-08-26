@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import Colors from 'themes/Color';
+import { styleGlobal } from 'types/StyleGlobal';
 
 type Props = {
   icon: any;
@@ -16,7 +17,10 @@ const ButtonIconCustom = (props: Props) => {
   }, []);
 
   return (
-    <TouchableOpacity activeOpacity={1} style={[styles.container, buttonStyle]} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={[styleGlobal.boxshadow, styles.container, buttonStyle]}
+      onPress={onPress}>
       <View style={[{ transform: [{ rotate: '-45deg' }] }]}>{icon}</View>
     </TouchableOpacity>
   );

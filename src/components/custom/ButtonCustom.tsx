@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import { Platform } from 'react-native';
 import { StyleSheet, Text, TextStyle, TouchableHighlight, TouchableOpacity, ViewStyle } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
@@ -125,11 +126,15 @@ const styles = StyleSheet.create({
   container: {
     minWidth: 70,
     maxWidth: 200,
-    padding: 4,
+    padding: Platform.select({
+      ios: 8,
+      android: 5,
+      default: 0,
+    }),
     borderRadius: 4,
   },
   textView: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',
   },

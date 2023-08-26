@@ -4,6 +4,7 @@
 import { BottomTabBarButtonProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { LabelPosition } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import { IconHeart, IconHome, IconNotifi, IconSettinguser, IconShop } from 'assets/icons';
+import { PathName } from 'configs';
 import HeartScreen from 'modules/heart/screen';
 import HomeScreen from 'modules/home/screen';
 import MerchentScreen from 'modules/merchent/screen';
@@ -61,7 +62,6 @@ const BottomTab = () => {
             borderTopWidth: 0,
             shadowColor: 'transparent',
           },
-          // tabBarHideOnKeyboard: true,
         }}
         initialRouteName="HomeScreen">
         <Stack.Screen
@@ -70,7 +70,7 @@ const BottomTab = () => {
             title: t('Ưa thích'),
             tabBarLabel: tabBarLabel(t('Ưa thích')),
           }}
-          name="HeartScreen"
+          name={PathName.HEARTSCREEN}
           component={HeartScreen}
         />
         <Stack.Screen
@@ -79,7 +79,7 @@ const BottomTab = () => {
             title: t('Cửa hàng'),
             tabBarLabel: tabBarLabel(t('Cửa hàng')),
           }}
-          name="MerchentScreen"
+          name={PathName.MERCHENTSCREEN}
           component={MerchentScreen}
         />
         <Stack.Screen
@@ -91,7 +91,7 @@ const BottomTab = () => {
               transform: [{ translateY: -14 }],
             },
           }}
-          name="HomeScreen"
+          name={PathName.HOMESCREEN}
           component={HomeScreen}
         />
         <Stack.Screen
@@ -100,7 +100,7 @@ const BottomTab = () => {
             title: t('Thông báo'),
             tabBarLabel: tabBarLabel(t('Thông báo')),
           }}
-          name="NotificationScreen"
+          name={PathName.NOTIFICATIONSCREEN}
           component={NotificationScreen}
         />
         <Stack.Screen
@@ -109,7 +109,7 @@ const BottomTab = () => {
             title: t('Thiết lập'),
             tabBarLabel: tabBarLabel(t('Thiết lập')),
           }}
-          name="SettingScreen"
+          name={PathName.SETTINGSCREEN}
           component={SettingScreen}
         />
       </Stack.Navigator>
