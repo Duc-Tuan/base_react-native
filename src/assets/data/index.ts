@@ -8,7 +8,7 @@ export interface ICarts {
     promotion: number;
 }
 
-export const dataCarts: ICarts[] = [
+export const dataCarts: ICarts[] | [] = [
     {
         id: 1,
         name: 'Sản phẩm 1',
@@ -67,26 +67,26 @@ export const dataCarts: ICarts[] = [
     },
     {
         id: 8,
-        name: 'Sản phẩm 8 Sản phẩm 8 Sản phẩm 8 Sản phẩm 8 Sản phẩm 8 Sản phẩm 8 Sản phẩm 8 Sản phẩm 8',
+        name: 'Sản phẩm 8',
         image: require('assets/images/app.png'),
-        qty: 4,
-        price: 230000,
+        qty: 2,
+        price: 120000,
         promotion: 10,
     },
     {
         id: 9,
         name: 'Sản phẩm 9',
         image: require('assets/images/app.png'),
-        qty: 4,
-        price: 230000,
+        qty: 2,
+        price: 120000,
         promotion: 10,
     },
     {
         id: 10,
         name: 'Sản phẩm 10',
         image: require('assets/images/app.png'),
-        qty: 4,
-        price: 230000,
+        qty: 2,
+        price: 120000,
         promotion: 10,
     },
 ]

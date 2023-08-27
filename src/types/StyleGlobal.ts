@@ -133,6 +133,18 @@ export const styleGlobal = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 14,
   },
+  flex_1: {
+    flex: 1,
+  },
+  flex_2: {
+    flex: 2,
+  },
+  flex_3: {
+    flex: 3,
+  },
+  flex_4: {
+    flex: 4,
+  },
 });
 
 export const marginVerticalItemListView = StyleSheet.create({

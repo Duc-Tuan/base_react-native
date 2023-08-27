@@ -49,7 +49,7 @@ const ButtonCustom = (props: Props) => {
     }
     if (typeButton === 'disabled') {
       return (defaultStyles = {
-        backgroundColor: hexToRgba(Colors.black, 0.3),
+        backgroundColor: hexToRgba(Colors.primary, 0.6),
         borderColor: 'rgba(0, 0, 0, 0.1)',
       });
     }

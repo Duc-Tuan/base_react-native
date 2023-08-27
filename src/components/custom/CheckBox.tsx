@@ -28,6 +28,10 @@ const CheckBox: React.FC<IProps> = ({ textRight, isDistable = true, size = 18, v
     onChange && onChange(isChecked);
   }, [isChecked]);
 
+  React.useEffect(() => {
+    value ? on() : off();
+  }, [value]);
+
   return (
     <TouchableOpacity activeOpacity={1} onPress={() => isDistable && toggle()}>
       <View style={[styleGlobal.flexDirection_row, styleGlobal.gap_10, styles.container]}>

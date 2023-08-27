@@ -27,7 +27,6 @@ const HomeScreen = () => {
   }, []);
 
   console.log('HomeScreen...');
-
   return (
     <ActivityPenal
       styleChildren={styles.container}
@@ -49,4 +48,14 @@ export default React.memo(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {},
+  imageRefresh: { width: 16, height: 16 },
+  viewButtonRefresh: {
+    width: 36,
+    height: 36,
+    borderRadius: 36,
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

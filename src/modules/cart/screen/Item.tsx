@@ -1,19 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import React from 'react';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { IconAdd, IconRemove } from 'assets/icons';
 import { formatCurrency, hexToRgba } from 'utils';
+import { ICarts } from 'assets/data';
+import useDebounce from 'hooks/useDebounce';
 
 interface IProps {
   data: any;
+  setData?: React.Dispatch<React.SetStateAction<ICarts[]>>;
 }
 
-const Item: React.FC<IProps> = ({ data }) => {
+const Item: React.FC<IProps> = ({ data, setData }) => {
   const [qty, setQty] = React.useState<number>(data?.qty);
 
   const styleCustom = [styleGlobal.alignItems_flexStart, styleGlobal.flexDirection_row, styleGlobal.gap_10];
   const flex = { flex: 1 };
+
+  const valueDebounce = useDebounce(qty, 400);
+
+  React.useEffect(() => {
+    setData &&
+      setData((prev: ICarts[]) => {
+        const dataNew: ICarts[] = [...prev];
+        dataNew?.map((d: ICarts) => {
+          if (d?.id === data?.id) {
+            return (d.qty = valueDebounce);
+          }
+        });
+        return dataNew;
+      });
+  }, [valueDebounce]);
 
   return (
     <View style={[...styleCustom, styleGlobal.justifyContent_spaceBetween, styleGlobal.padding_6, styles.container]}>
@@ -86,6 +105,7 @@ const styles = StyleSheet.create({
   },
   viewTextName: {
     fontWeight: '700',
+    color: Colors.black,
   },
   changeQty: {
     backgroundColor: hexToRgba(Colors.primary, 0.8),
