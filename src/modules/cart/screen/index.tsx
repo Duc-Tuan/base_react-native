@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useScrollToTop } from '@react-navigation/native';
-import { ICarts, dataCarts } from 'assets/data';
+import { ICarts } from 'assets/data';
 import { ActivityPenal, ButtonCustom, HeaderNew } from 'components';
 import SwipeListViewCustom from 'components/custom/SwipeListViewCustom';
 import React from 'react';
@@ -8,15 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import Colors from 'themes/Color';
 import { marginVerticalItemListView, styleGlobal } from 'types/StyleGlobal';
-import Item from './Item';
 import { formatCurrency } from 'utils';
+import Item from './Item';
 import ButtonAddCartNull from './buttonAddCartNull.tsx';
 
 const CartsScreen = () => {
   const { t } = useTranslation();
   const refScrollView = React.useRef<any>();
   const [selectCheck, setSelectCheck] = React.useState<number[]>([]);
-  const [data, setData] = React.useState<ICarts[]>(dataCarts);
+  const [data, setData] = React.useState<ICarts[]>([]);
   useScrollToTop(refScrollView);
 
   const totalMoney = React.useMemo(() => {

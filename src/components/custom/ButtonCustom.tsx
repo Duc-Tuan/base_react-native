@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
 import { StyleSheet, Text, TextStyle, TouchableHighlight, TouchableOpacity, ViewStyle } from 'react-native';
 import Colors from 'themes/Color';
@@ -17,6 +18,7 @@ type Props = {
 };
 
 const ButtonCustom = (props: Props) => {
+  const { t } = useTranslation();
   const { text, action, typeButton = 'main', styleButton, styleText, hover = false, disabled = false } = props;
   const [isHover, setIsHover] = React.useState<boolean>(false);
 
@@ -93,7 +95,7 @@ const ButtonCustom = (props: Props) => {
           },
           styles.textView,
         ]}>
-        {text}
+        {t(`${text}`)}
       </Text>
     </TouchableHighlight>
   ) : (
@@ -114,7 +116,7 @@ const ButtonCustom = (props: Props) => {
           },
           styles.textView,
         ]}>
-        {text}
+        {t(`${text}`)}
       </Text>
     </TouchableOpacity>
   );

@@ -50,7 +50,7 @@ export const styleGlobal = StyleSheet.create({
   justifyContent_spaceEvenly: {
     justifyContent: 'space-evenly',
   },
-  justifyContent_wrap: {
+  flex_wrap: {
     flexWrap: 'wrap',
   },
   gap_6: {
@@ -80,7 +80,7 @@ export const styleGlobal = StyleSheet.create({
   },
   boxshadow: {
     shadowColor: hexToRgba(Colors.black, 0.6),
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.8,
     shadowOffset: {
       width: 1,
       height: 1,
@@ -113,6 +113,14 @@ export const styleGlobal = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  padding_2: {
+    paddingVertical: 2,
+    paddingHorizontal: 2,
+  },
+  padding_4: {
+    paddingVertical: 4,
+    paddingHorizontal: 4,
+  },
   padding_6: {
     paddingVertical: 6,
     paddingHorizontal: 6,
@@ -144,6 +152,12 @@ export const styleGlobal = StyleSheet.create({
   },
   flex_4: {
     flex: 4,
+  },
+  textPrimary: {
+    color: Colors.textColor,
+  },
+  textFontBold: {
+    fontWeight: '700',
   },
 });
 
