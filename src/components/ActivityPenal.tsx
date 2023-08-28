@@ -18,6 +18,7 @@ import {
 import Colors from 'themes/Color';
 import { getStatusBarHeight } from 'utils/iphoneXHelper';
 import LoadingOverley from './LoadingOverley';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   children?: React.ReactNode;
@@ -60,6 +61,7 @@ const ActivityPenal: FC<Props> = ({
   onBackPress,
   adjustsFontSizeToFit,
 }) => {
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const { onLayout: onLayoutRight, width: widthRight } = useLayout();
   const widthHeaderLeft = React.useMemo(() => (widthRight > 0.15 * width ? widthRight : '15%'), [width, widthRight]);
@@ -98,7 +100,7 @@ const ActivityPenal: FC<Props> = ({
                 numberOfLines={1}
                 adjustsFontSizeToFit={adjustsFontSizeToFit}
                 style={StyleSheet.flatten([styles.textTitle, titleStyle])}>
-                {title}
+                {t(`${title}`)}
               </Text>
 
               <View onLayout={onLayoutRight} style={[styles.viewRight, rightIconStyle]}>
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
   viewRight: { minWidth: '15%', alignItems: 'flex-end' },
   textTitle: { fontSize: 17, fontWeight: '600', textAlign: 'center', color: '#FFFFFF', flex: 1 },
   viewBack: { paddingLeft: 15, justifyContent: 'center', flex: 1, height: 40 },
-  viewChildren: { flex: 1},
+  viewChildren: { flex: 1 },
   viewContentHeader: { height: 40, flexDirection: 'row', alignItems: 'center' },
   borderHeader: { borderBottomWidth: 1, borderBottomColor: '#DCE0E0' },
   backgroundHidden: { backgroundColor: 'transparent' },

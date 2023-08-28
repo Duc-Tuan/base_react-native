@@ -8,5 +8,11 @@ export const PATHNAME = {
   NOTIFICATIONSCREEN: 'NotificationScreen',
   SETTINGSCREEN: 'SettingScreen',
   CARTSCREEN: 'CartScreen',
+  CHANGEADDRESSCREEN: 'ChangeAddresscreen',
+  CHANGINFOUSERCREEN: 'ChangeInfoUserScreen',
+  CHANGEPASSWORDCREEN: 'ChangePasswordScreen',
+  CHANGECOLORSYSTEMCREEN: 'ChangeColorSystemScreen',
+  INFOSHOPCREEN: 'InfoShopScreen',
+  ORDERCREEN: 'OrderScreen',
   PRODUCT_DETAIL: (id?: string) => `/product/${id ?? ':roldId'}}`,
 };

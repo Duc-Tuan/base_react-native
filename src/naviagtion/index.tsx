@@ -11,6 +11,12 @@ import BottomTab from './stack/BottomTab';
 import CartsScreen from 'modules/cart/screen';
 import { LoginScreen, RegisterScreen } from 'modules/auth/screen';
 import { PathName } from 'configs';
+import ChangeAddressScreen from 'modules/auth/screen/profile/changeAddress';
+import ChangeInfoUserScreen from 'modules/auth/screen/profile/changeInfo';
+import ChangePasswordScreen from 'modules/auth/screen/profile/changePassword';
+import ChangeColorSystemScreen from 'modules/settings/screen/changeColorSystem';
+import InfoShopScreen from 'modules/settings/screen/infoShop';
+import OrderScreen from 'modules/settings/screen/order';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -45,6 +51,36 @@ const NavigationApp = () => {
           options={{ gestureEnabled: false, animation: 'fade' }}
           name={PathName.CARTSCREEN}
           component={CartsScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: false, animation: 'fade' }}
+          name={PathName.CHANGEADDRESSCREEN}
+          component={ChangeAddressScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: false, animation: 'fade' }}
+          name={PathName.CHANGINFOUSERCREEN}
+          component={ChangeInfoUserScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: false, animation: 'fade' }}
+          name={PathName.CHANGEPASSWORDCREEN}
+          component={ChangePasswordScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: false, animation: 'fade' }}
+          name={PathName.CHANGECOLORSYSTEMCREEN}
+          component={ChangeColorSystemScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: false, animation: 'fade' }}
+          name={PathName.INFOSHOPCREEN}
+          component={InfoShopScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: false, animation: 'fade' }}
+          name={PathName.ORDERCREEN}
+          component={OrderScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

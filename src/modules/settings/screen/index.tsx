@@ -10,6 +10,7 @@ import { styleGlobal } from 'types/StyleGlobal';
 import DisplayInfoUser from './components/DisplayInfoUser';
 import ItemMenu from './components/ItemMenu';
 import { useScrollToTop } from '@react-navigation/native';
+import { PathName } from 'configs';
 
 const SettingScreen = () => {
   console.log('setting...');
@@ -22,11 +23,19 @@ const SettingScreen = () => {
       {
         title: '',
         data: [
-          { tilte: t('Thông tin shop'), screen: 'InfoShopScreen', icon: <IconShop fill={Colors.primary} /> },
-          { tilte: t('Đơn hàng'), screen: 'OrderScreen', icon: <IconOrder fill={Colors.primary} /> },
-          { tilte: t('Địa chỉ'), screen: 'AddressScreen', icon: <IconAddress fill={Colors.primary} /> },
-          { tilte: t('Đổi mật khẩu'), screen: 'InfoShopScreen', icon: <IconLockChangePass fill={Colors.primary} /> },
-          { tilte: t('Đổi màu hệ thống'), screen: 'ChangeColorScreen', icon: <IconColor fill={Colors.primary} /> },
+          { tilte: t('Thông tin shop'), screen: PathName.INFOSHOPCREEN, icon: <IconShop fill={Colors.primary} /> },
+          { tilte: t('Đơn hàng'), screen: PathName.ORDERCREEN, icon: <IconOrder fill={Colors.primary} /> },
+          { tilte: t('Địa chỉ'), screen: PathName.CHANGEADDRESSCREEN, icon: <IconAddress fill={Colors.primary} /> },
+          {
+            tilte: t('Đổi mật khẩu'),
+            screen: PathName.CHANGEPASSWORDCREEN,
+            icon: <IconLockChangePass fill={Colors.primary} />,
+          },
+          {
+            tilte: t('Đổi màu hệ thống'),
+            screen: PathName.CHANGECOLORSYSTEMCREEN,
+            icon: <IconColor fill={Colors.primary} />,
+          },
         ],
       },
     ],
