@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { ActivityPenal } from 'components';
 
 const OrderScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>OrderScreen</Text>
-    </View>
+    <ActivityPenal title="Đơn hàng của tôi">
+      <View style={styles.container}>
+        <Text>OrderScreen</Text>
+      </View>
+    </ActivityPenal>
   );
 };
 

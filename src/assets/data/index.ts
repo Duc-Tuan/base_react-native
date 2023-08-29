@@ -7,6 +7,19 @@ export interface ICarts {
     price: number;
     promotion: number;
 }
+export interface ILocation {
+    code: string;
+    default: boolean;
+    item: {
+        Wards: string;
+        District: string;
+        city: string;
+        addressDetail: string;
+        phone: string;
+        organ: string;
+        deliveryTime: string;
+    }
+}
 
 export const dataCarts: ICarts[] | [] = [
     {
@@ -90,3 +103,45 @@ export const dataCarts: ICarts[] | [] = [
         promotion: 10,
     },
 ]
+
+export const dataLocation: ILocation[] = [
+    {
+        code: 'DC00001',
+        default: true,
+        item: {
+            Wards: 'Quảng Nghiệp',
+            District: 'Tứ Kỳ',
+            city: 'Hải Dương',
+            addressDetail: '1 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+            phone: '0123456789',
+            organ: 'Nhà riêng',
+            deliveryTime: 'Các ngày trong tuần',
+        },
+    },
+    {
+        code: 'DC00002',
+        default: false,
+        item: {
+            Wards: 'Quảng Nghiệp',
+            District: 'Tứ Kỳ',
+            city: 'Hải Dương',
+            addressDetail: '2 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+            phone: '0123456789',
+            organ: 'Cty',
+            deliveryTime: 'thứ 2 - thứ 6, 8h00 - 17h30',
+        },
+    },
+    {
+        code: 'DC00003',
+        default: false,
+        item: {
+            Wards: 'Quảng Nghiệp',
+            District: 'Tứ Kỳ',
+            city: 'Hải Dương',
+            addressDetail: '3 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+            phone: '0123456789',
+            organ: 'Cty',
+            deliveryTime: 'thứ 2 - thứ 7, 8h00 - 17h30',
+        },
+    },
+];

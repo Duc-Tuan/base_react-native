@@ -7,6 +7,7 @@ export { default as IconAddCart } from './icon_addCart';
 export { default as IconAddLocation } from './icon_addLocation';
 export { default as IconCancel } from './icon_cancel';
 export { default as IconCart } from './icon_cart';
+export { default as IconCartV2 } from './icon_cart_v2';
 export { default as IconCartDistable } from './icon_cartDistable';
 export { default as IconClose } from './icon_close';
 export { default as IconColor } from './icon_color';

@@ -53,7 +53,6 @@ const SwipeListViewCustom = React.forwardRef<FlatList, IProps>(
     const animated = React.useRef(new Animated.Value(0)).current;
 
     useImperativeHandle(ref, () => {
-      console.log('List view...');
       return refFlatList.current as FlatList;
     });
 
@@ -130,7 +129,6 @@ const SwipeListViewCustom = React.forwardRef<FlatList, IProps>(
       refFlatList.current = e;
     }, []);
 
-    console.log('List view...');
 
     const renderHeader = React.useCallback(() => {
       return (

@@ -27,7 +27,6 @@ const RegisterScreen = () => {
   });
 
   const onSubmit = (data: IFormRegister) => {
-    console.log(data);
     // return NavigationService.navigate(PathName.HOMESCREEN);
   };
 

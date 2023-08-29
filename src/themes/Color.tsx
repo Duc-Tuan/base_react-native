@@ -2,8 +2,8 @@
 import { hexToRgba } from '../utils';
 
 const Colors = {
-  primary: '#009a93',
-  second: hexToRgba('#009a93', 0.1),
+  primary: '#C2185B',
+  second: hexToRgba('#C2185B', 0.1),
   textColor: '#181725',
   background: '#F4F8F8',
   white: '#ffffff',
@@ -27,8 +27,8 @@ export const setColorPrimary = (_value: string) => {
 };
 
 export const ColorsSelect = {
-  primary: '#009a93',
-  pick: '#C2185B',
+  primary: '#C2185B',
+  pick: '#009a93',
   // lightBlue: "#00c39f",
   lightGray: '#3E5369',
   blue: '#1976D2',

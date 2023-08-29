@@ -19,6 +19,7 @@ import Colors from 'themes/Color';
 import { getStatusBarHeight } from 'utils/iphoneXHelper';
 import LoadingOverley from './LoadingOverley';
 import { useTranslation } from 'react-i18next';
+import { useColorPrimary } from 'hooks/useColorPrimary';
 
 interface Props {
   children?: React.ReactNode;
@@ -63,6 +64,7 @@ const ActivityPenal: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
+  const { colorPrimary } = useColorPrimary();
   const { onLayout: onLayoutRight, width: widthRight } = useLayout();
   const widthHeaderLeft = React.useMemo(() => (widthRight > 0.15 * width ? widthRight : '15%'), [width, widthRight]);
 
@@ -81,7 +83,7 @@ const ActivityPenal: FC<Props> = ({
             wapperStyleHeader,
           ]}>
           {!hiddenImageBackground && (
-            <View style={[StyleSheet.absoluteFillObject, styles.viewBgHeader]}>
+            <View style={[StyleSheet.absoluteFillObject, styles.viewBgHeader, { backgroundColor: colorPrimary }]}>
               <Image source={require('assets/images/linear-header.png')} style={styles.viewImage} />
             </View>
           )}
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   viewHeader: { paddingTop: getStatusBarHeight() },
   viewBgHeader: {
-    backgroundColor: Colors.primary,
+    // backgroundColor: Colors.primary,
     height: 200,
     borderBottomEndRadius: 120,
     borderBottomStartRadius: 120,

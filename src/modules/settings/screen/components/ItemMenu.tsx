@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import ItemSubMenu from './ItemSubMenu';
 import { Text, View, LayoutChangeEvent, TouchableOpacity } from 'react-native';
 import { styleGlobal } from 'types/StyleGlobal';
 import { useBoolean } from 'hooks/useBoolean';
 import { debounce } from 'lodash';
+import Colors from 'themes/Color';
 
 interface IProps {
   item?: any;
@@ -11,7 +13,6 @@ interface IProps {
 }
 
 const ItemMenu: React.FC<IProps> = ({ item, scrollTo }) => {
-  console.log(item?.title);
   const initY = React.useRef<number>(0);
   const [isOpen, { on, off, toggle: toggleOpen }] = useBoolean(true);
 
@@ -56,4 +57,4 @@ const ItemMenu: React.FC<IProps> = ({ item, scrollTo }) => {
   );
 };
 
-export default ItemMenu;
+export default React.memo(ItemMenu);

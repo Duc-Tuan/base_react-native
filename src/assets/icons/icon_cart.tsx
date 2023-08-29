@@ -1,12 +1,12 @@
-import React from "react";
-import Svg, { Rect, ClipPath, Defs, G, Path } from "react-native-svg";
+import React from 'react';
+import Svg, { Path } from 'react-native-svg';
 type Props = {
   fill?: string;
   width?: number;
   height?: number;
 };
 const IconCart = (props: Props) => {
-  const { fill = "black", width = 24, height = 24 } = props;
+  const { fill = 'black', width = 24, height = 24 } = props;
   return (
     // <Svg height={height} width={width} viewBox="0 0 24 24" {...props}>
     //   <G clip-path="url(#clip0_16158_219057)">
@@ -21,12 +21,7 @@ const IconCart = (props: Props) => {
     //     </ClipPath>
     //   </Defs>
     // </Svg>
-    <Svg
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
-      fill={fill}
-    >
+    <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} fill={fill}>
       <Path
         d="M8.75 13C8.75 12.8011 8.67098 12.6103 8.53033 12.4697C8.38968 12.329 8.19891 12.25 8 12.25C7.80109 12.25 7.61032 12.329 7.46967 12.4697C7.32902 12.6103 7.25 12.8011 7.25 13V17C7.25 17.1989 7.32902 17.3897 7.46967 17.5303C7.61032 17.671 7.80109 17.75 8 17.75C8.19891 17.75 8.38968 17.671 8.53033 17.5303C8.67098 17.3897 8.75 17.1989 8.75 17V13ZM16 12.25C16.1989 12.25 16.3897 12.329 16.5303 12.4697C16.671 12.6103 16.75 12.8011 16.75 13V17C16.75 17.1989 16.671 17.3897 16.5303 17.5303C16.3897 17.671 16.1989 17.75 16 17.75C15.8011 17.75 15.6103 17.671 15.4697 17.5303C15.329 17.3897 15.25 17.1989 15.25 17V13C15.25 12.8011 15.329 12.6103 15.4697 12.4697C15.6103 12.329 15.8011 12.25 16 12.25ZM12.75 13C12.75 12.8011 12.671 12.6103 12.5303 12.4697C12.3897 12.329 12.1989 12.25 12 12.25C11.8011 12.25 11.6103 12.329 11.4697 12.4697C11.329 12.6103 11.25 12.8011 11.25 13V17C11.25 17.1989 11.329 17.3897 11.4697 17.5303C11.6103 17.671 11.8011 17.75 12 17.75C12.1989 17.75 12.3897 17.671 12.5303 17.5303C12.671 17.3897 12.75 17.1989 12.75 17V13Z"
         fill={fill}

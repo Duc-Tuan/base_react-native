@@ -5,6 +5,7 @@ import { BottomTabBarButtonProps, createBottomTabNavigator } from '@react-naviga
 import { LabelPosition } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import { IconHeart, IconHome, IconNotifi, IconSettinguser, IconShop } from 'assets/icons';
 import { PathName } from 'configs';
+import { useColorPrimary } from 'hooks/useColorPrimary';
 import HeartScreen from 'modules/heart/screen';
 import HomeScreen from 'modules/home/screen';
 import MerchentScreen from 'modules/merchent/screen';
@@ -13,24 +14,32 @@ import SettingScreen from 'modules/settings/screen';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Colors from 'themes/Color';
 import { heightFull, widthFull } from 'types/StyleGlobal';
 
 const Stack = createBottomTabNavigator();
 
 const BottomTab = () => {
   const { t } = useTranslation();
+  const { colorPrimary } = useColorPrimary();
   const tabBarButton = React.useCallback((props: BottomTabBarButtonProps) => <TouchableOpacity {...props} />, []);
   const tabBarIcon = React.useCallback(
     (Component: React.MemoExoticComponent<(props: any) => JSX.Element>) =>
       ({ focused, color }: { focused: boolean; color: string; size: number }) =>
-        <Component fill={focused ? Colors.primary : color} />,
+        <Component fill={focused ? colorPrimary : color} />,
     [],
   );
   const tabBarLabel = React.useCallback(
     (title: string) =>
       ({ focused }: { focused: boolean; color: string; position: LabelPosition }) =>
-        <Text style={StyleSheet.flatten([styles.textInActive, focused && styles.textActive])}>{title}</Text>,
+        (
+          <Text
+            style={StyleSheet.flatten([
+              styles.textInActive,
+              focused && (styles.textActive, { color: colorPrimary }),
+            ])}>
+            {title}
+          </Text>
+        ),
     [],
   );
 
@@ -53,7 +62,7 @@ const BottomTab = () => {
           // tabBarShowLabel: false,
           tabBarLabelStyle: { fontSize: 13, fontWeight: '700' },
           tabBarInactiveTintColor: '#808991',
-          tabBarActiveTintColor: Colors.primary,
+          tabBarActiveTintColor: colorPrimary,
           header: () => <View style={[styles.iconBefore]} />,
           tabBarStyle: {
             position: 'relative',
@@ -121,7 +130,7 @@ export default React.memo(BottomTab);
 
 const styles = StyleSheet.create({
   textInActive: { color: '#808991', fontSize: 12, fontWeight: '400', transform: [{ translateY: -4 }] },
-  textActive: { color: Colors.primary, fontWeight: '700' },
+  textActive: { fontWeight: '700' },
   iconBefore: {
     position: 'absolute',
     right: 0,

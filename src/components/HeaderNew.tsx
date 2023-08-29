@@ -4,6 +4,7 @@ import { dataCarts } from 'assets/data';
 import { IconAdd, IconCart, IconClose, IconLeft, IconSearch, IconUser } from 'assets/icons';
 import { PathName } from 'configs';
 import { useBoolean } from 'hooks/useBoolean';
+import { useColorPrimary } from 'hooks/useColorPrimary';
 import useDebounce from 'hooks/useDebounce';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
@@ -43,6 +44,7 @@ const HeaderNew: React.FC<IProps> = ({
   isUser,
   handleRight,
 }) => {
+  const { colorPrimary } = useColorPrimary();
   const [isOpenSearch, { on, off }] = useBoolean();
   const [text, setText] = React.useState<string>('');
   const textDebounce = useDebounce(text, 500);
@@ -82,7 +84,7 @@ const HeaderNew: React.FC<IProps> = ({
 
   return (
     <View style={[styles.viewHeader]}>
-      <View style={[StyleSheet.absoluteFillObject, styles.viewBgHeader]}>
+      <View style={[StyleSheet.absoluteFillObject, styles.viewBgHeader, { backgroundColor: colorPrimary }]}>
         <Image source={require('assets/images/linear-header.png')} style={styles.viewImage} />
       </View>
 
@@ -94,7 +96,7 @@ const HeaderNew: React.FC<IProps> = ({
           styles.viewContentHeader,
         ]}>
         <View style={[styles.viewLeft, !!hiddenBack && !isOpenSearch && styles.pr0]}>
-          <TouchableOpacity onPress={handleBack} style={[styles.viewBack]}>
+          <TouchableOpacity onPress={handleBack} style={[styles.viewBack]} activeOpacity={0.8}>
             {isOpenSearch ? (
               <IconClose fill={Colors.white} />
             ) : (
@@ -130,19 +132,19 @@ const HeaderNew: React.FC<IProps> = ({
 
         <View style={styles.viewRight}>
           {!hiddenSearch && !isOpenSearch && (
-            <TouchableOpacity onPress={handleToggleSearch} style={styles.viewButtonActions}>
+            <TouchableOpacity onPress={handleToggleSearch} style={styles.viewButtonActions} activeOpacity={0.8}>
               <IconSearch fill={Colors.white} />
             </TouchableOpacity>
           )}
 
           {hiddenAdd && (
-            <TouchableOpacity onPress={handleAdd} style={styles.viewButtonActions}>
+            <TouchableOpacity onPress={handleAdd} style={styles.viewButtonActions} activeOpacity={0.8}>
               <IconAdd fill={Colors.white} />
             </TouchableOpacity>
           )}
 
           {rightIcon && (
-            <TouchableOpacity onPress={handleRight} style={styles.viewButtonActions}>
+            <TouchableOpacity onPress={handleRight} style={styles.viewButtonActions} activeOpacity={0.8}>
               {rightIcon}
             </TouchableOpacity>
           )}
@@ -150,6 +152,7 @@ const HeaderNew: React.FC<IProps> = ({
           {!isRightIcon && (
             <View style={styles.ViewCart}>
               <TouchableOpacity
+                activeOpacity={0.8}
                 onPress={() => NavigationService.navigate(PathName.CARTSCREEN)}
                 style={styles.viewButtonActions}>
                 <IconCart fill={Colors.white} />
@@ -171,14 +174,14 @@ const HeaderNew: React.FC<IProps> = ({
   );
 };
 
-export default React.memo(HeaderNew);
+export default HeaderNew;
 
 const styles = StyleSheet.create({
   viewHeader: { paddingTop: getStatusBarHeight() },
   viewImage: { width: '100%', height: '100%' },
   viewContentHeader: { paddingVertical: 10 },
   viewBgHeader: {
-    backgroundColor: Colors.primary,
+    // backgroundColor: Colors.primary,
     height: 200,
     borderBottomEndRadius: 120,
     borderBottomStartRadius: 120,

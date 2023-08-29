@@ -1,11 +1,12 @@
 import Svg, { Path } from 'react-native-svg';
+import Colors from 'themes/Color';
 type Props = {
   fill?: string;
   width?: number;
   height?: number;
 };
 export default function IconAdd(props: Props) {
-  const { fill = 'black', width = 24, height = 24 } = props;
+  const { fill = Colors.primary, width = 24, height = 24 } = props;
   return (
     <Svg height={height} width={width} viewBox="0 0 24 24" {...props}>
       <Path opacity={0.4} d="M12 17.35a1.63 1.63 0 1 0 0-3.26 1.63 1.63 0 0 0 0 3.26Z" fill={fill} />

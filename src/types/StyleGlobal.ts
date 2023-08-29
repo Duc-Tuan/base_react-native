@@ -10,6 +10,7 @@ export const styleGlobal = StyleSheet.create({
   dFlex_center: {
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   flexDirection_column: {
     flexDirection: 'column',
@@ -50,6 +51,12 @@ export const styleGlobal = StyleSheet.create({
   justifyContent_spaceEvenly: {
     justifyContent: 'space-evenly',
   },
+  dflex_spaceBetween: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+  },
   flex_wrap: {
     flexWrap: 'wrap',
   },
@@ -79,7 +86,7 @@ export const styleGlobal = StyleSheet.create({
     height: heightFull,
   },
   boxshadow: {
-    shadowColor: hexToRgba(Colors.black, 0.6),
+    shadowColor: hexToRgba(Colors.black, 0.2),
     shadowOpacity: 0.8,
     shadowOffset: {
       width: 1,
@@ -106,7 +113,7 @@ export const styleGlobal = StyleSheet.create({
     zIndex: 40,
   },
   textBold: {
-    fontFamily: 'Roboto_Bold',
+    color: hexToRgba(Colors.black, 0.6),
     fontSize: 16,
   },
   image: {
@@ -158,6 +165,15 @@ export const styleGlobal = StyleSheet.create({
   },
   textFontBold: {
     fontWeight: '700',
+  },
+  buttonActionsCirc: {
+    backgroundColor: hexToRgba(Colors.primary, 0.1),
+    // width: 32,
+    // height: 32,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 8,
   },
 });
 

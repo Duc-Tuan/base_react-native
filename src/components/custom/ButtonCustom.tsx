@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
+import { useColorPrimary } from 'hooks/useColorPrimary';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform } from 'react-native';
-import { StyleSheet, Text, TextStyle, TouchableHighlight, TouchableOpacity, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, Text, TextStyle, TouchableHighlight, TouchableOpacity, ViewStyle } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
@@ -21,20 +21,17 @@ const ButtonCustom = (props: Props) => {
   const { t } = useTranslation();
   const { text, action, typeButton = 'main', styleButton, styleText, hover = false, disabled = false } = props;
   const [isHover, setIsHover] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    console.log('buttomC....');
-  }, []);
+  const { colorPrimary } = useColorPrimary();
 
   const actionStyles = () => {
     let defaultStyles: ViewStyle = {
-      backgroundColor: Colors.primary,
-      borderColor: Colors.primary,
+      backgroundColor: colorPrimary,
+      borderColor: colorPrimary,
     };
     if (typeButton === 'outline-main') {
       return (defaultStyles = {
         backgroundColor: 'rgb(255, 255, 255)',
-        borderColor: Colors.primary,
+        borderColor: colorPrimary,
       });
     }
     if (typeButton === 'nomal') {
@@ -51,7 +48,7 @@ const ButtonCustom = (props: Props) => {
     }
     if (typeButton === 'disabled') {
       return (defaultStyles = {
-        backgroundColor: hexToRgba(Colors.primary, 0.6),
+        backgroundColor: hexToRgba(colorPrimary ?? Colors.primary, 0.6),
         borderColor: 'rgba(0, 0, 0, 0.1)',
       });
     }
@@ -60,11 +57,11 @@ const ButtonCustom = (props: Props) => {
 
   const colorText = () => {
     let defaultStylesText: TextStyle = {
-      color: isHover && isHover ? Colors.primary : 'white',
+      color: isHover && isHover ? colorPrimary : 'white',
     };
     if (typeButton === 'outline-main') {
       return (defaultStylesText = {
-        color: isHover && isHover ? 'white' : Colors.primary,
+        color: isHover && isHover ? 'white' : colorPrimary,
       });
     }
     if (typeButton === 'nomal') {
@@ -84,7 +81,7 @@ const ButtonCustom = (props: Props) => {
         styleGlobal.boxshadow,
         { borderRadius: 4, borderWidth: 1, ...actionStyles(), ...styleButton },
       ]}
-      underlayColor={Colors.primary}
+      underlayColor={colorPrimary}
       onHideUnderlay={() => setIsHover(false)}
       onShowUnderlay={() => setIsHover(true)}>
       <Text

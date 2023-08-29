@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { reducer as cartReducer } from 'modules/cart/store';
+import { reducer as settingReducer } from 'modules/settings/store';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
+  settings: settingReducer,
 });
 
 const store = configureStore({

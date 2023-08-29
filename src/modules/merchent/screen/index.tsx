@@ -8,7 +8,6 @@ import { StyleSheet, Text, View, ScrollView, RefreshControl } from 'react-native
 import Colors from 'themes/Color';
 
 const MerchentScreen = () => {
-  console.log('merchent...');
   const { t } = useTranslation();
   const refScrollView = React.useRef<any>();
   const [textSearch, setTextSearch] = React.useState<string>('');

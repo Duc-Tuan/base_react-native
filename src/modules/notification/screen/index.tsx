@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import Colors from 'themes/Color';
 
 const NotificationScreen = () => {
-  console.log('notification...');
   const { t } = useTranslation();
   const refScrollView = React.useRef<any>();
   const [refreshing, setRefreshing] = React.useState<boolean>(false);

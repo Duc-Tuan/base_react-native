@@ -12,10 +12,6 @@ type Props = {
 const ButtonIconCustom = (props: Props) => {
   const { icon, buttonStyle, onPress } = props;
 
-  React.useEffect(() => {
-    console.log('buttonIcon....');
-  }, []);
-
   return (
     <TouchableOpacity
       activeOpacity={1}

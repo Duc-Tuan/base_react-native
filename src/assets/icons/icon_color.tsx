@@ -1,11 +1,12 @@
 import Svg, { Path } from 'react-native-svg';
+import Colors from 'themes/Color';
 type Props = {
   fill?: string;
   width?: number;
   height?: number;
 };
 export default function IconColor(props: Props) {
-  const { fill = 'black', width = 24, height = 24 } = props;
+  const { fill = Colors.primary, width = 24, height = 24 } = props;
   return (
     <Svg height={height} width={width} viewBox="0 0 24 24" {...props}>
       <Path

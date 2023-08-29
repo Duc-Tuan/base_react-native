@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { ActivityPenal } from 'components';
 
 const ChangePasswordScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>ChangePasswordScreen</Text>
-    </View>
+    <ActivityPenal title="Đổi mật khẩu">
+      <View style={styles.container}>
+        <Text>InfoShopScreen</Text>
+      </View>
+    </ActivityPenal>
   );
 };
 

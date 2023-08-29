@@ -29,7 +29,7 @@ const ItemSubMenu: React.FC<IProps> = ({ item, stylesWrapper }) => {
   );
 };
 
-export default ItemSubMenu;
+export default React.memo(ItemSubMenu);
 
 const styles = StyleSheet.create({
   container: {

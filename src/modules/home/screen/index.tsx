@@ -26,12 +26,16 @@ const HomeScreen = () => {
     }
   }, []);
 
-  console.log('HomeScreen...');
   return (
     <ActivityPenal
       styleChildren={styles.container}
       renderHeader={
-        <HeaderNew setTextSearch={setTextSearch} hiddenBack isUser placeholder={t('Tìm kiếm tên, mã sản phẩm...')} />
+        <HeaderNew
+          setTextSearch={setTextSearch}
+          hiddenBack
+          isUser
+          placeholder={t('Tìm kiếm tên, mã sản phẩm...')}
+        />
       }>
       <ScrollView
         ref={refScrollView}

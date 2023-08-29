@@ -1,20 +1,21 @@
-import Svg, { Rect, ClipPath, Defs, G, Path } from "react-native-svg";
+import Svg, { Path } from 'react-native-svg';
+import Colors from 'themes/Color';
 type Props = {
   fill?: string;
   width?: number;
   height?: number;
 };
 export default function IconOrder(props: Props) {
-  const { fill = "black", width = 24, height = 24 } = props;
+  const { fill = Colors.primary, width = 24, height = 24 } = props;
   return (
     <Svg width={width} height={height} fill={fill}>
       <Path
         d="M13.833 4.042a1.878 1.878 0 0 1-1.875 1.875H9.042c-.517 0-.984-.209-1.325-.55a1.864 1.864 0 0 1-.55-1.325c0-1.034.841-1.875 1.875-1.875h2.916c.517 0 .984.208 1.325.55.342.341.55.808.55 1.325Z"
-        fill={fill || "#808991"}
+        fill={fill || '#808991'}
       />
       <Path
         d="M16.192 4.692a2.359 2.359 0 0 0-.642-.375c-.242-.092-.483.1-.533.35a3.114 3.114 0 0 1-3.059 2.5H9.042a3.102 3.102 0 0 1-2.209-.917 3.083 3.083 0 0 1-.85-1.575c-.05-.25-.3-.45-.541-.35-.967.392-1.609 1.275-1.609 3.05V15.5c0 2.5 1.492 3.333 3.334 3.333h6.666c1.842 0 3.334-.833 3.334-3.333V7.375c0-1.358-.375-2.192-.975-2.683Zm-9.025 6.016H10.5a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625H7.167a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625Zm6.666 4.584H7.167a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h6.666a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625Z"
-        fill={fill || "#808991"}
+        fill={fill || '#808991'}
       />
     </Svg>
   );
