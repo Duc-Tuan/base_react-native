@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Dimensions, Platform, StatusBar } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 const STATUSBAR_DEFAULT_HEIGHT = 20;
 const STATUSBAR_X_HEIGHT = 44;

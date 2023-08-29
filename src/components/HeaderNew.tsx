@@ -6,11 +6,15 @@ import { PathName } from 'configs';
 import { useBoolean } from 'hooks/useBoolean';
 import { useColorPrimary } from 'hooks/useColorPrimary';
 import useDebounce from 'hooks/useDebounce';
+import { useGetAccount } from 'hooks/useGetAccount';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, StyleProp, StyleSheet, Text, TextInput, TextStyle, TouchableOpacity, View } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
+import { hexToRgba } from 'utils';
+import { checkNullish } from 'utils/genal';
 import { getStatusBarHeight } from 'utils/iphoneXHelper';
 
 interface IProps {
@@ -44,10 +48,12 @@ const HeaderNew: React.FC<IProps> = ({
   isUser,
   handleRight,
 }) => {
+  const { t } = useTranslation();
   const { colorPrimary } = useColorPrimary();
   const [isOpenSearch, { on, off }] = useBoolean();
   const [text, setText] = React.useState<string>('');
   const textDebounce = useDebounce(text, 500);
+  const { user, isLogin } = useGetAccount();
 
   React.useEffect(() => {
     if (setTextSearch) {
@@ -71,8 +77,12 @@ const HeaderNew: React.FC<IProps> = ({
       off();
     } else if (!hiddenBack) {
       NavigationService.goBack();
+    } else if (isLogin) {
+      NavigationService.navigate(PathName.PROFILESCREEN);
+    } else if (!isLogin) {
+      NavigationService.navigate(PathName.LOGINSCREEN);
     }
-  }, [hiddenBack, isOpenSearch, onBackPress, onChangeText, off]);
+  }, [hiddenBack, isOpenSearch, onBackPress, onChangeText, off, isLogin]);
 
   const onSubmitEditing = React.useCallback(() => {
     onChangeText(text);
@@ -102,7 +112,21 @@ const HeaderNew: React.FC<IProps> = ({
             ) : (
               <React.Fragment>
                 {isUser ? (
-                  <IconUser fill={Colors.white} width={28} height={28} />
+                  isLogin ? (
+                    <View style={[styleGlobal.dFlex_center, styleGlobal.gap_10]}>
+                      <View style={[styleGlobal.padding_2, styles.viewIsUser]}>
+                        <Image source={user.image} style={[styleGlobal.image, styles.viewImageUser]} />
+                      </View>
+                      <View>
+                        <Text style={styles.viewTextOpcity}>{t('Xem chi tiết')}</Text>
+                        <Text numberOfLines={1} style={[styleGlobal.textBold, styles.viewTextNameUser]}>
+                          {checkNullish(user?.name) ?? t('Đang cập nhập...')}
+                        </Text>
+                      </View>
+                    </View>
+                  ) : (
+                    <IconUser fill={Colors.white} width={28} height={28} />
+                  )
                 ) : (
                   !hiddenBack && <IconLeft fill={Colors.white} />
                 )}
@@ -245,5 +269,26 @@ const styles = StyleSheet.create({
   },
   viewMenu: {
     height: '90%',
+  },
+  viewIsUser: {
+    borderRadius: 30,
+    borderColor: Colors.white,
+    borderWidth: 1,
+    borderStyle: 'solid',
+  },
+  viewImageUser: {
+    width: 24,
+    height: 24,
+    borderRadius: 30,
+    padding: 10,
+  },
+  viewTextNameUser: {
+    color: Colors.white,
+    maxWidth: 160,
+  },
+  viewTextOpcity: {
+    color: hexToRgba(Colors.white, 0.6),
+    fontSize: 8,
+    fontWeight: '700',
   },
 });

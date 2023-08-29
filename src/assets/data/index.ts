@@ -1,3 +1,6 @@
+import { IUserGlobal } from 'modules/auth/screen/Function';
+import Colors from 'themes/Color';
+
 /* eslint-disable prettier/prettier */
 export interface ICarts {
     id: string | number;
@@ -102,7 +105,7 @@ export const dataCarts: ICarts[] | [] = [
         price: 120000,
         promotion: 10,
     },
-]
+];
 
 export const dataLocation: ILocation[] = [
     {
@@ -145,3 +148,18 @@ export const dataLocation: ILocation[] = [
         },
     },
 ];
+
+export const dataUser: IUserGlobal = {
+    id: 1,
+    code: 'US00001',
+    useName: 'nhincaiconcu',
+    name: 'Mr.Tuan',
+    phone: '0123456789',
+    gender: 'Nam',
+    email: 'phamductuan26032002@gmail.com',
+    address: 'Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+    image: require('assets/images/avt.jpg'),
+    status: 'active',
+    age: '26/03/2002',
+    color: Colors.primary,
+};

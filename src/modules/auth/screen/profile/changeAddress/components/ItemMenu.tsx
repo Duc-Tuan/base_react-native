@@ -82,7 +82,7 @@ const ItemMenu: React.FC<IProps> = ({ item }) => {
   );
 };
 
-export default ItemMenu;
+export default React.memo(ItemMenu);
 
 const styles = StyleSheet.create({
   container: {

@@ -9,6 +9,6 @@ const ChangeInfoUserScreen = () => {
   );
 };
 
-export default ChangeInfoUserScreen;
+export default React.memo(ChangeInfoUserScreen);
 
 const styles = StyleSheet.create({ container: {} });

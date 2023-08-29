@@ -2,16 +2,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { ActivityPenal } from 'components';
 
-const OrderScreen = () => {
+const ProfileScreen = () => {
   return (
-    <ActivityPenal title="Đơn hàng của tôi">
+    <ActivityPenal title="Thông tin cá nhân">
       <View style={styles.container}>
-        <Text>OrderScreen</Text>
+        <Text>info User</Text>
       </View>
     </ActivityPenal>
   );
 };
 
-export default React.memo(OrderScreen);
+export default React.memo(ProfileScreen);
 
 const styles = StyleSheet.create({ container: {} });

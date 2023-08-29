@@ -20,6 +20,7 @@ const ButtonAddCartNull = () => {
           style={[
             styleGlobal.dFlex_center,
             styleGlobal.gap_14,
+            styleGlobal.flexDirection_column,
             styleGlobal.padding_10,
             styles.viewNoData,
             { borderColor: hexToRgba(Colors.primary, 0.6) },
@@ -35,7 +36,8 @@ const ButtonAddCartNull = () => {
   );
 };
 
-export default ButtonAddCartNull;
+export default React.memo(ButtonAddCartNull);
+
 const styles = StyleSheet.create({
   viewNoData: {
     // borderColor: hexToRgba(Colors.primary, 0.6),

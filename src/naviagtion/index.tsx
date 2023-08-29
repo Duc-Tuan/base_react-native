@@ -13,6 +13,7 @@ import CartsScreen from 'modules/cart/screen';
 import ChangeColorSystemScreen from 'modules/settings/screen/changeColorSystem';
 import InfoShopScreen from 'modules/settings/screen/infoShop';
 import OrderScreen from 'modules/settings/screen/order';
+import ProfileScreen from 'modules/auth/screen/profile';
 import SplashScreen from './components/splashScreen/SplashScreen';
 import { screenOptionsNative } from './shareStack';
 import BottomTab from './stack/BottomTab';
@@ -87,6 +88,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.DETAILADDRESSSCREEN}
           component={DetailAddressScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.PROFILESCREEN}
+          component={ProfileScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

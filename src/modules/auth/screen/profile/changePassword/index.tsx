@@ -12,6 +12,6 @@ const ChangePasswordScreen = () => {
   );
 };
 
-export default ChangePasswordScreen;
+export default React.memo(ChangePasswordScreen);
 
 const styles = StyleSheet.create({ container: {} });

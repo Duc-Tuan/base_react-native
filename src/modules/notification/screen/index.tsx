@@ -36,6 +36,6 @@ const NotificationScreen = () => {
   );
 };
 
-export default NotificationScreen;
+export default React.memo(NotificationScreen);
 
 const styles = StyleSheet.create({ container: {} });

@@ -5,24 +5,39 @@ import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
 import { ButtonCustom } from 'components';
 import { useTranslation } from 'react-i18next';
+import NavigationService from 'naviagtion/stack/NavigationService';
+import { PathName } from 'configs';
+import { checkNullish } from 'utils/genal';
+import { IUserGlobal } from 'modules/auth/screen/Function';
 
 interface IProps {
   colorPrimary?: string;
+  user: IUserGlobal;
+  isLogin: boolean;
 }
 
-const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary }) => {
+const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   const { t } = useTranslation();
 
-  return (
-    <TouchableWithoutFeedback onPress={() => console.log('info user...')}>
+  const changeScreen = React.useCallback(() => {
+    NavigationService.navigate(PathName.PROFILESCREEN);
+  }, []);
+
+  const changeLogin = React.useCallback(() => NavigationService.navigate(PathName.LOGINSCREEN), []);
+  const changeRegister = React.useCallback(() => NavigationService.navigate(PathName.REGISTERsCREEN), []);
+
+  return isLogin ? (
+    <TouchableWithoutFeedback onPress={changeScreen}>
       <View style={[styleGlobal.padding_10, styleGlobal.boxshadow, styles.container]}>
         <View style={[styleGlobal.flexDirection_row, styleGlobal.gap_10]}>
           <View style={[styleGlobal.border, styleGlobal.padding_2, styles.viewImage, { borderColor: colorPrimary }]}>
-            <Image source={require('assets/images/avt.jpg')} style={[styleGlobal.image, styles.viewImg]} />
+            <Image source={user?.image} style={[styleGlobal.image, styles.viewImg]} />
           </View>
 
           <View>
-            <Text style={[styleGlobal.textPrimary, styleGlobal.textFontBold]}>Pham Duc Tuan</Text>
+            <Text style={[styleGlobal.textPrimary, styleGlobal.textFontBold]}>
+              {checkNullish(user?.name) ?? t('Đang cập nhập...')}
+            </Text>
             <ButtonCustom text="Đăng xuất" styleButton={styles.viewLogout} />
           </View>
         </View>
@@ -33,11 +48,33 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary }) => {
             styles.viewSub,
             { backgroundColor: hexToRgba(colorPrimary ?? Colors.primary, 0.05) },
           ]}>
-          <Text style={[styleGlobal.textPrimary]}>{t('Giới tính')}: Nam</Text>
-          <Text style={[styleGlobal.textPrimary]}>{t('Năm sinh')}: 26/03/2002</Text>
+          <Text style={[styleGlobal.textPrimary]}>
+            {t('Giới tính')}: {checkNullish(user.gender) ?? t('Đang cập nhập...')}
+          </Text>
+          <Text style={[styleGlobal.textPrimary]}>
+            {t('Năm sinh')}: {checkNullish(user.age) ?? t('Đang cập nhập...')}
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
+  ) : (
+    <View
+      style={[
+        styleGlobal.padding_14,
+        styleGlobal.justifyContent_center,
+        styleGlobal.boxshadow,
+        styles.container,
+        styles.containerNull,
+      ]}>
+      <Text style={styles.viewTextNullLogin}>
+        {t('Bạn chưa đăng nhập. Vui lòng đăng nhập để xem thông tin chi tiết.')}
+      </Text>
+
+      <View style={[styleGlobal.dflex_spaceBetween, styleGlobal.marginTop_14]}>
+        <ButtonCustom text="Đăng nhập" styleButton={styleGlobal.flex_1} action={changeLogin} />
+        <ButtonCustom text="Đăng ký" styleButton={styleGlobal.flex_1} action={changeRegister} />
+      </View>
+    </View>
   );
 };
 
@@ -48,8 +85,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 10,
   },
+  containerNull: {
+    minHeight: 160,
+  },
   viewImage: {
-    // borderColor: Colors.primary,
     width: 50,
     height: 50,
     borderRadius: 50,
@@ -59,12 +98,16 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   viewSub: {
-    // backgroundColor: hexToRgba(Colors.primary, 0.05),
     marginTop: 10,
     borderRadius: 4,
   },
   viewLogout: {
     padding: 2,
+    paddingHorizontal: 10,
     marginTop: 6,
+  },
+  viewTextNullLogin: {
+    color: Colors.black,
+    fontSize: 16,
   },
 });

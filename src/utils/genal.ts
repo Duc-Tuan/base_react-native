@@ -46,3 +46,8 @@ export const convertPrice = (value: number, type: string) => {
   }
   return value;
 };
+
+export const checkNullish = (data?: any) => {
+  if (!data || (typeof data === 'string' && data === '') || data === undefined) return null;
+  return data;
+};

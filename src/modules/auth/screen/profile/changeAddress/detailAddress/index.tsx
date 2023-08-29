@@ -23,6 +23,6 @@ const DetailAddressScreen: React.FC<IProps> = ({ route: { params } }) => {
   );
 };
 
-export default DetailAddressScreen;
+export default React.memo(DetailAddressScreen);
 
 const styles = StyleSheet.create({ container: {} });

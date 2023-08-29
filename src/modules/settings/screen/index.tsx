@@ -12,12 +12,15 @@ import { heigthFooter } from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import DisplayInfoUser from './components/DisplayInfoUser';
 import ItemMenu from './components/ItemMenu';
+import { useGetAccount } from 'hooks/useGetAccount';
+import { hexToRgba } from 'utils';
 
 const SettingScreen = () => {
   const { colorPrimary } = useColorPrimary();
   const { t } = useTranslation();
   const refScrollView = React.useRef<ScrollView>();
   useScrollToTop(refScrollView as any);
+  const { user, isLogin } = useGetAccount();
 
   React.useEffect(() => {}, [colorPrimary]);
 
@@ -26,14 +29,33 @@ const SettingScreen = () => {
       {
         title: '',
         data: [
-          { tilte: t('Thông tin cửa hàng'), screen: PathName.INFOSHOPSCREEN, icon: <IconShop fill={colorPrimary} /> },
-          { tilte: t('Địa chỉ'), screen: PathName.CHANGEADDRESSSCREEN, icon: <IconAddress fill={colorPrimary} /> },
-          { tilte: t('Giỏ hàng'), screen: PathName.CARTSCREEN, icon: <IconCartV2 fill={colorPrimary} /> },
-          { tilte: t('Đơn hàng'), screen: PathName.ORDERSCREEN, icon: <IconOrder fill={colorPrimary} /> },
+          {
+            tilte: t('Thông tin cửa hàng'),
+            screen: PathName.INFOSHOPSCREEN,
+            icon: <IconShop fill={colorPrimary} />,
+          },
+          {
+            tilte: t('Địa chỉ'),
+            screen: PathName.CHANGEADDRESSSCREEN,
+            isLogin,
+            icon: <IconAddress fill={isLogin ? colorPrimary : hexToRgba(colorPrimary, 0.6)} />,
+          },
+          {
+            tilte: t('Giỏ hàng'),
+            screen: PathName.CARTSCREEN,
+            icon: <IconCartV2 fill={colorPrimary} />,
+          },
+          {
+            tilte: t('Đơn hàng'),
+            screen: PathName.ORDERSCREEN,
+            isLogin,
+            icon: <IconOrder fill={isLogin ? colorPrimary : hexToRgba(colorPrimary, 0.6)} />,
+          },
           {
             tilte: t('Đổi mật khẩu'),
             screen: PathName.CHANGEPASSWORDSCREEN,
-            icon: <IconLockChangePass fill={colorPrimary} />,
+            isLogin,
+            icon: <IconLockChangePass fill={isLogin ? colorPrimary : hexToRgba(colorPrimary, 0.6)} />,
           },
           {
             tilte: t('Đổi màu hệ thống'),
@@ -43,7 +65,7 @@ const SettingScreen = () => {
         ],
       },
     ];
-  }, [t, colorPrimary]);
+  }, [t, colorPrimary, isLogin]);
 
   const scrollTo = React.useCallback((value: number) => {
     refScrollView.current?.scrollTo({ animated: true, y: value });
@@ -54,7 +76,7 @@ const SettingScreen = () => {
   return (
     <ActivityPenal hiddenBack title="Thiết lập">
       <View style={[...styleCustom, styles.viewInfoUser]}>
-        <DisplayInfoUser colorPrimary={colorPrimary} />
+        <DisplayInfoUser colorPrimary={colorPrimary} user={user} isLogin={isLogin} />
       </View>
       <ScrollView ref={refScrollView as MutableRefObject<ScrollView>} style={styleCustom}>
         <View style={styles.viewScroll}>

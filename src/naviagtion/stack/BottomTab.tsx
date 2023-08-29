@@ -25,7 +25,7 @@ const BottomTab = () => {
   const tabBarIcon = React.useCallback(
     (Component: React.MemoExoticComponent<(props: any) => JSX.Element>) =>
       ({ focused, color }: { focused: boolean; color: string; size: number }) =>
-        <Component fill={focused ? colorPrimary : color} />,
+        <Component fill={color} />,
     [],
   );
   const tabBarLabel = React.useCallback(
@@ -33,10 +33,7 @@ const BottomTab = () => {
       ({ focused }: { focused: boolean; color: string; position: LabelPosition }) =>
         (
           <Text
-            style={StyleSheet.flatten([
-              styles.textInActive,
-              focused && (styles.textActive, { color: colorPrimary }),
-            ])}>
+            style={StyleSheet.flatten([styles.textInActive, focused && (styles.textActive, { color: colorPrimary })])}>
             {title}
           </Text>
         ),

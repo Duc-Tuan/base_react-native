@@ -81,6 +81,12 @@ export const styleGlobal = StyleSheet.create({
   gap_20: {
     gap: 20,
   },
+  gap_26: {
+    gap: 26,
+  },
+  gap_30: {
+    gap: 30,
+  },
   w_full: {
     width: widthFull,
     height: heightFull,
@@ -114,11 +120,41 @@ export const styleGlobal = StyleSheet.create({
   },
   textBold: {
     color: hexToRgba(Colors.black, 0.6),
-    fontSize: 16,
+    fontSize: 14,
   },
   image: {
     width: '100%',
     height: '100%',
+  },
+  paddingTop_8: {
+    paddingTop: 8,
+  },
+  paddingTop_10: {
+    paddingTop: 10,
+  },
+  paddingTop_12: {
+    paddingTop: 12,
+  },
+  paddingTop_14: {
+    paddingTop: 14,
+  },
+  paddingTop_16: {
+    paddingTop: 16,
+  },
+  paddingBottom_8: {
+    paddingBottom: 8,
+  },
+  paddingBottom_10: {
+    paddingBottom: 10,
+  },
+  paddingBottom_12: {
+    paddingBottom: 12,
+  },
+  paddingBottom_14: {
+    paddingBottom: 14,
+  },
+  paddingBottom_16: {
+    paddingBottom: 16,
   },
   padding_2: {
     paddingVertical: 2,
@@ -148,6 +184,24 @@ export const styleGlobal = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 14,
   },
+  paddingVertical_10: {
+    paddingVertical: 10,
+  },
+  paddingVertical_12: {
+    paddingVertical: 12,
+  },
+  paddingVertical_14: {
+    paddingVertical: 14,
+  },
+  paddingVertical_16: {
+    paddingVertical: 16,
+  },
+  paddingVertical_18: {
+    paddingVertical: 18,
+  },
+  paddingVertical_20: {
+    paddingVertical: 20,
+  },
   flex_1: {
     flex: 1,
   },
@@ -174,6 +228,64 @@ export const styleGlobal = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
+  },
+  marginTop_8: {
+    marginTop: 8,
+  },
+  marginTop_10: {
+    marginTop: 10,
+  },
+  marginTop_12: {
+    marginTop: 12,
+  },
+  marginTop_14: {
+    marginTop: 14,
+  },
+  marginTop_16: {
+    marginTop: 16,
+  },
+  marginBottom_8: {
+    marginBottom: 8,
+  },
+  marginBottom_10: {
+    marginBottom: 10,
+  },
+  marginBottom_12: {
+    marginBottom: 12,
+  },
+  marginBottom_14: {
+    marginBottom: 14,
+  },
+  marginBottom_16: {
+    marginBottom: 16,
+  },
+  margin_2: {
+    marginVertical: 2,
+    marginHorizontal: 2,
+  },
+  margin_4: {
+    marginVertical: 4,
+    marginHorizontal: 4,
+  },
+  margin_6: {
+    marginVertical: 6,
+    marginHorizontal: 6,
+  },
+  margin_8: {
+    marginVertical: 8,
+    marginHorizontal: 8,
+  },
+  margin_10: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+  },
+  margin_12: {
+    marginVertical: 12,
+    marginHorizontal: 12,
+  },
+  margin_14: {
+    marginVertical: 14,
+    marginHorizontal: 14,
   },
 });
 

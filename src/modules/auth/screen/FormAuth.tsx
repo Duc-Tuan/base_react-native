@@ -1,5 +1,6 @@
-import { IconHome } from 'assets/icons';
+import { IconHome, IconLeft } from 'assets/icons';
 import { ButtonCustom, ButtonIcon } from 'components';
+import { PathName } from 'configs';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
 import {
@@ -34,11 +35,16 @@ const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, styl
         />
 
         <SafeAreaView>
-          <View style={styles.viewHeader}>
+          <View style={[styleGlobal.dflex_spaceBetween, styles.viewHeader]}>
+            <ButtonIcon
+              icon={<IconLeft fill={Colors.primary} />}
+              buttonStyle={styles.btnBack}
+              onPress={NavigationService.goBack}
+            />
             <ButtonIcon
               icon={<IconHome fill={Colors.primary} />}
               buttonStyle={styles.btnBack}
-              onPress={() => NavigationService.navigate('HomeScreen')}
+              onPress={() => NavigationService.navigate(PathName.HOMESCREEN)}
             />
           </View>
         </SafeAreaView>

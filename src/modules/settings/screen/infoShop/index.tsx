@@ -12,6 +12,6 @@ const InfoShopScreen = () => {
   );
 };
 
-export default InfoShopScreen;
+export default React.memo(InfoShopScreen);
 
 const styles = StyleSheet.create({ container: {} });
