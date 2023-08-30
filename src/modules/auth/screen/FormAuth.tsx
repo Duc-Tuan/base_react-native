@@ -3,6 +3,7 @@ import { ButtonCustom, ButtonIcon } from 'components';
 import { PathName } from 'configs';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Image,
   Keyboard,
@@ -26,6 +27,7 @@ interface IProps {
 }
 
 const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, stylesWrapper }) => {
+  const { t } = useTranslation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -50,7 +52,7 @@ const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, styl
         </SafeAreaView>
 
         <View style={[StyleSheet.absoluteFillObject, styles.viewBg]} />
-        <Text style={[StyleSheet.absoluteFillObject, styles.viewText]}>{title}</Text>
+        <Text style={[StyleSheet.absoluteFillObject, styles.viewText]}>{t(title)}</Text>
 
         <View style={[StyleSheet.absoluteFillObject, styles.main, stylesWrapper]}>
           <View style={[styleGlobal.flexDirection_column, styleGlobal.gap_10, styleGlobal.justifyContent_spaceBetween]}>

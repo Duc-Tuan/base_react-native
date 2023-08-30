@@ -9,8 +9,10 @@ import { styleGlobal } from 'types/StyleGlobal';
 import { IFormLogin } from './Function';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
+import { useTranslation } from 'react-i18next';
 
 const LoginScreen = () => {
+  const { t } = useTranslation();
   const {
     control,
     handleSubmit,
@@ -23,6 +25,7 @@ const LoginScreen = () => {
   });
 
   const onSubmit = (data: IFormLogin) => {
+    console.log(data);
     return NavigationService.navigate(PathName.HOMESCREEN);
   };
 
@@ -33,12 +36,12 @@ const LoginScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: 'Vui lòng không để trống trường này.',
+              required: t('Vui lòng không để trống trường này.'),
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder="Nhập tài khoản..."
-                label="Tài khoản:"
+                placeholder={t('Nhập tài khoản...')}
+                label={t('Tài khoản:')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -54,13 +57,13 @@ const LoginScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: 'Vui lòng không để trống trường này.',
+              required: t('Vui lòng không để trống trường này.'),
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
                 placeholder="********"
                 secureTextEntry
-                label="Mật khẩu:"
+                label={t('Mật khẩu:')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -77,12 +80,12 @@ const LoginScreen = () => {
             style={
               (styleGlobal.justifyContent_flexStart, styleGlobal.alignItems_center, styleGlobal.flexDirection_row)
             }>
-            <Text style={styles.viewText}>Bạn chưa có tài khoản?</Text>
+            <Text style={styles.viewText}>{t('Bạn chưa có tài khoản?')}</Text>
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewButtonRegister}
               onPress={() => NavigationService.navigate(PathName.REGISTERsCREEN)}>
-              <Text style={styles.viewTextRegister}>Đăng ký ngay.</Text>
+              <Text style={styles.viewTextRegister}>{t('Đăng ký ngay.')}</Text>
             </TouchableOpacity>
           </View>
           <CheckBox textRight="Lưu mật khẩu." />

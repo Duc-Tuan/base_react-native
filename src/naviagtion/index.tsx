@@ -19,6 +19,7 @@ import { screenOptionsNative } from './shareStack';
 import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
+import NewAddressScreen from 'modules/auth/screen/profile/changeAddress/components/NewAddress';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -93,6 +94,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.PROFILESCREEN}
           component={ProfileScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.NEWADDRESSSCREEN}
+          component={NewAddressScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

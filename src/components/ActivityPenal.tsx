@@ -40,6 +40,7 @@ interface Props {
   rightIcon?: React.ReactNode;
   onBackPress?: () => void;
   adjustsFontSizeToFit?: boolean;
+  handleRight?: () => void;
 }
 
 const ActivityPenal: FC<Props> = ({
@@ -61,6 +62,7 @@ const ActivityPenal: FC<Props> = ({
   titleStyle,
   onBackPress,
   adjustsFontSizeToFit,
+  handleRight,
 }) => {
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
@@ -106,7 +108,11 @@ const ActivityPenal: FC<Props> = ({
               </Text>
 
               <View onLayout={onLayoutRight} style={[styles.viewRight, rightIconStyle]}>
-                {rightIcon}
+                {rightIcon && (
+                  <TouchableOpacity onPress={handleRight} style={styles.viewButtonActions} activeOpacity={0.8}>
+                    {rightIcon}
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
           )}
@@ -137,11 +143,20 @@ const styles = StyleSheet.create({
   },
   viewImage: { height: '100%', width: '100%' },
   viewLeft: { width: '15%', height: 40 },
-  viewRight: { minWidth: '15%', alignItems: 'flex-end' },
+  viewRight: { minWidth: '15%', alignItems: 'flex-end', paddingRight: 15 },
   textTitle: { fontSize: 17, fontWeight: '600', textAlign: 'center', color: '#FFFFFF', flex: 1 },
   viewBack: { paddingLeft: 15, justifyContent: 'center', flex: 1, height: 40 },
   viewChildren: { flex: 1 },
   viewContentHeader: { height: 40, flexDirection: 'row', alignItems: 'center' },
   borderHeader: { borderBottomWidth: 1, borderBottomColor: '#DCE0E0' },
   backgroundHidden: { backgroundColor: 'transparent' },
+  viewButtonActions: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    width: 32,
+    height: 32,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 8,
+  },
 });

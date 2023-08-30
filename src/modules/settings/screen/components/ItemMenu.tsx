@@ -6,6 +6,7 @@ import { styleGlobal } from 'types/StyleGlobal';
 import { useBoolean } from 'hooks/useBoolean';
 import { debounce } from 'lodash';
 import Colors from 'themes/Color';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   item?: any;
@@ -14,6 +15,7 @@ interface IProps {
 
 const ItemMenu: React.FC<IProps> = ({ item, scrollTo }) => {
   const initY = React.useRef<number>(0);
+  const { t } = useTranslation();
   const [isOpen, { on, off, toggle: toggleOpen }] = useBoolean(true);
 
   const onLayout = React.useCallback((event: LayoutChangeEvent) => {
@@ -33,7 +35,7 @@ const ItemMenu: React.FC<IProps> = ({ item, scrollTo }) => {
     <React.Fragment>
       {item?.title && (
         <TouchableOpacity activeOpacity={0.9} onPress={handleOpen}>
-          <Text>{item?.title}</Text>
+          <Text>{t(item?.title)}</Text>
         </TouchableOpacity>
       )}
 

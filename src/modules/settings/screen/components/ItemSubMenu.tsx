@@ -4,6 +4,7 @@ import Colors from 'themes/Color';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { styleGlobal, widthFull } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   item?: {
@@ -17,6 +18,8 @@ interface IProps {
 }
 
 const ItemSubMenu: React.FC<IProps> = ({ item, stylesWrapper }) => {
+  const { t } = useTranslation();
+
   const goToScreen = React.useCallback(() => {
     if (item?.screen) {
       NavigationService.navigate(item?.screen, item?.option || {});
@@ -26,12 +29,12 @@ const ItemSubMenu: React.FC<IProps> = ({ item, stylesWrapper }) => {
   return item?.isLogin || item?.isLogin === undefined ? (
     <TouchableOpacity onPress={goToScreen} style={[styles.container, stylesWrapper]} activeOpacity={0.9}>
       {item?.icon}
-      <Text style={styles.textTitle}>{item?.tilte}</Text>
+      {item?.tilte && <Text style={styles.textTitle}>{t(item?.tilte)}</Text>}
     </TouchableOpacity>
   ) : (
     <View style={[styles.container, styleGlobal.border, styles.containerNull, stylesWrapper]}>
       {item?.icon}
-      <Text style={(styles.textTitle, item?.isLogin && styles.activeText)}>{item?.tilte}</Text>
+      <Text style={(styles.textTitle, item?.isLogin && styles.activeText)}>{t(item?.tilte)}</Text>
     </View>
   );
 };

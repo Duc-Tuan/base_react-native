@@ -129,7 +129,6 @@ const SwipeListViewCustom = React.forwardRef<FlatList, IProps>(
       refFlatList.current = e;
     }, []);
 
-
     const renderHeader = React.useCallback(() => {
       return (
         <View

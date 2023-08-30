@@ -7,6 +7,7 @@ import { IconCheck } from 'assets/icons';
 import { styleGlobal } from 'types/StyleGlobal';
 import Colors from 'themes/Color';
 import { hexToRgba } from 'utils';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   textRight?: string;
@@ -17,6 +18,7 @@ interface IProps {
 }
 
 const CheckBox: React.FC<IProps> = ({ textRight, isDistable = true, size = 18, value, onChange }) => {
+  const { t } = useTranslation();
   const [isChecked, { on, off, toggle }] = useBoolean(value);
 
   const styleViewCheckBox = {
@@ -48,13 +50,13 @@ const CheckBox: React.FC<IProps> = ({ textRight, isDistable = true, size = 18, v
           ]}>
           {isChecked && <IconCheck fill={Colors.white} />}
         </View>
-        <Text style={styles.viewText}>{textRight}</Text>
+        {textRight && <Text style={styles.viewText}>{t(textRight)}</Text>}
       </View>
     </TouchableOpacity>
   );
 };
 
-export default CheckBox;
+export default React.memo(CheckBox);
 
 const styles = StyleSheet.create({
   container: { paddingVertical: 10 },

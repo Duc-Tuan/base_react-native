@@ -6,6 +6,9 @@ import ItemMenu from './components/ItemMenu';
 import { ILocation, dataLocation } from 'assets/data';
 import { useScrollToTop } from '@react-navigation/native';
 import Colors from 'themes/Color';
+import { IconAdd } from 'assets/icons';
+import NavigationService from 'naviagtion/stack/NavigationService';
+import { PathName } from 'configs';
 
 const ChangeAddressScreen = () => {
   const refScrollView = React.useRef<any>();
@@ -26,8 +29,16 @@ const ChangeAddressScreen = () => {
     }
   }, []);
 
+  const handleChangeNewAddress = React.useCallback(() => {
+    NavigationService.navigate(PathName.NEWADDRESSSCREEN);
+  }, []);
+
   return (
-    <ActivityPenal title="Địa chỉ của tôi" styleChildren={styles.container}>
+    <ActivityPenal
+      title="Địa chỉ của tôi"
+      styleChildren={styles.container}
+      rightIcon={<IconAdd fill={Colors.white} />}
+      handleRight={handleChangeNewAddress}>
       <ScrollView
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>

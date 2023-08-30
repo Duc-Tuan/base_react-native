@@ -2,7 +2,16 @@
 import { useColorPrimary } from 'hooks/useColorPrimary';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet, Text, TextStyle, TouchableHighlight, TouchableOpacity, ViewStyle } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableHighlight,
+  TouchableOpacity,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
@@ -11,8 +20,8 @@ type Props = {
   text: string;
   hover?: boolean;
   disabled?: boolean;
-  styleButton?: ViewStyle;
-  styleText?: TextStyle;
+  styleButton?: StyleProp<ViewStyle>;
+  styleText?: StyleProp<TextStyle>;
   typeButton?: 'cancel' | 'error' | 'main' | 'outline-main' | 'warning' | 'nomal' | 'disabled';
   action?: () => void;
 };
@@ -79,7 +88,8 @@ const ButtonCustom = (props: Props) => {
       style={[
         styles.container,
         styleGlobal.boxshadow,
-        { borderRadius: 4, borderWidth: 1, ...actionStyles(), ...styleButton },
+        { borderRadius: 4, borderWidth: 1, ...actionStyles() },
+        styleButton,
       ]}
       underlayColor={colorPrimary}
       onHideUnderlay={() => setIsHover(false)}
@@ -88,9 +98,9 @@ const ButtonCustom = (props: Props) => {
         style={[
           {
             ...colorText(),
-            ...styleText,
           },
           styles.textView,
+          styleText,
         ]}>
         {t(`${text}`)}
       </Text>
@@ -102,16 +112,17 @@ const ButtonCustom = (props: Props) => {
       style={[
         styles.container,
         styleGlobal.boxshadow,
-        { borderRadius: 4, borderWidth: 1, ...actionStyles(), ...styleButton },
+        { borderRadius: 4, borderWidth: 1, ...actionStyles() },
+        styleButton,
       ]}
       disabled={disabled}>
       <Text
         style={[
           {
             ...colorText(),
-            ...styleText,
           },
           styles.textView,
+          styleText,
         ]}>
         {t(`${text}`)}
       </Text>

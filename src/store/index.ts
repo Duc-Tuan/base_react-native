@@ -5,7 +5,7 @@ import { reducer as settingReducer } from 'modules/settings/store';
 import { reducer as authReducer } from 'modules/auth/store';
 
 const rootReducer = combineReducers({
-  cart: cartReducer,
+  carts: cartReducer,
   settings: settingReducer,
   auth: authReducer,
 });

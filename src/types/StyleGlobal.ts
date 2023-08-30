@@ -184,6 +184,15 @@ export const styleGlobal = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 14,
   },
+  paddingVertical_4: {
+    paddingVertical: 4,
+  },
+  paddingVertical_6: {
+    paddingVertical: 6,
+  },
+  paddingVertical_8: {
+    paddingVertical: 8,
+  },
   paddingVertical_10: {
     paddingVertical: 10,
   },
@@ -219,6 +228,7 @@ export const styleGlobal = StyleSheet.create({
   },
   textFontBold: {
     fontWeight: '700',
+    color: Colors.textColor,
   },
   buttonActionsCirc: {
     backgroundColor: hexToRgba(Colors.primary, 0.1),
@@ -286,6 +296,18 @@ export const styleGlobal = StyleSheet.create({
   margin_14: {
     marginVertical: 14,
     marginHorizontal: 14,
+  },
+  zIndex_lv1: {
+    zIndex: 10,
+  },
+  zIndex_lv2: {
+    zIndex: 20,
+  },
+  zIndex_lv3: {
+    zIndex: 30,
+  },
+  zIndex_lv4: {
+    zIndex: 40,
   },
 });
 

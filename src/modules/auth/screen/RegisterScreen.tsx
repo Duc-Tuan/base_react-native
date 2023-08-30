@@ -10,8 +10,10 @@ import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import FormAuth from './FormAuth';
 import { IFormRegister } from './Function';
+import { useTranslation } from 'react-i18next';
 
 const RegisterScreen = () => {
+  const { t } = useTranslation();
   const {
     control,
     handleSubmit,
@@ -27,7 +29,8 @@ const RegisterScreen = () => {
   });
 
   const onSubmit = (data: IFormRegister) => {
-    // return NavigationService.navigate(PathName.HOMESCREEN);
+    console.log(data);
+    return NavigationService.navigate(PathName.HOMESCREEN);
   };
 
   const isValidPasswordCofirm = React.useCallback((data: string) => {
@@ -44,12 +47,12 @@ const RegisterScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: 'Vui lòng không để trống trường này.',
+              required: t('Vui lòng không để trống trường này.'),
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder="Nhập email"
-                label="Email:"
+                placeholder={t('Nhập email...')}
+                label={t('Email:')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -65,12 +68,12 @@ const RegisterScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: 'Vui lòng không để trống trường này.',
+              required: t('Vui lòng không để trống trường này.'),
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder="Nhập tên tài khoản..."
-                label="Tài khoản:"
+                placeholder={t('Nhập tài khoản...')}
+                label={t('Tài khoản:')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -87,13 +90,13 @@ const RegisterScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: 'Vui lòng không để trống trường này.',
+              required: t('Vui lòng không để trống trường này.'),
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
                 placeholder="********"
                 secureTextEntry
-                label="Mật khẩu:"
+                label={t('Mật khẩu:')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -109,7 +112,7 @@ const RegisterScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: 'Vui lòng không để trống trường này.',
+              required: t('Vui lòng không để trống trường này.'),
               validate: value => {
                 if (isValidPasswordCofirm(value) === true) return undefined;
                 return isValidPasswordCofirm(value);
@@ -119,7 +122,7 @@ const RegisterScreen = () => {
               <InputCustom
                 placeholder="********"
                 secureTextEntry
-                label="Nhập lại mật khẩu:"
+                label={t('Nhập lại mật khẩu:')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -136,12 +139,12 @@ const RegisterScreen = () => {
             style={
               (styleGlobal.justifyContent_flexStart, styleGlobal.alignItems_center, styleGlobal.flexDirection_row)
             }>
-            <Text style={styles.viewText}>Bạn đã có tài khoản?</Text>
+            <Text style={styles.viewText}>{t('Bạn đã có tài khoản?')}</Text>
             <TouchableOpacity
               activeOpacity={0.8}
               style={styles.viewButtonRegister}
               onPress={() => NavigationService.navigate(PathName.LOGINSCREEN)}>
-              <Text style={styles.viewTextRegister}>Đăng nhập ngay.</Text>
+              <Text style={styles.viewTextRegister}>{t('Đăng nhập ngay.')}</Text>
             </TouchableOpacity>
           </View>
         </View>

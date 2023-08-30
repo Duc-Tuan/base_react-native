@@ -4,14 +4,25 @@
 import { IconClose, IconEye, IconEyeOff } from 'assets/icons';
 import { useBoolean } from 'hooks/useBoolean';
 import React from 'react';
-import { KeyboardType, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import {
+  KeyboardType,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
 
 type Props = {
   placeholder?: string;
-  inputStyle?: ViewStyle;
+  inputStyle?: StyleProp<ViewStyle>;
   onChange?: (value: string) => void;
   type?: KeyboardType;
   // initialState?: any;
@@ -25,6 +36,7 @@ type Props = {
   secureTextEntry?: any;
   close?: boolean;
   onBlur?: any;
+  required?: boolean;
 };
 
 const InputCustom = (props: Props) => {
@@ -44,7 +56,9 @@ const InputCustom = (props: Props) => {
     close = true,
     valueText,
     onBlur,
+    required,
   } = props;
+  const { t } = useTranslation();
   const [focus, setFocus] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>(valueText ?? '');
   const [showPassword, { on, off, toggle }] = useBoolean(secureTextEntry ?? false);
@@ -54,11 +68,21 @@ const InputCustom = (props: Props) => {
   };
   React.useEffect(() => {
     setValueSearch && setValueSearch(valueText ?? value);
+    setValue(valueText ?? '');
   }, [value, valueText]);
 
   return (
     <View style={{ position: 'relative' }}>
-      {label && <Text style={{ fontWeight: '600', color: Colors.black, fontSize: 16, marginBottom: 4 }}>{label}</Text>}
+      {label && (
+        <Text style={{ fontWeight: '600', color: Colors.black, fontSize: 16, marginBottom: 4 }}>
+          {t(label)}
+          {required && (
+            <Text style={{ color: hexToRgba(Colors.black, 0.6) }}>
+              (<Text style={styles.viewRequired}>*</Text>)
+            </Text>
+          )}
+        </Text>
+      )}
       <View
         style={[
           styleGlobal.dFlex_center,
@@ -143,4 +167,5 @@ const styles = StyleSheet.create({
   },
   viewTextInput: { padding: 4, width: '100%', zIndex: 10, paddingRight: 10 },
   viewIconRight: { position: 'absolute', top: '20%', right: 10, zIndex: 100 },
+  viewRequired: { color: 'red' },
 });

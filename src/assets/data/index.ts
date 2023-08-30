@@ -1,6 +1,6 @@
 import { IUserGlobal } from 'modules/auth/screen/Function';
 import Colors from 'themes/Color';
-
+import { IOptions } from 'types/product-types';
 /* eslint-disable prettier/prettier */
 export interface ICarts {
     id: string | number;
@@ -13,15 +13,18 @@ export interface ICarts {
 export interface ILocation {
     code: string;
     default: boolean;
-    item: {
-        Wards: string;
-        District: string;
-        city: string;
-        addressDetail: string;
-        phone: string;
-        organ: string;
-        deliveryTime: string;
-    }
+    item: ILocationDetail;
+}
+export interface ILocationDetail {
+    Wards: string;
+    village: string;
+    District: string;
+    city: string;
+    addressDetail: string;
+    phone: string;
+    organ: string;
+    deliveryTime: string;
+    default?: boolean;
 }
 
 export const dataCarts: ICarts[] | [] = [
@@ -112,6 +115,7 @@ export const dataLocation: ILocation[] = [
         code: 'DC00001',
         default: true,
         item: {
+            village: '',
             Wards: 'Quảng Nghiệp',
             District: 'Tứ Kỳ',
             city: 'Hải Dương',
@@ -125,6 +129,7 @@ export const dataLocation: ILocation[] = [
         code: 'DC00002',
         default: false,
         item: {
+            village: '',
             Wards: 'Quảng Nghiệp',
             District: 'Tứ Kỳ',
             city: 'Hải Dương',
@@ -138,6 +143,7 @@ export const dataLocation: ILocation[] = [
         code: 'DC00003',
         default: false,
         item: {
+            village: '',
             Wards: 'Quảng Nghiệp',
             District: 'Tứ Kỳ',
             city: 'Hải Dương',
@@ -163,3 +169,18 @@ export const dataUser: IUserGlobal = {
     age: '26/03/2002',
     color: Colors.primary,
 };
+
+export const optionsOrgan: IOptions[] = [
+    {
+        value: 1,
+        label: 'Nhà riêng',
+    },
+    {
+        value: 2,
+        label: 'Công ty',
+    },
+    {
+        value: 3,
+        label: 'Khác',
+    },
+];
