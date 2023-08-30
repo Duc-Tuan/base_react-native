@@ -9,7 +9,7 @@ const DisplayImage = () => {
   const { t } = useTranslation();
 
   return (
-    <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column, styles.container]}>
+    <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column, styleGlobal.marginTop_14]}>
       <TouchableOpacity onPress={handleBack} style={[styles.viewBack]} activeOpacity={0.8}>
         <View style={[styleGlobal.padding_2, styles.viewImgShop]}>
           <Image
@@ -40,7 +40,6 @@ const DisplayImage = () => {
 export default React.memo(DisplayImage);
 
 const styles = StyleSheet.create({
-  container: { marginBottom: 20 },
   viewBack: { justifyContent: 'center' },
   viewImgShop: { borderRadius: 100, borderColor: Colors.primary, borderWidth: 1, borderStyle: 'solid' },
   viewImageShop: {

@@ -168,6 +168,10 @@ export const styleGlobal = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 6,
   },
+  padding_7: {
+    paddingVertical: 7,
+    paddingHorizontal: 7,
+  },
   padding_8: {
     paddingVertical: 8,
     paddingHorizontal: 8,
@@ -210,6 +214,9 @@ export const styleGlobal = StyleSheet.create({
   },
   paddingVertical_20: {
     paddingVertical: 20,
+  },
+  paddingHorizontal_10: {
+    paddingHorizontal: 10,
   },
   flex_1: {
     flex: 1,

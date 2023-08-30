@@ -1,15 +1,32 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { styleGlobal } from 'types/StyleGlobal';
+import { Animated, LayoutChangeEvent, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-const MenuMap = () => {
+interface IProps {
+  scrollA?: any;
+}
+
+const MenuMap: React.FC<IProps> = ({ scrollA }) => {
+  const [heigth, setHeigth] = React.useState<number>(0);
+
+  const handleLayout = React.useCallback((e: LayoutChangeEvent) => {
+    setHeigth(e?.nativeEvent?.layout?.height);
+  }, []);
+  console.log(heigth);
+
   return (
-    <View style={[styleGlobal.marginTop_10, styles.container]}>
-      <Text>MenuMap</Text>
-    </View>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      onScroll={
+        heigth > 420 && Animated.event([{ nativeEvent: { contentOffset: { y: scrollA } } }], { useNativeDriver: false })
+      }
+      scrollEventThrottle={16}>
+      <View style={[styles.container]} onLayout={handleLayout}>
+        <Text>MenuMap</Text>
+      </View>
+    </ScrollView>
   );
 };
 
-export default MenuMap;
+export default React.memo(MenuMap);
 
-const styles = StyleSheet.create({ container: {} });
+const styles = StyleSheet.create({ container: { paddingBottom: 100 } });
