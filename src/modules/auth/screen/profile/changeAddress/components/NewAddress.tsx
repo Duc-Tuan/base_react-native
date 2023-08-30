@@ -292,7 +292,7 @@ const NewAddressScreen = () => {
           </View>
 
           <View style={[styleGlobal.marginTop_10, styleGlobal.zIndex_lv1]}>
-            <CheckBox textRight="Chọn làm địa chỉ mặc định" onChange={handelAddressDefault} />
+            <CheckBox textRight="Chọn làm địa chỉ mặc định." onChange={handelAddressDefault} />
           </View>
         </View>
 

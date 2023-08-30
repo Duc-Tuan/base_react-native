@@ -7,3 +7,8 @@ export interface IOptions {
     value: string | number;
     label: string | number;
 }
+
+export interface IRouterTabsMenu {
+    key: string;
+    title: string;
+}

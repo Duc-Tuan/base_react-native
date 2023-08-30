@@ -226,9 +226,24 @@ export const styleGlobal = StyleSheet.create({
   textPrimary: {
     color: Colors.textColor,
   },
+  textBg: {
+    color: Colors.primary,
+  },
   textFontBold: {
     fontWeight: '700',
     color: Colors.textColor,
+  },
+  textFontSize_10: {
+    fontSize: 10,
+  },
+  textFontSize_14: {
+    fontSize: 14,
+  },
+  textFontSize_16: {
+    fontSize: 16,
+  },
+  textFontSize_18: {
+    fontSize: 18,
   },
   buttonActionsCirc: {
     backgroundColor: hexToRgba(Colors.primary, 0.1),

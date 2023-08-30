@@ -74,7 +74,17 @@ const InputCustom = (props: Props) => {
   return (
     <View style={{ position: 'relative' }}>
       {label && (
-        <Text style={{ fontWeight: '600', color: Colors.black, fontSize: 16, marginBottom: 4 }}>
+        <Text
+          style={{
+            fontWeight: '600',
+            color: Colors.black,
+            fontSize: Platform.select({
+              ios: 13,
+              android: 14,
+              default: 13,
+            }),
+            marginBottom: 4,
+          }}>
           {t(label)}
           {required && (
             <Text style={{ color: hexToRgba(Colors.black, 0.6) }}>
