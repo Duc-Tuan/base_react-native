@@ -6,6 +6,7 @@ import Modal from 'react-native-modal';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import ButtonCustom from './custom/ButtonCustom';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   isVisible: boolean;
@@ -29,6 +30,8 @@ const WrapperModal = (props: Props) => {
     children,
     swipeDirection = 'down',
   } = props;
+  const { t } = useTranslation();
+
   return (
     <Modal
       isVisible={isVisible}
@@ -45,7 +48,7 @@ const WrapperModal = (props: Props) => {
               styles.header,
             ]}>
             <Text style={styles.textHeader} numberOfLines={1}>
-              {textHeader ?? 'Popup'}
+              {t(textHeader ?? 'Đang cập nhập...')}
             </Text>
             <TouchableOpacity activeOpacity={0.9} onPress={hiddenPopup}>
               <IconClose fill={Colors.black} />

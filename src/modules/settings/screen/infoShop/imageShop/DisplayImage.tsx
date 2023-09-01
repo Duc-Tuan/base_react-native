@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import { styleGlobal } from 'types/StyleGlobal';
-import Colors from 'themes/Color';
 import { useTranslation } from 'react-i18next';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Colors from 'themes/Color';
+import { styleGlobal } from 'types/StyleGlobal';
 
 const DisplayImage = () => {
   const handleBack = () => {};
@@ -10,8 +10,8 @@ const DisplayImage = () => {
 
   return (
     <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column, styleGlobal.marginTop_14]}>
-      <TouchableOpacity onPress={handleBack} style={[styles.viewBack]} activeOpacity={0.8}>
-        <View style={[styleGlobal.padding_2, styles.viewImgShop]}>
+      <TouchableOpacity onPress={handleBack} style={[styles.viewBack]} activeOpacity={1}>
+        <View style={[styleGlobal.padding_2, styles.viewImgShop, { borderColor: Colors.primary }]}>
           <Image
             source={require('assets/images/avt.jpg')}
             style={[styleGlobal.image, styleGlobal.padding_10, styles.viewImageShop]}
@@ -41,7 +41,7 @@ export default React.memo(DisplayImage);
 
 const styles = StyleSheet.create({
   viewBack: { justifyContent: 'center' },
-  viewImgShop: { borderRadius: 100, borderColor: Colors.primary, borderWidth: 1, borderStyle: 'solid' },
+  viewImgShop: { borderRadius: 100, borderWidth: 1, borderStyle: 'solid' },
   viewImageShop: {
     width: 80,
     height: 80,

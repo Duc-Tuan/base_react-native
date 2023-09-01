@@ -1,32 +1,45 @@
+/* eslint-disable react/self-closing-comp */
+import { IconLocation } from 'assets/icons';
 import React from 'react';
-import { Animated, LayoutChangeEvent, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import Colors from 'themes/Color';
+import { styleGlobal } from 'types/StyleGlobal';
 
-interface IProps {
-  scrollA?: any;
-}
+const locationID = { latitude: 20.810481228782997, longitude: 106.32251555810518 };
 
-const MenuMap: React.FC<IProps> = ({ scrollA }) => {
-  const [heigth, setHeigth] = React.useState<number>(0);
-
-  const handleLayout = React.useCallback((e: LayoutChangeEvent) => {
-    setHeigth(e?.nativeEvent?.layout?.height);
-  }, []);
-  console.log(heigth);
-
+const MenuMap = () => {
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      onScroll={
-        heigth > 420 && Animated.event([{ nativeEvent: { contentOffset: { y: scrollA } } }], { useNativeDriver: false })
-      }
-      scrollEventThrottle={16}>
-      <View style={[styles.container]} onLayout={handleLayout}>
-        <Text>MenuMap</Text>
+    <View style={[styles.container]}>
+      <View style={[styleGlobal.dFlex_center, styleGlobal.justifyContent_flexStart, styles.viewInfo]}>
+        <IconLocation fill={Colors.primary} />
+        <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_14]}>Quảng Nghiệp - Tứ Kỳ - Hải Dương.</Text>
       </View>
-    </ScrollView>
+
+      <View style={[styleGlobal.flex_1, styleGlobal.paddingTop_10]}>
+        <MapView
+          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+          style={[styleGlobal.border, styleGlobal.image, styles.viewMap]}
+          initialRegion={{
+            ...locationID,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+          }}>
+          <Marker
+            coordinate={{
+              ...locationID,
+            }}
+          />
+        </MapView>
+      </View>
+    </View>
   );
 };
 
 export default React.memo(MenuMap);
 
-const styles = StyleSheet.create({ container: { paddingBottom: 100 } });
+const styles = StyleSheet.create({
+  container: { paddingTop: 10, flex: 1 },
+  viewMap: { borderRadius: 10, height: '58%' },
+  viewInfo: {},
+});

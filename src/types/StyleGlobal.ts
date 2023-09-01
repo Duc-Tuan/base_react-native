@@ -331,6 +331,14 @@ export const styleGlobal = StyleSheet.create({
   zIndex_lv4: {
     zIndex: 40,
   },
+  borderBottomPrimary: {
+    borderBottomColor: Colors.primary,
+    borderBottomWidth: 1,
+  },
+  borderBottomWhite: {
+    borderBottomColor: Colors.white,
+    borderBottomWidth: 1,
+  },
 });
 
 export const marginVerticalItemListView = StyleSheet.create({

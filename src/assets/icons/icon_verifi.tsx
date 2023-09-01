@@ -1,12 +1,12 @@
-import React from "react";
-import Svg, { Rect, ClipPath, Defs, G, Path } from "react-native-svg";
+import React from 'react';
+import Svg, { Rect, ClipPath, Defs, G, Path } from 'react-native-svg';
 type Props = {
   fill?: string;
   width?: number;
   height?: number;
 };
 const IconVerifi = (props: Props) => {
-  const { fill = "black", width = 24, height = 24 } = props;
+  const { fill = 'black', width = 24, height = 24 } = props;
   return (
     <Svg height={height} width={width} viewBox="0 0 24 24" {...props}>
       <G clip-path="url(#clip0_16158_220125)">

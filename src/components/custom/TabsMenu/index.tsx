@@ -1,6 +1,6 @@
 import IconShare from 'assets/icons/icon_share';
 import React from 'react';
-import { Animated, StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { Animated, StyleSheet, TouchableOpacity, View, useWindowDimensions, StyleProp, ViewStyle } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 import Colors from 'themes/Color';
 import { heightFull, styleGlobal } from 'types/StyleGlobal';
@@ -8,15 +8,17 @@ import { IRouterTabsMenu } from 'types/product-types';
 import { hexToRgba } from 'utils';
 
 interface IProps {
+  activeTextHeader?: StyleProp<ViewStyle>;
   routerTabs: IRouterTabsMenu[];
   SceneMapTabs: {
     [key: string]: React.ComponentType<unknown>;
   };
   isShare?: boolean;
   handleShare?: () => void;
+  isDefault?: boolean;
 }
 
-const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleShare }) => {
+const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleShare, isDefault = false }) => {
   const layout = useWindowDimensions();
 
   const renderScene = SceneMap(SceneMapTabs);
@@ -42,9 +44,10 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
 
             return (
               <TouchableOpacity
+                activeOpacity={0.9}
                 style={[
                   styles.tabItem,
-                  {
+                  !isDefault && {
                     backgroundColor:
                       props?.navigationState?.index === i ? Colors.primary : hexToRgba(Colors.primary, 0.6),
                   },
@@ -53,9 +56,9 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
                 onPress={() => setIndex(i)}>
                 <Animated.Text
                   style={[
-                    inputRange.map((inputIndex: any) => inputIndex === i && styles.viewActive),
+                    inputRange.map((inputIndex: any) => inputIndex === i && !isDefault && styles.viewActive),
                     { opacity, color },
-                    styleGlobal.padding_10,
+                    !isDefault && styleGlobal.padding_10,
                   ]}>
                   {route.title}
                 </Animated.Text>
@@ -63,7 +66,7 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
             );
           })}
           {isShare && (
-            <TouchableOpacity activeOpacity={0.9} onPress={handleShare} style={styles.viewButtonShare}>
+            <TouchableOpacity activeOpacity={0.9} onPress={handleShare} style={[styles.viewButtonShare]}>
               <View style={styleGlobal.padding_7}>
                 <IconShare fill={Colors.white} />
               </View>
@@ -72,7 +75,7 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
         </View>
       );
     },
-    [isShare, handleShare],
+    [isShare, handleShare, isDefault],
   );
 
   return (

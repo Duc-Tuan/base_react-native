@@ -3,7 +3,7 @@ import { ActivityPenal } from 'components';
 import TabsMenu from 'components/custom/TabsMenu';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, View, Share, Alert } from 'react-native';
 import Colors from 'themes/Color';
 import { heightFull, styleGlobal } from 'types/StyleGlobal';
 import DisplayImage from './imageShop/DisplayImage';
@@ -16,19 +16,34 @@ const InfoShopScreen = () => {
   const { t } = useTranslation();
   const scrollA = React.useRef(new Animated.Value(0)).current;
 
-  const MenuMapNew = () => <MenuMap scrollA={scrollA} />;
-
-  const MenuInfoNew = () => <MenuInfo scrollA={scrollA} />;
-
   const routerTabs = [
     { key: 'map', title: t('Địa chỉ') },
     { key: 'info', title: t('Thông tin') },
   ];
 
   const SceneMapTabs = {
-    map: MenuMapNew,
-    info: MenuInfoNew,
+    map: MenuMap,
+    info: MenuInfo,
   };
+
+  const onShare = React.useCallback(async () => {
+    try {
+      const result = await Share.share({
+        message: 'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  }, []);
 
   return (
     <ActivityPenal title="Thông tin cửa hàng">
@@ -37,7 +52,7 @@ const InfoShopScreen = () => {
           <DisplayImage />
         </Animated.View>
         <View style={[styleGlobal.padding_14]}>
-          <TabsMenu SceneMapTabs={SceneMapTabs} routerTabs={routerTabs} isShare />
+          <TabsMenu SceneMapTabs={SceneMapTabs} routerTabs={routerTabs} isShare handleShare={onShare} />
         </View>
       </View>
     </ActivityPenal>

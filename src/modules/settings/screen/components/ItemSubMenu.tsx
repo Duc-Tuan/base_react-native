@@ -27,7 +27,7 @@ const ItemSubMenu: React.FC<IProps> = ({ item, stylesWrapper }) => {
   }, [item]);
 
   return item?.isLogin || item?.isLogin === undefined ? (
-    <TouchableOpacity onPress={goToScreen} style={[styles.container, stylesWrapper]} activeOpacity={0.9}>
+    <TouchableOpacity onPress={goToScreen} style={[styles.container, stylesWrapper]} activeOpacity={0.8}>
       {item?.icon}
       {item?.tilte && <Text style={styles.textTitle}>{t(item?.tilte)}</Text>}
     </TouchableOpacity>
