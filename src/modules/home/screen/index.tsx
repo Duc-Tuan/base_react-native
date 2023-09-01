@@ -41,11 +41,7 @@ const HomeScreen = () => {
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
         <View>
-          <Text>HomeScreen</Text>
-          <Text>HomeScreen</Text>
-          <Text>HomeScreen</Text>
-          <Text>HomeScreen</Text>
-          <Text>HomeScreen</Text>
+          <Text>Day la trang home aaaaaa</Text>
         </View>
       </ScrollView>
     </ActivityPenal>
