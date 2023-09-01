@@ -1,0 +1,1 @@
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

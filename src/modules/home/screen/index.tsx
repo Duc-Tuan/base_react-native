@@ -42,6 +42,10 @@ const HomeScreen = () => {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
         <View>
           <Text>HomeScreen</Text>
+          <Text>HomeScreen</Text>
+          <Text>HomeScreen</Text>
+          <Text>HomeScreen</Text>
+          <Text>HomeScreen</Text>
         </View>
       </ScrollView>
     </ActivityPenal>
