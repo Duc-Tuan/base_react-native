@@ -39,7 +39,7 @@ const ItemMenu: React.FC<IProps> = ({ item }) => {
   }, [item]);
 
   const handleDelete = () => {
-    console.log(item);
+    // console.log(item);
   };
 
   return (

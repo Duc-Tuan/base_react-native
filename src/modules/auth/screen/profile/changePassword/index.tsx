@@ -24,7 +24,7 @@ const ChangePasswordScreen = () => {
   });
 
   const onSubmit = React.useCallback((data: IChangePassword) => {
-    console.log(data);
+    // console.log(data);
   }, []);
 
   const isValidPasswordCofirm = React.useCallback(

@@ -35,7 +35,7 @@ const CartsScreen = () => {
   }, [selectCheck, data]);
 
   const handleRemoveItem = (data: any) => {
-    console.log(data);
+    // console.log(data);
   };
 
   const renderChildren = React.useCallback((data: any) => {

@@ -49,7 +49,7 @@ const NewAddressScreen = () => {
   });
 
   const onSubmit = React.useCallback((data: ILocationDetail) => {
-    console.log(data);
+    // console.log(data);
   }, []);
 
   React.useEffect(() => {

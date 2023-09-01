@@ -48,17 +48,15 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
 
     launchImageLibrary(options, (response: any) => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        // console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('Image picker error: ', response.error);
+        // console.log('Image picker error: ', response.error);
       } else {
         let imageUri = response.uri || response.assets?.[0]?.uri;
         setSelectedImage(imageUri);
       }
     });
   };
-
-  console.log(selectedImage);
 
   return (
     <>

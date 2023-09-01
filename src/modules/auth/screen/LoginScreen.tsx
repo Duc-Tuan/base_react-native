@@ -25,7 +25,7 @@ const LoginScreen = () => {
   });
 
   const onSubmit = (data: IFormLogin) => {
-    console.log(data);
+    // console.log(data);
     return NavigationService.navigate(PathName.HOMESCREEN);
   };
 
