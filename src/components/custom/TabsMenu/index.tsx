@@ -66,7 +66,10 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
             );
           })}
           {isShare && (
-            <TouchableOpacity activeOpacity={0.9} onPress={handleShare} style={[styles.viewButtonShare]}>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={handleShare}
+              style={[styles.viewButtonShare, { backgroundColor: Colors.primary }]}>
               <View style={styleGlobal.padding_7}>
                 <IconShare fill={Colors.white} />
               </View>
@@ -110,7 +113,6 @@ const styles = StyleSheet.create({
     color: Colors.textColor,
   },
   viewButtonShare: {
-    backgroundColor: Colors.primary,
     borderRadius: 6,
   },
 });

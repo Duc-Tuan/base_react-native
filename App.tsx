@@ -13,6 +13,7 @@ import { ClickOutsideProvider } from 'react-native-click-outside';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
+// import codePush from 'react-native-code-push';
 
 dayjs.locale('vi');
 
@@ -38,4 +39,7 @@ function App(): JSX.Element {
   );
 }
 
+// const codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
+
+// export default codePush(codePushOptions)(App);
 export default App;

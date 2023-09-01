@@ -8,6 +8,10 @@ const DisplayImage = () => {
   const handleBack = () => {};
   const { t } = useTranslation();
 
+  const stylesText = {
+    color: Colors.primary,
+  };
+
   return (
     <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column, styleGlobal.marginTop_14]}>
       <TouchableOpacity onPress={handleBack} style={[styles.viewBack]} activeOpacity={1}>
@@ -21,15 +25,15 @@ const DisplayImage = () => {
       <Text style={[styleGlobal.textFontBold, styleGlobal.marginTop_10]}>{t('Cửa hàng')} Chef</Text>
       <View style={[styleGlobal.dFlex_center, styleGlobal.gap_18, styleGlobal.paddingTop_10]}>
         <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column]}>
-          <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_16, styleGlobal.textBg]}>10</Text>
+          <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_16, { ...stylesText }]}>10</Text>
           <Text style={[styleGlobal.textPrimary]}>{t('Lượt thích')}</Text>
         </View>
         <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column]}>
-          <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_16, styleGlobal.textBg]}>10</Text>
+          <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_16, { ...stylesText }]}>10</Text>
           <Text style={[styleGlobal.textPrimary]}>{t('Theo dõi')}</Text>
         </View>
         <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column]}>
-          <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_16, styleGlobal.textBg]}>10</Text>
+          <Text style={[styleGlobal.textFontBold, styleGlobal.textFontSize_16, { ...stylesText }]}>10</Text>
           <Text style={[styleGlobal.textPrimary]}>{t('Phản hồi')}</Text>
         </View>
       </View>
@@ -47,5 +51,4 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 100,
   },
-  viewGroup: {},
 });

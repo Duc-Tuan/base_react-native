@@ -20,6 +20,9 @@ const MenuInfo = () => {
     styleGlobal.padding_10,
     styleGlobal.border,
     styles.grounp,
+    {
+      backgroundColor: hexToRgba(Colors.primary, 0.1),
+    },
   ];
 
   const render = React.useCallback(
@@ -84,7 +87,6 @@ export default MenuInfo;
 const styles = StyleSheet.create({
   container: { paddingBottom: 280 },
   grounp: {
-    backgroundColor: hexToRgba(Colors.primary, 0.1),
     borderRadius: 8,
     borderColor: hexToRgba(Colors.black, 0.2),
   },
