@@ -234,6 +234,7 @@ export const styleGlobal = StyleSheet.create({
     color: Colors.textColor,
   },
   textBg: {
+    fontWeight: '700',
     color: Colors.primary,
   },
   textFontBold: {
@@ -338,6 +339,9 @@ export const styleGlobal = StyleSheet.create({
   borderBottomWhite: {
     borderBottomColor: Colors.white,
     borderBottomWidth: 1,
+  },
+  backgroundColorTran: {
+    backgroundColor: 'transparent',
   },
 });
 
