@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import {initReactI18next} from 'react-i18next';
-import i18next, {LanguageDetectorAsyncModule, Resource} from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import i18next, { LanguageDetectorAsyncModule, Resource } from 'i18next';
 
 import vi from './locales/vi.json';
 
@@ -8,12 +8,12 @@ const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   async: true,
   detect: cb => cb('vi'),
-  init: () => {},
-  cacheUserLanguage: () => {},
+  init: () => { },
+  cacheUserLanguage: () => { },
 };
 
 const resources: Resource = {
-  vi: {translation: vi},
+  vi: { translation: vi },
 };
 
 i18next.use(languageDetector).use(initReactI18next).init({

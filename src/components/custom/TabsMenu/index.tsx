@@ -20,7 +20,7 @@ import { hexToRgba } from 'utils';
 
 interface IProps {
   activeTextHeader?: StyleProp<ViewStyle>;
-  routerTabs: IRouterTabsMenu[];
+  routerTabs: () => IRouterTabsMenu[];
   SceneMapTabs: {
     [key: string]: React.ComponentType<unknown>;
   };
