@@ -48,7 +48,7 @@ const BottomTab = () => {
           heightFull -
           Platform.select({
             ios: 0,
-            android: 30,
+            android: 0,
             default: 0,
           }),
       }}>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
       heightFull -
       Platform.select({
         ios: 69,
-        android: 99,
+        android: 69,
         default: 0,
       }),
     borderStyle: 'solid',
