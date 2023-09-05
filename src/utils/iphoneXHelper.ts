@@ -59,7 +59,7 @@ export function getStatusBarHeight() {
     return Platform.select({
         ios: statusBarHeight,
         // android: StatusBar.currentHeight,
-        android: 0,
+        android: 6,
         default: 0,
     });
 }
