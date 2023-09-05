@@ -44,13 +44,7 @@ const BottomTab = () => {
     <View
       style={{
         width: widthFull,
-        height:
-          heightFull -
-          Platform.select({
-            ios: 0,
-            android: 0,
-            default: 0,
-          }),
+        height: heightFull,
       }}>
       <Stack.Navigator
         screenOptions={{
