@@ -9,11 +9,13 @@ import Colors from 'themes/Color';
 import ViewProduct from './ViewProduct';
 import ViewCategories from './viewCategoryies';
 import { styleGlobal } from 'types/StyleGlobal';
+import ViewBanner from './viewBanner';
 
 const HomeScreen = () => {
   const { t } = useTranslation();
   const refScrollView = React.useRef<any>();
   const refViewProduct = React.useRef<any>();
+  const refViewBanners = React.useRef<any>();
   const refViewCategories = React.useRef<any>();
   const [refreshing, setRefreshing] = React.useState<boolean>(false);
   useScrollToTop(refScrollView);
@@ -21,7 +23,11 @@ const HomeScreen = () => {
   const onRefresh = React.useCallback(async () => {
     try {
       setRefreshing(true);
-      await Promise.all([refViewProduct.current?.onRefresh(), refViewCategories.current?.onRefresh()]);
+      await Promise.all([
+        refViewProduct?.current?.onRefresh(),
+        refViewCategories?.current?.onRefresh(),
+        refViewBanners?.current?.onRefresh(),
+      ]);
     } catch (error) {
     } finally {
       setRefreshing(false);
@@ -34,6 +40,7 @@ const HomeScreen = () => {
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
         <View style={[styleGlobal.padding_10, styles.container]}>
+          <ViewBanner ref={refViewBanners} />
           <ViewCategories ref={refViewCategories} />
           <ViewProduct ref={refViewProduct} />
         </View>

@@ -17,11 +17,43 @@ interface IProps {
   initaldata: any[];
   renderItem: (data: any) => React.ReactElement;
   stylesWrapper?: StyleProp<ViewStyle>;
+  delayTime?: number;
+  autoPlay?: boolean;
 }
 
-const FlatListhorizontal: React.FC<IProps> = ({ initaldata, renderItem, stylesWrapper }) => {
+const FlatListhorizontal: React.FC<IProps> = ({
+  initaldata,
+  renderItem,
+  stylesWrapper,
+  delayTime = 3000,
+  autoPlay = false,
+}) => {
   const refFlat = React.useRef<any>();
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
+
+  console.log(activeIndex);
+
+  React.useEffect(() => {
+    const setTimer = autoPlay
+      ? setInterval(() => {
+          if (activeIndex !== initaldata.length - 1) {
+            return refFlat.current.scrollToIndex({
+              index: activeIndex + 1,
+              animetion: true,
+            });
+          } else {
+            return refFlat.current.scrollToIndex({
+              index: 0,
+              animetion: true,
+            });
+          }
+        }, delayTime)
+      : undefined;
+
+    return () => {
+      autoPlay && clearInterval(setTimer);
+    };
+  }, [activeIndex, autoPlay, initaldata.length]);
 
   //handle scroll
   const handleScroll = React.useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
