@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   styleViewImge: {
-    objectFit: 'fill',
+    objectFit: 'cover',
   },
 });
