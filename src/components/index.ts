@@ -5,3 +5,4 @@ export { default as WrapperModal } from './WrapperModal';
 export { default as ButtonCustom } from './custom/ButtonCustom';
 export { default as ButtonIcon } from './custom/ButtonIcon';
 export { default as InputCustom } from './custom/InputCustom';
+export { default as HeaderViewAll } from './custom/HeaderViewAll';

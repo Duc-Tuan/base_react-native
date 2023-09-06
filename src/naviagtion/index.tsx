@@ -20,6 +20,7 @@ import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
 import NewAddressScreen from 'modules/auth/screen/profile/changeAddress/components/NewAddress';
+import CategoriesScreen from 'modules/merchent/screen/CategoriesScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -99,6 +100,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.NEWADDRESSSCREEN}
           component={NewAddressScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.CATEGORIESSCREEN}
+          component={CategoriesScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

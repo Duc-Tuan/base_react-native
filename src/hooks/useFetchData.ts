@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const useFetchData = <T>(callback: () => Promise<T>) => {
+const useFetchData = <T>(callback: (page: number) => Promise<T>) => {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   const fetchNoLoading = useCallback(async () => {
     try {
-      const response = await callback();
+      const response = await callback(1);
       setData(response);
       return response;
     } catch (error) {}

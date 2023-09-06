@@ -60,6 +60,9 @@ export const styleGlobal = StyleSheet.create({
   flex_wrap: {
     flexWrap: 'wrap',
   },
+  gap_4: {
+    gap: 4,
+  },
   gap_6: {
     gap: 6,
   },
@@ -125,6 +128,7 @@ export const styleGlobal = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    objectFit: 'contain',
   },
   paddingTop_8: {
     paddingTop: 8,
@@ -217,6 +221,9 @@ export const styleGlobal = StyleSheet.create({
   },
   paddingHorizontal_10: {
     paddingHorizontal: 10,
+  },
+  paddingHorizontal_4: {
+    paddingHorizontal: 4,
   },
   flex_1: {
     flex: 1,
@@ -342,6 +349,9 @@ export const styleGlobal = StyleSheet.create({
   },
   backgroundColorTran: {
     backgroundColor: 'transparent',
+  },
+  backgroundColorWhite: {
+    backgroundColor: Colors.white,
   },
 });
 

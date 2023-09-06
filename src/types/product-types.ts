@@ -12,3 +12,14 @@ export interface IRouterTabsMenu {
     key: string;
     title: string;
 }
+
+export interface ResponseCommon<T> {
+    paganition: Metadata;
+    data: T[];
+}
+
+export interface Metadata {
+    currentPage: number;
+    totalPage: number;
+    pageSize: number;
+}

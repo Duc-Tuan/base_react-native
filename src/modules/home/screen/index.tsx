@@ -4,22 +4,24 @@ import ActivityPenal from 'components/ActivityPenal';
 import HeaderNew from 'components/HeaderNew';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import Colors from 'themes/Color';
 import ViewProduct from './ViewProduct';
+import ViewCategories from './viewCategoryies';
+import { styleGlobal } from 'types/StyleGlobal';
 
 const HomeScreen = () => {
   const { t } = useTranslation();
   const refScrollView = React.useRef<any>();
   const refViewProduct = React.useRef<any>();
-  const [textSearch, setTextSearch] = React.useState<string>('');
+  const refViewCategories = React.useRef<any>();
   const [refreshing, setRefreshing] = React.useState<boolean>(false);
   useScrollToTop(refScrollView);
 
   const onRefresh = React.useCallback(async () => {
     try {
       setRefreshing(true);
-      await Promise.all([refViewProduct.current?.onRefresh()]);
+      await Promise.all([refViewProduct.current?.onRefresh(), refViewCategories.current?.onRefresh()]);
     } catch (error) {
     } finally {
       setRefreshing(false);
@@ -27,18 +29,13 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <ActivityPenal
-      // styleChildren={styles.container}
-      renderHeader={
-        <HeaderNew setTextSearch={setTextSearch} hiddenBack isUser placeholder={t('Tìm kiếm tên, mã sản phẩm...')} />
-      }>
+    <ActivityPenal renderHeader={<HeaderNew hiddenBack isUser placeholder={t('Tìm kiếm tên, mã sản phẩm...')} />}>
       <ScrollView
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
-        <View style={styles.container}>
+        <View style={[styleGlobal.padding_10, styles.container]}>
+          <ViewCategories ref={refViewCategories} />
           <ViewProduct ref={refViewProduct} />
-
-          <Text>Day la trang home aaaaaa</Text>
         </View>
       </ScrollView>
     </ActivityPenal>
@@ -48,7 +45,7 @@ const HomeScreen = () => {
 export default React.memo(HomeScreen);
 
 const styles = StyleSheet.create({
-  container: { paddingBottom: 30 },
+  container: { paddingBottom: 30, paddingTop: 0 },
   imageRefresh: { width: 16, height: 16 },
   viewButtonRefresh: {
     width: 36,
