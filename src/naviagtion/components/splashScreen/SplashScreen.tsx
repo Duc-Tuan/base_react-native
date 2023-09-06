@@ -38,7 +38,7 @@ const SplashScreen = () => {
 
   return (
     <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-      <Image source={require('assets/images/app.png')} style={[styleGlobal.image]} />
+      <Image source={require('assets/images/app.png')} style={[styleGlobal.image, styles.styleViewImge]} />
     </Animated.View>
   );
 };
@@ -50,5 +50,8 @@ const styles = StyleSheet.create({
     width: widthFull,
     height: heightFull,
     position: 'relative',
+  },
+  styleViewImge: {
+    objectFit: 'fill',
   },
 });
