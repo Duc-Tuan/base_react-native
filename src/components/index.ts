@@ -7,3 +7,4 @@ export { default as ButtonIcon } from './custom/ButtonIcon';
 export { default as InputCustom } from './custom/InputCustom';
 export { default as HeaderViewAll } from './custom/HeaderViewAll';
 export { default as ImageCustom } from './custom/ImageCustom';
+export { default as FlatListComponent } from './custom/FlatListComponent';

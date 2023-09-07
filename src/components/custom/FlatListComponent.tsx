@@ -29,9 +29,10 @@ const FlatListComponent: React.FC<IProps> = React.forwardRef(
     ref,
   ) => {
     React.useImperativeHandle(ref, () => ({ onRefresh }));
+
     return (
       <FlatList
-        contentContainerStyle={[styleGlobal.dFlex_center, styleGlobal.gap_10, styleGlobal.flex_wrap]}
+        contentContainerStyle={[styleGlobal.gap_10, styleGlobal.paddingBottom_16]}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh && onRefresh} tintColor={Colors.primary} />
         }

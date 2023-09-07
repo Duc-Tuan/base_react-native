@@ -3,9 +3,14 @@ import { ILocation } from 'assets/data';
 import * as httpRequest from 'store/axios';
 
 const ApiAddressOrder = {
-    async getAddressOrder() {
+    async getAddressOrder(page?: number, pageSize?: number) {
         try {
-            const res = await httpRequest.get('addressOrders');
+            const res = await httpRequest.get('addressOrders', {
+                params: {
+                    page,
+                    pageSize,
+                },
+            });
             return res;
         } catch (error: any) {
             const { message, status } = error || {};

@@ -15,6 +15,7 @@ import { isValidPhone } from 'utils/genal';
 import CheckBox from 'components/custom/CheckBox';
 import ApiAddressOrder from 'assets/api/ApiAddress';
 import { PathName } from 'configs';
+import { useToast } from 'hooks/useToast';
 
 const options: IOptions[] = [
   { value: 1, label: 'Hải Dương' },
@@ -23,6 +24,7 @@ const options: IOptions[] = [
 
 const NewAddressScreen = () => {
   const { t } = useTranslation();
+  const toast = useToast();
   const [optionsOrganNew, setOptionsOrganNew] = React.useState<IOptions[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -55,8 +57,9 @@ const NewAddressScreen = () => {
     try {
       setLoading(true);
       const putData = await ApiAddressOrder.createAddressOrder(data);
+      toast('success', putData?.mess);
       setLoading(false);
-      NavigationService.navigate(PathName.CHANGEADDRESSSCREEN);
+      NavigationService.replace(PathName.CHANGEADDRESSSCREEN);
     } catch (error) {
       console.log(error);
     }

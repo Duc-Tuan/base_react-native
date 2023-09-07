@@ -1,27 +1,32 @@
 import { useScrollToTop } from '@react-navigation/native';
 import { ApiAddress } from 'assets/api';
-import { ILocation } from 'assets/data';
 import { IconAdd } from 'assets/icons';
-import { ActivityPenal, LoadingOverley } from 'components';
+import { ActivityPenal, FlatListComponent, LoadingOverley } from 'components';
 import { PathName } from 'configs';
-import useFetchData from 'hooks/useFetchData';
+import useFetchDataList from 'hooks/useFetchDataList';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import ItemMenu from './components/ItemMenu';
 
 const ChangeAddressScreen = () => {
   const refScrollView = React.useRef<any>();
-  const func1 = React.useCallback(() => ApiAddress.getAddressOrder().then(res => res), []);
-  const { data: dataList, onRefresh, loading, refreshing } = useFetchData(func1);
-  const styleCustom = [styleGlobal.padding_10, { paddingBottom: 0 }];
+  const func1 = React.useCallback((page: number) => ApiAddress.getAddressOrder(page, 5).then(res => res), []);
+  const { data: dataList, onRefresh, loading, refreshing, hasNext, onEndReached } = useFetchDataList(func1);
   useScrollToTop(refScrollView);
 
   const handleChangeNewAddress = React.useCallback(() => {
     NavigationService.navigate(PathName.NEWADDRESSSCREEN);
   }, []);
+
+  console.log(hasNext);
+
+  const listFooterComponent = React.useCallback(
+    () => <View style={[hasNext && styles.listFooterComponent]}>{hasNext && <ActivityIndicator />}</View>,
+    [hasNext],
+  );
 
   return (
     <ActivityPenal
@@ -32,15 +37,15 @@ const ChangeAddressScreen = () => {
       {loading ? (
         <LoadingOverley visible={loading} />
       ) : (
-        <ScrollView
-          ref={refScrollView}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
-          <View style={styleCustom}>
-            {dataList.map((i: ILocation, idx: number) => {
-              return <ItemMenu key={idx} item={i} />;
-            })}
-          </View>
-        </ScrollView>
+        <FlatListComponent
+          data={dataList}
+          onRefresh={onRefresh}
+          refreshing={refreshing || loading}
+          renderItem={(data: any) => <ItemMenu item={data?.item} />}
+          styleWrapper={[styleGlobal.padding_10]}
+          listFooterComponent={listFooterComponent}
+          onEndReached={onEndReached}
+        />
       )}
     </ActivityPenal>
   );
@@ -48,4 +53,7 @@ const ChangeAddressScreen = () => {
 
 export default ChangeAddressScreen;
 
-const styles = StyleSheet.create({ container: {} });
+const styles = StyleSheet.create({
+  container: {},
+  listFooterComponent: { height: 50, justifyContent: 'center', alignItems: 'center' },
+});

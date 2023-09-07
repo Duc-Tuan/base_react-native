@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     minHeight: 60,
     backgroundColor: Colors.white,
     borderRadius: 6,
-    marginBottom: 10,
+    // marginBottom: 10,
   },
   viewHeader: {
     marginBottom: 8,
