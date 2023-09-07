@@ -44,7 +44,7 @@ const BottomTab = () => {
     <View
       style={{
         width: widthFull,
-        height: heightFull,
+        height: heightFull - 6,
       }}>
       <Stack.Navigator
         screenOptions={{
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
       heightFull -
       Platform.select({
         ios: 69,
-        android: 69,
+        android: 75,
         default: 0,
       }),
     borderStyle: 'solid',
