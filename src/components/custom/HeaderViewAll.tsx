@@ -20,17 +20,17 @@ const HeaderViewAll: React.FC<IProps> = ({ title, namePath }) => {
   return (
     <View
       style={[
+        styleGlobal.backgroundColorWhite,
         styleGlobal.dflex_spaceBetween,
-        // styleGlobal.backgroundColorWhite,
         styleGlobal.padding_10,
         styleGlobal.marginBottom_10,
-        styles.viewHeader,
+        styles.container,
       ]}>
       <Text style={[styleGlobal.textFontBold]}>{t(title)}</Text>
 
       <TouchableOpacity activeOpacity={0.9} onPress={handleViewAll}>
         <View style={[styleGlobal.dFlex_center, styleGlobal.gap_4]}>
-          <Text style={[styleGlobal.textBg]}>{t('Xem tất cả')}</Text>
+          <Text style={[styleGlobal.textBg, { color: Colors.primary }]}>{t('Xem tất cả')}</Text>
           <IconRightV2 fill={Colors.primary} width={16} height={16} />
         </View>
       </TouchableOpacity>
@@ -38,6 +38,8 @@ const HeaderViewAll: React.FC<IProps> = ({ title, namePath }) => {
   );
 };
 
-export default HeaderViewAll;
+export default React.memo(HeaderViewAll);
 
-const styles = StyleSheet.create({ viewHeader: { borderRadius: 6 } });
+const styles = StyleSheet.create({
+  container: { borderRadius: 6 },
+});

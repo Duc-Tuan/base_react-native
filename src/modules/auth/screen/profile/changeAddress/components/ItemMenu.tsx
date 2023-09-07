@@ -13,23 +13,13 @@ interface IProps {
   item?: ILocation;
 }
 
-interface ILocationDetail {
-  Wards: string;
-  District: string;
-  city: string;
-  addressDetail: string;
-  phone: string;
-  organ: string;
-  deliveryTime: string;
-}
-
 const ItemMenu: React.FC<IProps> = ({ item }) => {
   const { t } = useTranslation();
-  const dataAddress = (data?: ILocationDetail) => {
+  const dataAddress = (data?: ILocation) => {
     return [
-      { title: t('Cơ quan'), item: data?.organ },
-      { title: t('Số điện thoại'), item: data?.phone },
-      { title: t('Thời gian nhận hàng'), item: data?.deliveryTime },
+      { title: t('Cơ quan'), item: data?.addressOrganReceive },
+      { title: t('Số điện thoại'), item: data?.addressPhoneReceive },
+      { title: t('Thời gian nhận hàng'), item: data?.addressTimeReceive },
       { title: t('Địa chỉ'), item: data?.addressDetail },
     ];
   };
@@ -50,7 +40,7 @@ const ItemMenu: React.FC<IProps> = ({ item }) => {
       <View style={[styleGlobal.dflex_spaceBetween, styles.viewHeader]}>
         <View style={[styleGlobal.dFlex_center, styleGlobal.gap_6]}>
           <Text style={styles.viewTextCode}>{item?.code}</Text>
-          {item?.default && (
+          {item?.addressDefault && (
             <View
               style={[
                 styleGlobal.dflex_spaceBetween,
@@ -63,17 +53,21 @@ const ItemMenu: React.FC<IProps> = ({ item }) => {
           )}
         </View>
 
-        {!item?.default && (
+        {!item?.addressDefault && (
           <TouchableOpacity
             onPress={handleDelete}
-            style={[styleGlobal.buttonActionsCirc, styleGlobal.padding_6]}
+            style={[
+              styleGlobal.buttonActionsCirc,
+              styleGlobal.padding_6,
+              { backgroundColor: hexToRgba(Colors.primary, 0.1) },
+            ]}
             activeOpacity={0.8}>
             <IconDelete fill={Colors.primary} />
           </TouchableOpacity>
         )}
       </View>
 
-      {dataAddress(item?.item)?.map((i: any, idx: number) => (
+      {dataAddress(item)?.map((i: any, idx: number) => (
         <Text key={idx} style={{ color: hexToRgba(Colors.black, 0.7) }}>
           {i?.title}: <Text style={[styleGlobal.textBold, styleGlobal.textFontBold]}>{i?.item}</Text>
         </Text>

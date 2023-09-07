@@ -10,7 +10,16 @@ import { useGetAccount } from 'hooks/useGetAccount';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, StyleProp, StyleSheet, Text, TextInput, TextStyle, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextStyle,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';

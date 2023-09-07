@@ -1,6 +1,6 @@
 import { IUserGlobal } from 'modules/auth/screen/Function';
 import Colors from 'themes/Color';
-import { IOptions } from 'types/product-types';
+import { IGeneral, IOptions } from 'types/product-types';
 /* eslint-disable prettier/prettier */
 export interface ICarts {
     id: string | number;
@@ -10,21 +10,17 @@ export interface ICarts {
     price: number;
     promotion: number;
 }
-export interface ILocation {
-    code: string;
-    default: boolean;
-    item: ILocationDetail;
-}
-export interface ILocationDetail {
-    Wards: string;
-    village: string;
-    District: string;
-    city: string;
+export interface ILocation extends IGeneral {
+    addressOrganReceive: string;
+    addressPhoneReceive: string;
+    addressTimeReceive: string;
     addressDetail: string;
-    phone: string;
-    organ: string;
-    deliveryTime: string;
-    default?: boolean;
+    addressWards: string;
+    addressVillage: string;
+    addressDistrict: string;
+    addressCity: string;
+    addressDefault: boolean;
+    address_useId: string;
 }
 
 export const dataCarts: ICarts[] | [] = [
@@ -110,50 +106,50 @@ export const dataCarts: ICarts[] | [] = [
     },
 ];
 
-export const dataLocation: ILocation[] = [
-    {
-        code: 'DC00001',
-        default: true,
-        item: {
-            village: '',
-            Wards: 'Quảng Nghiệp',
-            District: 'Tứ Kỳ',
-            city: 'Hải Dương',
-            addressDetail: '1 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-            phone: '0123456789',
-            organ: 'Nhà riêng',
-            deliveryTime: 'Các ngày trong tuần',
-        },
-    },
-    {
-        code: 'DC00002',
-        default: false,
-        item: {
-            village: '',
-            Wards: 'Quảng Nghiệp',
-            District: 'Tứ Kỳ',
-            city: 'Hải Dương',
-            addressDetail: '2 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-            phone: '0123456789',
-            organ: 'Cty',
-            deliveryTime: 'thứ 2 - thứ 6, 8h00 - 17h30',
-        },
-    },
-    {
-        code: 'DC00003',
-        default: false,
-        item: {
-            village: '',
-            Wards: 'Quảng Nghiệp',
-            District: 'Tứ Kỳ',
-            city: 'Hải Dương',
-            addressDetail: '3 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-            phone: '0123456789',
-            organ: 'Cty',
-            deliveryTime: 'thứ 2 - thứ 7, 8h00 - 17h30',
-        },
-    },
-];
+// export const dataLocation: ILocation[] = [
+//     {
+//         code: 'DC00001',
+//         default: true,
+//         item: {
+//             village: '',
+//             Wards: 'Quảng Nghiệp',
+//             District: 'Tứ Kỳ',
+//             city: 'Hải Dương',
+//             addressDetail: '1 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+//             phone: '0123456789',
+//             organ: 'Nhà riêng',
+//             deliveryTime: 'Các ngày trong tuần',
+//         },
+//     },
+//     {
+//         code: 'DC00002',
+//         default: false,
+//         item: {
+//             village: '',
+//             Wards: 'Quảng Nghiệp',
+//             District: 'Tứ Kỳ',
+//             city: 'Hải Dương',
+//             addressDetail: '2 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+//             phone: '0123456789',
+//             organ: 'Cty',
+//             deliveryTime: 'thứ 2 - thứ 6, 8h00 - 17h30',
+//         },
+//     },
+//     {
+//         code: 'DC00003',
+//         default: false,
+//         item: {
+//             village: '',
+//             Wards: 'Quảng Nghiệp',
+//             District: 'Tứ Kỳ',
+//             city: 'Hải Dương',
+//             addressDetail: '3 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
+//             phone: '0123456789',
+//             organ: 'Cty',
+//             deliveryTime: 'thứ 2 - thứ 7, 8h00 - 17h30',
+//         },
+//     },
+// ];
 
 export const dataUser: IUserGlobal = {
     id: 1,

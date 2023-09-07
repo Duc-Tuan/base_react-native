@@ -1,3 +1,4 @@
+import LinearGradientCustom from 'components/custom/LinearGradientCustom';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { styleGlobal, widthFull } from 'types/StyleGlobal';
@@ -19,25 +20,28 @@ const CategoryItem: React.FC<IProps> = ({ data }) => {
         },
       ]}>
       {data?.map((i: any, idx: number) => (
-        <View
-          key={idx}
-          style={[
-            styleGlobal.justifyContent_center,
-            styleGlobal.flexDirection_column,
-            styleGlobal.alignItems_center,
-            styleGlobal.padding_10,
-            styles.container,
-          ]}>
-          <View style={styles.viewImage}>
-            <Image
-              style={[styleGlobal.image]}
-              source={{
-                uri: i?.categoryImage,
-              }}
-            />
+        <LinearGradientCustom key={idx}>
+          <View
+            style={[
+              styleGlobal.justifyContent_center,
+              styleGlobal.flexDirection_column,
+              styleGlobal.alignItems_center,
+              styleGlobal.padding_10,
+              styles.container,
+            ]}>
+            <View style={styles.viewImage}>
+              <Image
+                style={[styleGlobal.image]}
+                source={{
+                  uri: i?.categoryImage,
+                }}
+              />
+            </View>
+            <Text numberOfLines={1} style={styleGlobal.textFontBold}>
+              {i?.categoryName}
+            </Text>
           </View>
-          <Text style={styleGlobal.textFontBold}>{i?.categoryName}</Text>
-        </View>
+        </LinearGradientCustom>
       ))}
     </View>
   );

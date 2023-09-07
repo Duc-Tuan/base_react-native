@@ -94,6 +94,9 @@ export const styleGlobal = StyleSheet.create({
     width: widthFull,
     height: heightFull,
   },
+  w: {
+    width: '100%',
+  },
   boxshadow: {
     shadowColor: hexToRgba(Colors.black, 0.2),
     shadowOpacity: 0.8,

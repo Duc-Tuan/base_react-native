@@ -22,7 +22,7 @@ const ViewCategories = React.forwardRef((_, ref) => {
   }, [dataList]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <HeaderViewAll title="Thể loại" namePath={PathName.CATEGORIESSCREEN} />
       {loading ? (
         <LoadingOverley visible={loading} />
@@ -31,6 +31,7 @@ const ViewCategories = React.forwardRef((_, ref) => {
           initaldata={dataCategories}
           renderItem={(d: any) => <CategoryItem data={d?.item} />}
           stylesWrapper={[
+            styleGlobal.lv1,
             styleGlobal.backgroundColorWhite,
             styleGlobal.paddingVertical_14,
             styleGlobal.boxshadow,

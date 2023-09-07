@@ -62,7 +62,7 @@ const SelectCustom: React.FC<IProps> = ({ options, styleWrapper, placeholder, la
         </Text>
       )}
       <View style={[styleGlobal.border, styles.container, styleWrapper]} ref={ref}>
-        <TouchableOpacity activeOpacity={1} onPress={() => toggle()} style={styleGlobal.padding_2}>
+        <TouchableOpacity activeOpacity={1} onPress={() => toggle()} style={styleGlobal.padding_6}>
           <View style={styleGlobal.dflex_spaceBetween}>
             <Text style={[styleGlobal.paddingVertical_4, styles.viewTextLabel]}>
               {selected?.label ?? (placeholder && t(placeholder)) ?? t('Chọn ngay')}

@@ -14,7 +14,7 @@ const ViewBanner = React.forwardRef((_, ref) => {
   React.useImperativeHandle(ref, () => ({ onRefresh }));
 
   return (
-    <View style={styles.container}>
+    <View style={[styleGlobal.lv1, styles.container]}>
       {loading ? (
         <LoadingOverley visible={loading} />
       ) : (

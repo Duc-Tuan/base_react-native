@@ -7,12 +7,14 @@ import { ActivityPenal, ButtonCustom, InputCustom } from 'components';
 import { styleGlobal } from 'types/StyleGlobal';
 import Colors from 'themes/Color';
 import { Controller, useForm } from 'react-hook-form';
-import { ILocationDetail, optionsOrgan } from 'assets/data';
+import { ILocation, optionsOrgan } from 'assets/data';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import SelectCustom from 'components/custom/Selected/SelectCustom';
 import { IOptions } from 'types/product-types';
 import { isValidPhone } from 'utils/genal';
 import CheckBox from 'components/custom/CheckBox';
+import ApiAddressOrder from 'assets/api/ApiAddress';
+import { PathName } from 'configs';
 
 const options: IOptions[] = [
   { value: 1, label: 'Hải Dương' },
@@ -22,6 +24,7 @@ const options: IOptions[] = [
 const NewAddressScreen = () => {
   const { t } = useTranslation();
   const [optionsOrganNew, setOptionsOrganNew] = React.useState<IOptions[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const dataNew = optionsOrgan?.map((i: IOptions) => ({ value: i.value, label: t(String(i.label)) }));
@@ -34,42 +37,49 @@ const NewAddressScreen = () => {
     watch,
     setValue,
     formState: { errors },
-  } = useForm<ILocationDetail>({
+  } = useForm<ILocation>({
     defaultValues: {
-      Wards: '',
-      District: '',
-      village: '',
-      city: '',
+      addressOrganReceive: '',
+      addressPhoneReceive: '',
+      addressTimeReceive: '',
       addressDetail: '',
-      phone: '',
-      organ: '',
-      deliveryTime: '',
-      default: false,
+      addressWards: '',
+      addressVillage: '',
+      addressDistrict: '',
+      addressCity: '',
+      addressDefault: false,
     },
   });
 
-  const onSubmit = React.useCallback((data: ILocationDetail) => {
-    // console.log(data);
+  const onSubmit = React.useCallback(async (data: ILocation) => {
+    try {
+      setLoading(true);
+      const putData = await ApiAddressOrder.createAddressOrder(data);
+      setLoading(false);
+      NavigationService.navigate(PathName.CHANGEADDRESSSCREEN);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   React.useEffect(() => {
-    switch (watch('organ')) {
+    switch (watch('addressOrganReceive')) {
       case t('Nhà riêng'):
-        setValue('deliveryTime', t('Lúc nào cũng có người nhận.'));
+        setValue('addressTimeReceive', t('Lúc nào cũng có người nhận.'));
         break;
       case t('Công ty'):
-        setValue('deliveryTime', t('Từ thứ 2 - thứ 6, 8h00 - 17h30 hàng tuần'));
+        setValue('addressTimeReceive', t('Từ thứ 2 - thứ 6, 8h00 - 17h30 hàng tuần'));
         break;
       case t('Khác'):
-        setValue('deliveryTime', t('Thoải mái, đến là đón'));
+        setValue('addressTimeReceive', t('Thoải mái, đến là đón'));
         break;
       default:
-        setValue('deliveryTime', '');
+        setValue('addressTimeReceive', '');
     }
-  }, [watch('organ'), t]);
+  }, [watch('addressOrganReceive'), t]);
 
   const handelAddressDefault = React.useCallback((data: boolean) => {
-    setValue('default', data);
+    setValue('addressDefault', data);
   }, []);
 
   return (
@@ -101,13 +111,15 @@ const NewAddressScreen = () => {
                   inputStyle={[
                     styleGlobal.boxshadow,
                     styleGlobal.lv1,
-                    errors.phone ? { borderColor: Colors.error } : undefined,
+                    errors.addressPhoneReceive ? { borderColor: Colors.error } : undefined,
                   ]}
                 />
               )}
-              name="phone"
+              name="addressPhoneReceive"
             />
-            {errors.phone && <Text style={styles.viewTextInput}>{errors.phone.message}</Text>}
+            {errors.addressPhoneReceive && (
+              <Text style={styles.viewTextInput}>{errors.addressPhoneReceive.message}</Text>
+            )}
           </View>
 
           <View style={styleGlobal.marginTop_10}>
@@ -124,7 +136,7 @@ const NewAddressScreen = () => {
                   inputStyle={[styleGlobal.boxshadow, styleGlobal.lv1]}
                 />
               )}
-              name="deliveryTime"
+              name="addressTimeReceive"
             />
           </View>
 
@@ -143,13 +155,15 @@ const NewAddressScreen = () => {
                   styleWrapper={[
                     styleGlobal.boxshadow,
                     styleGlobal.lv1,
-                    errors.organ ? { borderColor: Colors.error } : undefined,
+                    errors.addressOrganReceive ? { borderColor: Colors.error } : undefined,
                   ]}
                 />
               )}
-              name="organ"
+              name="addressOrganReceive"
             />
-            {errors.organ && <Text style={styles.viewTextInput}>{errors.organ.message}</Text>}
+            {errors.addressOrganReceive && (
+              <Text style={styles.viewTextInput}>{errors.addressOrganReceive.message}</Text>
+            )}
           </View>
 
           <View
@@ -175,13 +189,13 @@ const NewAddressScreen = () => {
                     styleWrapper={[
                       styleGlobal.boxshadow,
                       styleGlobal.lv1,
-                      errors.village ? { borderColor: Colors.error } : undefined,
+                      errors.addressVillage ? { borderColor: Colors.error } : undefined,
                     ]}
                   />
                 )}
-                name="village"
+                name="addressVillage"
               />
-              {errors.village && <Text style={styles.viewTextInput}>{errors.village.message}</Text>}
+              {errors.addressVillage && <Text style={styles.viewTextInput}>{errors.addressVillage.message}</Text>}
             </View>
             <View style={styleGlobal.flex_1}>
               <Controller
@@ -198,13 +212,13 @@ const NewAddressScreen = () => {
                     styleWrapper={[
                       styleGlobal.boxshadow,
                       styleGlobal.lv1,
-                      errors.District ? { borderColor: Colors.error } : undefined,
+                      errors.addressDistrict ? { borderColor: Colors.error } : undefined,
                     ]}
                   />
                 )}
-                name="District"
+                name="addressDistrict"
               />
-              {errors.District && <Text style={styles.viewTextInput}>{errors.District.message}</Text>}
+              {errors.addressDistrict && <Text style={styles.viewTextInput}>{errors.addressDistrict.message}</Text>}
             </View>
           </View>
 
@@ -231,13 +245,13 @@ const NewAddressScreen = () => {
                     styleWrapper={[
                       styleGlobal.boxshadow,
                       styleGlobal.lv1,
-                      errors.Wards ? { borderColor: Colors.error } : undefined,
+                      errors.addressWards ? { borderColor: Colors.error } : undefined,
                     ]}
                   />
                 )}
-                name="Wards"
+                name="addressWards"
               />
-              {errors.Wards && <Text style={styles.viewTextInput}>{errors.Wards.message}</Text>}
+              {errors.addressWards && <Text style={styles.viewTextInput}>{errors.addressWards.message}</Text>}
             </View>
             <View style={styleGlobal.flex_1}>
               <Controller
@@ -254,13 +268,13 @@ const NewAddressScreen = () => {
                     styleWrapper={[
                       styleGlobal.boxshadow,
                       styleGlobal.lv1,
-                      errors.city ? { borderColor: Colors.error } : undefined,
+                      errors.addressCity ? { borderColor: Colors.error } : undefined,
                     ]}
                   />
                 )}
-                name="city"
+                name="addressCity"
               />
-              {errors.city && <Text style={styles.viewTextInput}>{errors.city.message}</Text>}
+              {errors.addressCity && <Text style={styles.viewTextInput}>{errors.addressCity.message}</Text>}
             </View>
           </View>
 
@@ -303,7 +317,13 @@ const NewAddressScreen = () => {
             styleButton={styleGlobal.flex_1}
             action={NavigationService.goBack}
           />
-          <ButtonCustom text="Thêm mới" styleButton={styleGlobal.flex_1} action={handleSubmit(onSubmit)} />
+          <ButtonCustom
+            text="Thêm mới"
+            styleButton={styleGlobal.flex_1}
+            action={handleSubmit(onSubmit)}
+            disabled={loading}
+            typeButton={!loading ? 'main' : 'disabled'}
+          />
         </View>
       </ScrollView>
     </ActivityPenal>

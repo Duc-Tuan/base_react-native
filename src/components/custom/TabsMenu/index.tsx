@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { SceneMap, TabView } from 'react-native-tab-view';
 import Colors from 'themes/Color';
-import { heightFull, styleGlobal } from 'types/StyleGlobal';
+import { styleGlobal } from 'types/StyleGlobal';
 import { IRouterTabsMenu } from 'types/product-types';
 import { hexToRgba } from 'utils';
 
@@ -78,14 +78,18 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
                       styles.tabItem,
                       styleGlobal.backgroundColorTran,
                       styleGlobal.padding_4,
-                      props?.navigationState?.index === i ? styleGlobal.borderBottomPrimary : undefined,
+                      props?.navigationState?.index === i
+                        ? { borderBottomColor: Colors.primary, borderBottomWidth: 1 }
+                        : undefined,
                     ]}
                     key={i}
                     onPress={() => setIndex(i)}>
                     <Animated.Text
                       style={[
                         inputRange.map((inputIndex: any) => inputIndex === i && !isDefault && styles.viewActive),
-                        props?.navigationState?.index === i ? styleGlobal.textBg : styleGlobal.textPrimary,
+                        props?.navigationState?.index === i
+                          ? { fontWeight: '700', color: Colors.primary }
+                          : styleGlobal.textPrimary,
                         { opacity },
                         !isDefault && styleGlobal.padding_10,
                       ]}>
@@ -175,7 +179,7 @@ const TabsMenu: React.FC<IProps> = ({ routerTabs, SceneMapTabs, isShare, handleS
 export default React.memo(TabsMenu);
 
 const styles = StyleSheet.create({
-  container: { height: heightFull, backgroundColor: Colors.white },
+  container: { height: '100%', backgroundColor: Colors.white },
   tabItem: {
     flex: 1,
     alignItems: 'center',

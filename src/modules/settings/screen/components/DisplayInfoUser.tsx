@@ -76,7 +76,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                     <Image source={user?.image} style={[styleGlobal.image, styles.viewImg]} />
                   </View>
                   <View style={[styleGlobal.dFlex_center, StyleSheet.absoluteFillObject, styles.viewCamera]}>
-                    <IconCameraV2 fill={Colors.primary} />
+                    <IconCameraV2 fill={colorPrimary} />
                   </View>
                 </>
               </TouchableOpacity>
