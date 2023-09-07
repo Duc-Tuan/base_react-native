@@ -39,7 +39,7 @@ const HomeScreen = () => {
       <ScrollView
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
-        <View style={[styleGlobal.padding_10, styles.container]}>
+        <View style={[styleGlobal.padding_10, styleGlobal.gap_20, styles.container]}>
           <ViewBanner ref={refViewBanners} />
           <ViewCategories ref={refViewCategories} />
           <ViewProduct ref={refViewProduct} />

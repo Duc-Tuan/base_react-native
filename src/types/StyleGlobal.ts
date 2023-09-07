@@ -130,6 +130,10 @@ export const styleGlobal = StyleSheet.create({
     height: '100%',
     objectFit: 'contain',
   },
+  viewImage: {
+    width: '100%',
+    height: '100%',
+  },
   paddingTop_8: {
     paddingTop: 8,
   },

@@ -44,4 +44,4 @@ const ViewCategories = React.forwardRef((_, ref) => {
 
 export default ViewCategories;
 
-const styles = StyleSheet.create({ container: { paddingBottom: 10 }, viewFlatList: { borderRadius: 10 } });
+const styles = StyleSheet.create({ container: {}, viewFlatList: { borderRadius: 10 } });

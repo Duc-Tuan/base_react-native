@@ -31,8 +31,6 @@ const FlatListhorizontal: React.FC<IProps> = ({
   const refFlat = React.useRef<any>();
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
 
-  console.log(activeIndex);
-
   React.useEffect(() => {
     const setTimer = autoPlay
       ? setInterval(() => {

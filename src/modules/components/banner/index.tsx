@@ -1,3 +1,4 @@
+import OpentURL from 'components/custom/OpentURL';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { styleGlobal, widthFull } from 'types/StyleGlobal';
@@ -8,7 +9,7 @@ interface IProps {
 
 const BannerItem: React.FC<IProps> = ({ data }) => {
   return (
-    <View style={styles.container}>
+    <OpentURL stylesWrapper={styles.container} url={data?.bannerLink}>
       <View style={styles.viewImage}>
         <Image
           style={[styleGlobal.image, styles.img]}
@@ -17,7 +18,7 @@ const BannerItem: React.FC<IProps> = ({ data }) => {
           }}
         />
       </View>
-    </View>
+    </OpentURL>
   );
 };
 
