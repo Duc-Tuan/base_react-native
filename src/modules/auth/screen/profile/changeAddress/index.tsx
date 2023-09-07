@@ -21,8 +21,6 @@ const ChangeAddressScreen = () => {
     NavigationService.navigate(PathName.NEWADDRESSSCREEN);
   }, []);
 
-  console.log(hasNext);
-
   const listFooterComponent = React.useCallback(
     () => <View style={[hasNext && styles.listFooterComponent]}>{hasNext && <ActivityIndicator />}</View>,
     [hasNext],
