@@ -119,6 +119,7 @@ const InputCustom = (props: Props) => {
           style={styles.viewTextInput}
           onChangeText={handleSearch}
           placeholder={placeholder}
+          cursorColor={Colors.primary}
           placeholderTextColor={'rgba(0, 0, 0, 0.4)'}
           keyboardType={type ?? undefined}
           value={value}
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     width: '100%',
   },
-  viewTextInput: { padding: 4, width: '100%', zIndex: 10, paddingRight: 10 },
+  viewTextInput: { padding: 4, width: '100%', zIndex: 10, paddingRight: 10, color: Colors.black },
   viewIconRight: { position: 'absolute', top: '20%', right: 10, zIndex: 100 },
   viewRequired: { color: 'red' },
 });

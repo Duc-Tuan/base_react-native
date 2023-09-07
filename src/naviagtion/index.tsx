@@ -50,7 +50,7 @@ const NavigationApp = () => {
           name={PathName.REGISTERsCREEN}
           component={RegisterScreen}
         />
-        <Stack.Screen options={{ gestureEnabled: true, animation: 'fade' }} name="BottomTab" component={BottomTab} />
+        <Stack.Screen options={{ gestureEnabled: false, animation: 'fade' }} name="BottomTab" component={BottomTab} />
         <Stack.Screen
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.CARTSCREEN}
