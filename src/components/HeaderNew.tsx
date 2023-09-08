@@ -10,21 +10,13 @@ import { useGetAccount } from 'hooks/useGetAccount';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Image,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextInput,
-  TextStyle,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { Image, StyleProp, StyleSheet, Text, TextInput, TextStyle, TouchableOpacity, View } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
 import { checkNullish } from 'utils/genal';
 import { getStatusBarHeight } from 'utils/iphoneXHelper';
+import { ImageCustom } from 'components';
 
 interface IProps {
   hiddenBack?: boolean;
@@ -124,7 +116,7 @@ const HeaderNew: React.FC<IProps> = ({
                   isLogin ? (
                     <View style={[styleGlobal.dFlex_center, styleGlobal.gap_10]}>
                       <View style={[styleGlobal.padding_2, styles.viewIsUser]}>
-                        <Image source={user.image} style={[styleGlobal.image, styles.viewImageUser]} />
+                        <ImageCustom urlImeg={undefined} styleWapper={[styles.viewImageUser]} />
                       </View>
                       <View>
                         <Text style={styles.viewTextOpcity}>{t('Xem chi tiết')}</Text>

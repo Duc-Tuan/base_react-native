@@ -18,13 +18,15 @@ const ChangeAddressScreen = () => {
   useScrollToTop(refScrollView);
 
   const handleChangeNewAddress = React.useCallback(() => {
-    NavigationService.navigate(PathName.NEWADDRESSSCREEN);
+    NavigationService.navigate(PathName.NEWANDEDITADDRESSSCREEN);
   }, []);
 
   const listFooterComponent = React.useCallback(
     () => <View style={[hasNext && styles.listFooterComponent]}>{hasNext && <ActivityIndicator />}</View>,
     [hasNext],
   );
+
+  const handleDeleteUi = React.useCallback(() => onRefresh(), [onRefresh]);
 
   return (
     <ActivityPenal
@@ -39,7 +41,7 @@ const ChangeAddressScreen = () => {
           data={dataList}
           onRefresh={onRefresh}
           refreshing={refreshing || loading}
-          renderItem={(data: any) => <ItemMenu item={data?.item} />}
+          renderItem={(data: any) => <ItemMenu handleDeleteUi={handleDeleteUi} item={data?.item} />}
           styleWrapper={[styleGlobal.padding_10]}
           listFooterComponent={listFooterComponent}
           onEndReached={onEndReached}
@@ -49,7 +51,7 @@ const ChangeAddressScreen = () => {
   );
 };
 
-export default ChangeAddressScreen;
+export default React.memo(ChangeAddressScreen);
 
 const styles = StyleSheet.create({
   container: {},

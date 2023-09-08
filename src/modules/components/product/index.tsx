@@ -1,5 +1,6 @@
+import { ImageCustom } from 'components';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal, widthFull } from 'types/StyleGlobal';
 
@@ -15,16 +16,12 @@ const ProductItem: React.FC<IProps> = ({ data }) => {
         styleGlobal.flexDirection_column,
         styleGlobal.alignItems_center,
         styleGlobal.boxshadow,
-        styleGlobal.padding_10,
+        styleGlobal.padding_6,
+        styleGlobal.paddingVertical_10,
         styles.container,
       ]}>
       <View style={styles.viewImage}>
-        <Image
-          style={[styleGlobal.image]}
-          source={{
-            uri: data?.productImage,
-          }}
-        />
+        <ImageCustom urlImeg={data?.productImage} styleWapper={styles.image} />
       </View>
       <Text style={styleGlobal.textFontBold}>{data?.productName}</Text>
     </View>
@@ -35,5 +32,6 @@ export default React.memo(ProductItem);
 
 const styles = StyleSheet.create({
   container: { width: widthFull / 2 - 16, backgroundColor: Colors.white, borderRadius: 10 },
-  viewImage: { width: 100, height: 100 },
+  viewImage: { width: 140, height: 140 },
+  image: { borderRadius: 8, objectFit: 'fill' },
 });

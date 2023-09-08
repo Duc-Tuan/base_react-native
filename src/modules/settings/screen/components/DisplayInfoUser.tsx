@@ -6,7 +6,7 @@ import React from 'react';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { hexToRgba } from 'utils';
-import { ButtonCustom, WrapperModal } from 'components';
+import { ButtonCustom, ImageCustom, WrapperModal } from 'components';
 import { useTranslation } from 'react-i18next';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
@@ -64,7 +64,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
         <TouchableWithoutFeedback onPress={changeScreen}>
           <View style={[styleGlobal.padding_10, styleGlobal.boxshadow, styles.container]}>
             <View style={[styleGlobal.flexDirection_row, styleGlobal.gap_18]}>
-              <TouchableOpacity activeOpacity={0.9} onPress={openImagePicker}>
+              <TouchableOpacity activeOpacity={0.9} onPress={() => on()}>
                 <>
                   <View
                     style={[
@@ -73,7 +73,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                       styles.viewImage,
                       { borderColor: colorPrimary },
                     ]}>
-                    <Image source={user?.image} style={[styleGlobal.image, styles.viewImg]} />
+                    <ImageCustom urlImeg={user?.image} styleWapper={[styles.viewImg]} />
                   </View>
                   <View style={[styleGlobal.dFlex_center, StyleSheet.absoluteFillObject, styles.viewCamera]}>
                     <IconCameraV2 fill={colorPrimary} />

@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 export interface IGeneral {
+    _id: string | number;
     id: string | number;
     code: string;
 }

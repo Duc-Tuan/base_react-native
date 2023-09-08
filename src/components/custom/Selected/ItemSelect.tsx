@@ -20,13 +20,13 @@ const ItemSelect: React.FC<IProps> = ({ data, setSelected, hidden, selected }) =
         hidden();
         setSelected(data);
       }}
-      style={[styleGlobal.padding_4, styles.container, selected?.value === data?.value && styles.viewActive]}>
-      <Text style={[styleGlobal.textBold, selected?.value === data?.value && styles.viewText]}>{data?.label}</Text>
+      style={[styleGlobal.padding_4, styles.container, selected?.label === data?.label && styles.viewActive]}>
+      <Text style={[styleGlobal.textBold, selected?.label === data?.label && styles.viewText]}>{data?.label}</Text>
     </TouchableOpacity>
   );
 };
 
-export default ItemSelect;
+export default React.memo(ItemSelect);
 
 const styles = StyleSheet.create({
   container: { paddingVertical: 10 },

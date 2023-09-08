@@ -6,7 +6,6 @@ import React from 'react';
 import { PathName } from 'configs';
 import { LoginScreen, RegisterScreen } from 'modules/auth/screen';
 import ChangeAddressScreen from 'modules/auth/screen/profile/changeAddress';
-import DetailAddressScreen from 'modules/auth/screen/profile/changeAddress/detailAddress';
 import ChangeInfoUserScreen from 'modules/auth/screen/profile/changeInfo';
 import ChangePasswordScreen from 'modules/auth/screen/profile/changePassword';
 import CartsScreen from 'modules/cart/screen';
@@ -19,7 +18,7 @@ import { screenOptionsNative } from './shareStack';
 import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
-import NewAddressScreen from 'modules/auth/screen/profile/changeAddress/components/NewAddress';
+import NewAndEditAddress from 'modules/auth/screen/profile/changeAddress/components/NewAndEditAddress';
 import CategoriesScreen from 'modules/merchent/screen/CategoriesScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -88,18 +87,13 @@ const NavigationApp = () => {
         />
         <Stack.Screen
           options={{ gestureEnabled: true, animation: 'fade' }}
-          name={PathName.DETAILADDRESSSCREEN}
-          component={DetailAddressScreen}
-        />
-        <Stack.Screen
-          options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.PROFILESCREEN}
           component={ProfileScreen}
         />
         <Stack.Screen
           options={{ gestureEnabled: true, animation: 'fade' }}
-          name={PathName.NEWADDRESSSCREEN}
-          component={NewAddressScreen}
+          name={PathName.NEWANDEDITADDRESSSCREEN}
+          component={NewAndEditAddress}
         />
         <Stack.Screen
           options={{ gestureEnabled: true, animation: 'fade' }}

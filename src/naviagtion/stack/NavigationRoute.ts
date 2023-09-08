@@ -6,7 +6,9 @@ export type RootStackParamList = {
     [key: string]: any;
     OrderDetailScreen: { id: string | number; onRefresh?: () => void; isSupplier?: boolean; isAutoFu?: boolean };
     DetailAddressScreen: { data: ILocation };
+    NewAddressScreen: { data?: any };
 };
 
 export type OrderDetailScreenRouteProp = RouteProp<RootStackParamList, 'OrderDetailScreen'>;
 export type DetailAddressScreenRouteProp = RouteProp<RootStackParamList, 'DetailAddressScreen'>;
+export type NewAddressScreenRouteProp = RouteProp<RootStackParamList, 'NewAddressScreen'>;

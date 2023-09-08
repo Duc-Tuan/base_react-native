@@ -131,7 +131,7 @@ export const styleGlobal = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectFit: 'fill',
   },
   viewImage: {
     width: '100%',
@@ -359,6 +359,9 @@ export const styleGlobal = StyleSheet.create({
   },
   backgroundColorWhite: {
     backgroundColor: Colors.white,
+  },
+  textCenter: {
+    textAlign: 'center',
   },
 });
 

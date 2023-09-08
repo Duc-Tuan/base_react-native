@@ -152,6 +152,7 @@ export const dataCarts: ICarts[] | [] = [
 // ];
 
 export const dataUser: IUserGlobal = {
+    _id: 1,
     id: 1,
     code: 'US00001',
     useName: 'nhincaiconcu',
@@ -160,7 +161,7 @@ export const dataUser: IUserGlobal = {
     gender: 'Nam',
     email: 'phamductuan26032002@gmail.com',
     address: 'Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-    image: require('assets/images/avt.jpg'),
+    image: 'https://i.pinimg.com/564x/2b/b1/d8/2bb1d82e651c45912e0b66e91bf51aa1.jpg',
     status: 'active',
     age: '26/03/2002',
     color: Colors.primary,

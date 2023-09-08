@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     top:
       heightFull -
       Platform.select({
-        ios: 69,
+        ios: 75,
         android: 75,
         default: 0,
       }),

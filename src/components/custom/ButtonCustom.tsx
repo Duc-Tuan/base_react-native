@@ -22,8 +22,8 @@ type Props = {
   disabled?: boolean;
   styleButton?: StyleProp<ViewStyle>;
   styleText?: StyleProp<TextStyle>;
-  typeButton?: 'cancel' | 'error' | 'main' | 'outline-main' | 'warning' | 'nomal' | 'disabled';
-  action?: () => void;
+  typeButton?: 'cancel' | 'error' | 'main' | 'outline-main' | 'warning' | 'nomal' | 'disabled' | 'disabled-outline';
+  action?: (data?: any) => void;
 };
 
 const ButtonCustom = (props: Props) => {
@@ -61,6 +61,12 @@ const ButtonCustom = (props: Props) => {
         borderColor: 'rgba(0, 0, 0, 0.1)',
       });
     }
+    if (typeButton === 'disabled-outline') {
+      return (defaultStyles = {
+        backgroundColor: 'rgb(255, 255, 255)',
+        borderColor: hexToRgba(colorPrimary ?? Colors.primary, 0.6),
+      });
+    }
     return defaultStyles;
   };
 
@@ -71,6 +77,11 @@ const ButtonCustom = (props: Props) => {
     if (typeButton === 'outline-main') {
       return (defaultStylesText = {
         color: isHover && isHover ? 'white' : colorPrimary,
+      });
+    }
+    if (typeButton === 'disabled-outline') {
+      return (defaultStylesText = {
+        color: isHover && isHover ? 'white' : hexToRgba(colorPrimary, 0.6),
       });
     }
     if (typeButton === 'nomal') {
@@ -138,7 +149,7 @@ const styles = StyleSheet.create({
     maxWidth: 200,
     padding: Platform.select({
       ios: 8,
-      android: 5,
+      android: 6,
       default: 0,
     }),
     borderRadius: 4,

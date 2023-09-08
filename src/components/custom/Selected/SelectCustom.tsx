@@ -10,6 +10,7 @@ import ItemSelect from './ItemSelect';
 import { styleGlobal } from 'types/StyleGlobal';
 import { useTranslation } from 'react-i18next';
 import { hexToRgba } from 'utils';
+import { checkNullish } from 'utils/genal';
 
 interface IProps {
   styleWrapper?: StyleProp<ViewStyle>;
@@ -18,14 +19,31 @@ interface IProps {
   label?: string;
   onChange?: (data: any) => void;
   required?: boolean;
+  initalValue?: string | number;
 }
 
-const SelectCustom: React.FC<IProps> = ({ options, styleWrapper, placeholder, label, onChange, required }) => {
+const SelectCustom: React.FC<IProps> = ({
+  options,
+  styleWrapper,
+  placeholder,
+  label,
+  onChange,
+  required,
+  initalValue,
+}) => {
   const { t } = useTranslation();
   const [isMenu, { on, off, toggle }] = useBoolean();
   const animated = React.useRef(new Animated.Value(0)).current;
   const [selected, setSelected] = React.useState<IOptions | undefined>();
   const hidden = React.useCallback(() => off(), [off]);
+
+  React.useEffect(() => {
+    initalValue &&
+      setSelected({
+        value: 0,
+        label: checkNullish(initalValue) ? String(initalValue) : (placeholder && t(placeholder)) ?? t('Chọn ngay'),
+      });
+  }, [initalValue, t, placeholder]);
 
   const ref = useClickOutside<View>(hidden);
 
@@ -50,7 +68,7 @@ const SelectCustom: React.FC<IProps> = ({ options, styleWrapper, placeholder, la
   }, [isMenu, animated]);
 
   return (
-    <View>
+    <View style={styleGlobal.lv4}>
       {label && (
         <Text style={styles.viewTextLable}>
           {t(label)}
@@ -62,7 +80,10 @@ const SelectCustom: React.FC<IProps> = ({ options, styleWrapper, placeholder, la
         </Text>
       )}
       <View style={[styleGlobal.border, styles.container, styleWrapper]} ref={ref}>
-        <TouchableOpacity activeOpacity={1} onPress={() => toggle()} style={styleGlobal.padding_6}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => toggle()}
+          style={Platform.OS === 'ios' ? styleGlobal.padding_2 : styleGlobal.padding_6}>
           <View style={styleGlobal.dflex_spaceBetween}>
             <Text style={[styleGlobal.paddingVertical_4, styles.viewTextLabel]}>
               {selected?.label ?? (placeholder && t(placeholder)) ?? t('Chọn ngay')}

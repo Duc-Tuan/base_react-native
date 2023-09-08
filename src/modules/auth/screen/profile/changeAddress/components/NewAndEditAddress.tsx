@@ -16,17 +16,27 @@ import CheckBox from 'components/custom/CheckBox';
 import ApiAddressOrder from 'assets/api/ApiAddress';
 import { PathName } from 'configs';
 import { useToast } from 'hooks/useToast';
+import { NewAddressScreenRouteProp } from 'naviagtion/stack/NavigationRoute';
+import { ApiAddress } from 'assets/api';
 
 const options: IOptions[] = [
   { value: 1, label: 'Hải Dương' },
   { value: 2, label: 'Hà Nội' },
 ];
 
-const NewAddressScreen = () => {
+interface IProps {
+  route?: NewAddressScreenRouteProp;
+}
+
+const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
+  const { _id } = route?.params;
+
   const { t } = useTranslation();
   const toast = useToast();
   const [optionsOrganNew, setOptionsOrganNew] = React.useState<IOptions[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
+
+  const [dataLocation, setDataLocation] = React.useState<ILocation>();
 
   React.useEffect(() => {
     const dataNew = optionsOrgan?.map((i: IOptions) => ({ value: i.value, label: t(String(i.label)) }));
@@ -53,13 +63,47 @@ const NewAddressScreen = () => {
     },
   });
 
+  const getAddressOrder = React.useCallback(
+    async (id?: string | number) => {
+      setLoading(true);
+      const dataAddress = await ApiAddress.getDetailAddressOrder(id);
+      setDataLocation(dataAddress);
+      setLoading(false);
+
+      setValue('addressPhoneReceive', dataAddress?.addressPhoneReceive);
+      setValue('addressTimeReceive', dataAddress?.addressTimeReceive);
+      setValue('addressOrganReceive', dataAddress?.addressOrganReceive);
+      setValue('addressDetail', dataAddress?.addressDetail);
+      setValue('addressDefault', dataAddress?.addressDefault);
+
+      setValue('addressCity', dataAddress?.addressCity);
+      setValue('addressDistrict', dataAddress?.addressDistrict);
+      setValue('addressVillage', dataAddress?.addressVillage);
+      setValue('addressWards', dataAddress?.addressWards);
+    },
+    [_id],
+  );
+
+  React.useEffect(() => {
+    if (_id) {
+      getAddressOrder(_id);
+    }
+  }, [_id]);
+
   const onSubmit = React.useCallback(async (data: ILocation) => {
     try {
       setLoading(true);
-      const putData = await ApiAddressOrder.createAddressOrder(data);
-      toast('success', putData?.mess);
+      let putData;
+      if (_id) {
+        putData = await ApiAddressOrder.editAddressOrder(_id, data);
+      } else {
+        putData = await ApiAddressOrder.createAddressOrder(data);
+      }
       setLoading(false);
-      NavigationService.replace(PathName.CHANGEADDRESSSCREEN);
+      if (putData?.status) {
+        toast('success', putData?.mess);
+        NavigationService.replace(PathName.CHANGEADDRESSSCREEN);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +130,7 @@ const NewAddressScreen = () => {
   }, []);
 
   return (
-    <ActivityPenal title="Thêm địa chỉ mới">
+    <ActivityPenal title={_id ? `${t('Sửa địa chỉ')} ${dataLocation?.code ?? 'Đang cập nhật...'}` : 'Thêm địa chỉ mới'}>
       <ScrollView style={[styleGlobal.padding_14, styles.container, styleGlobal.marginTop_10]}>
         <View>
           <View>
@@ -104,7 +148,7 @@ const NewAddressScreen = () => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <InputCustom
                   required
-                  type="number-pad"
+                  type="phone-pad"
                   placeholder={t('Nhập số điện thoại...')}
                   label={t('Số điện thoại:')}
                   close={false}
@@ -151,6 +195,7 @@ const NewAddressScreen = () => {
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <SelectCustom
+                  initalValue={_id ? value : undefined}
                   required
                   onChange={onChange}
                   options={optionsOrganNew}
@@ -186,6 +231,7 @@ const NewAddressScreen = () => {
                 render={({ field: { onChange, onBlur, value } }) => (
                   <SelectCustom
                     required
+                    initalValue={_id ? value : undefined}
                     onChange={onChange}
                     options={options}
                     label="Tổ\Thôn: "
@@ -211,6 +257,7 @@ const NewAddressScreen = () => {
                     required
                     onChange={onChange}
                     options={options}
+                    initalValue={_id ? value : undefined}
                     label="Quận/Huyện: "
                     styleWrapper={[
                       styleGlobal.boxshadow,
@@ -244,6 +291,7 @@ const NewAddressScreen = () => {
                     required
                     onChange={onChange}
                     options={options}
+                    initalValue={_id ? value : undefined}
                     label="Xã/Phường: "
                     styleWrapper={[
                       styleGlobal.boxshadow,
@@ -267,6 +315,7 @@ const NewAddressScreen = () => {
                     required
                     onChange={onChange}
                     options={options}
+                    initalValue={_id ? value : undefined}
                     label="Tỉnh/Thành phố:"
                     styleWrapper={[
                       styleGlobal.boxshadow,
@@ -309,7 +358,11 @@ const NewAddressScreen = () => {
           </View>
 
           <View style={[styleGlobal.marginTop_10, styleGlobal.zIndex_lv1]}>
-            <CheckBox textRight="Chọn làm địa chỉ mặc định." onChange={handelAddressDefault} />
+            <CheckBox
+              textRight="Chọn làm địa chỉ mặc định."
+              onChange={handelAddressDefault}
+              value={watch('addressDefault')}
+            />
           </View>
         </View>
 
@@ -321,7 +374,7 @@ const NewAddressScreen = () => {
             action={NavigationService.goBack}
           />
           <ButtonCustom
-            text="Thêm mới"
+            text={_id ? 'Cập nhật' : 'Thêm mới'}
             styleButton={styleGlobal.flex_1}
             action={handleSubmit(onSubmit)}
             disabled={loading}
@@ -333,7 +386,7 @@ const NewAddressScreen = () => {
   );
 };
 
-export default NewAddressScreen;
+export default NewAndEditAddress;
 
 const styles = StyleSheet.create({
   container: { backgroundColor: Colors.white },
