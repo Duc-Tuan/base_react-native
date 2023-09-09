@@ -1,5 +1,5 @@
-import { StyleSheet, FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native';
 import React from 'react';
+import { FlatList, RefreshControl, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 
@@ -7,11 +7,13 @@ interface IProps {
   data: any[];
   renderItem: (item: any) => React.ReactElement;
   listFooterComponent?: () => React.ReactElement;
+  listHeaderComponent?: () => React.ReactElement;
   onEndReached?: () => void;
   onRefresh?: any;
   onEndReachedThreshold?: number;
   refreshing?: boolean;
   styleWrapper?: StyleProp<ViewStyle>;
+  styleCustom?: StyleProp<ViewStyle>;
 }
 
 const FlatListComponent: React.FC<IProps> = React.forwardRef(
@@ -25,6 +27,9 @@ const FlatListComponent: React.FC<IProps> = React.forwardRef(
       listFooterComponent,
       refreshing = false,
       styleWrapper,
+      styleCustom,
+      listHeaderComponent,
+      ...rest
     },
     ref,
   ) => {
@@ -32,19 +37,21 @@ const FlatListComponent: React.FC<IProps> = React.forwardRef(
 
     return (
       <FlatList
-        contentContainerStyle={[styleGlobal.gap_10, styleGlobal.paddingBottom_16]}
+        contentContainerStyle={[styleGlobal.gap_10, styleGlobal.paddingBottom_16, styleCustom]}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh && onRefresh} tintColor={Colors.primary} />
         }
         style={[styles.contaiener, styleWrapper]}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
+        ListHeaderComponent={listHeaderComponent}
         data={data}
         keyExtractor={(item, index) => String(index)}
         renderItem={renderItem}
         onEndReached={onEndReached}
         onEndReachedThreshold={onEndReachedThreshold}
         ListFooterComponent={listFooterComponent}
+        {...rest}
       />
     );
   },

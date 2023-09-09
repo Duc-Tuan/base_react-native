@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { useAppSelector } from 'hooks';
-import { IUserGlobal } from 'modules/auth/screen/Function';
+import { IUser } from 'types/auth-types';
 
 export const useGetAccount = () => {
     const user = useAppSelector((state: any) => state?.auth?.user);
@@ -13,7 +13,7 @@ export const useGetAccount = () => {
     // }, []);
 
     const results: {
-        user: IUserGlobal;
+        user: IUser;
         isLogin: boolean;
     } = {
         user,

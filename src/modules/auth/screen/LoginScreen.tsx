@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { InputCustom } from 'components';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -10,27 +11,55 @@ import { IFormLogin } from './Function';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
 import { useTranslation } from 'react-i18next';
+import { actions as authActions } from '../store';
+import { useToast } from 'hooks/useToast';
+import { useAppDispatch } from 'hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
+  const toast = useToast();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [saveLogin, setSaveLogin] = React.useState<boolean>(false);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormLogin>({
     defaultValues: {
-      useName: '',
+      usename: '',
       password: '',
     },
   });
 
-  const onSubmit = (data: IFormLogin) => {
-    // console.log(data);
-    return NavigationService.navigate(PathName.HOMESCREEN);
-  };
+  const onSubmit = React.useCallback(
+    async (data: IFormLogin) => {
+      // const token = await AsyncStorage.getItem('token');
+      // setHeaders({ 'x-food-access-token': token });
+      setLoading(true);
+      await dispatch(authActions.login(data))
+        .then(async (data: any) => {
+          if (data?.payload?.status) {
+            if (saveLogin) {
+              await AsyncStorage.setItem('token', data?.payload?.token);
+            }
+            toast('success', 'Đăng nhập thành công.');
+            return NavigationService.navigate(PathName.HOMESCREEN);
+          } else {
+            toast('error', data?.payload?.mess);
+          }
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+      setLoading(false);
+    },
+    [dispatch, toast, saveLogin],
+  );
 
   return (
-    <FormAuth title="Đăng nhập" active={handleSubmit(onSubmit)} titleActive="Đăng nhập">
+    <FormAuth loading={loading} title="Đăng nhập" active={handleSubmit(onSubmit)} titleActive="Đăng nhập">
       <View style={styles.container}>
         <View>
           <Controller
@@ -46,12 +75,12 @@ const LoginScreen = () => {
                 valueText={value}
                 onBlur={onBlur}
                 onChange={onChange}
-                inputStyle={errors.useName ? { borderColor: Colors.error } : undefined}
+                inputStyle={errors.usename ? { borderColor: Colors.error } : undefined}
               />
             )}
-            name="useName"
+            name="usename"
           />
-          {errors.useName && <Text style={styles.viewTextInput}>{errors.useName.message}</Text>}
+          {errors.usename && <Text style={styles.viewTextInput}>{errors.usename.message}</Text>}
         </View>
         <View style={styles.viewGroup}>
           <Controller
@@ -88,7 +117,7 @@ const LoginScreen = () => {
               <Text style={styles.viewTextRegister}>{t('Đăng ký ngay.')}</Text>
             </TouchableOpacity>
           </View>
-          <CheckBox textRight="Lưu mật khẩu." />
+          <CheckBox textRight="Lưu mật khẩu." onChange={e => setSaveLogin(e)} />
         </View>
       </View>
     </FormAuth>

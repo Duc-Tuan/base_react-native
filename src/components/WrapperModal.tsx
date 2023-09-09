@@ -93,7 +93,7 @@ const WrapperModal = (props: Props) => {
   );
 };
 
-export default WrapperModal;
+export default React.memo(WrapperModal);
 
 const styles = StyleSheet.create({
   container: {},

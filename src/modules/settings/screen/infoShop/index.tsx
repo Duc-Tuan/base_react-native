@@ -70,9 +70,7 @@ const InfoShopScreen = () => {
           ref={refScrollView}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>
           <View style={[styleGlobal.marginTop_10, styles.container]}>
-            <Animated.View
-            // style={{ ...styleSub.banner(scrollA) }}
-            >
+            <Animated.View>
               <DisplayImage data={dataList} />
             </Animated.View>
             <View style={[styleGlobal.padding_14]}>

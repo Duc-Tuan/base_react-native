@@ -56,3 +56,4 @@ export { default as IconPhone } from './icon_phone';
 export { default as IconTime } from './icon_time';
 export { default as IconCamera } from './icon_camera';
 export { default as IconCameraV2 } from './icon_camera_v2';
+export { default as IconFilter } from './icon_filter';

@@ -23,7 +23,7 @@ const ChangePasswordScreen = () => {
     },
   });
 
-  const onSubmit = React.useCallback((data: IChangePassword) => {
+  const onSubmit = React.useCallback(async (data: IChangePassword) => {
     // console.log(data);
   }, []);
 

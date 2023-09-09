@@ -34,7 +34,7 @@ const FlatListhorizontal: React.FC<IProps> = ({
   React.useEffect(() => {
     const setTimer = autoPlay
       ? setInterval(() => {
-          if (activeIndex !== initaldata.length - 1) {
+          if (activeIndex !== initaldata?.length - 1) {
             return refFlat.current.scrollToIndex({
               index: activeIndex + 1,
               animetion: true,
@@ -51,7 +51,7 @@ const FlatListhorizontal: React.FC<IProps> = ({
     return () => {
       autoPlay && clearInterval(setTimer);
     };
-  }, [activeIndex, autoPlay, initaldata.length]);
+  }, [activeIndex, autoPlay, initaldata?.length]);
 
   //handle scroll
   const handleScroll = React.useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -69,7 +69,7 @@ const FlatListhorizontal: React.FC<IProps> = ({
 
   //render dot
   const renderDot = React.useCallback(() => {
-    return initaldata.map((dot, idx) => {
+    return initaldata?.map((dot, idx) => {
       if (activeIndex === idx) {
         return (
           <View

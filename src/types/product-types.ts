@@ -20,6 +20,7 @@ export interface ResponseCommon<T> {
 }
 
 export interface Metadata {
+    totalElement?: number;
     currentPage: number;
     totalPage: number;
     pageSize: number;

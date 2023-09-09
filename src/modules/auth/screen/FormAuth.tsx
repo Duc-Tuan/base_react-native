@@ -24,9 +24,10 @@ interface IProps {
   titleActive: string;
   active: () => void;
   stylesWrapper?: ViewStyle;
+  loading?: boolean;
 }
 
-const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, stylesWrapper }) => {
+const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, stylesWrapper, loading = false }) => {
   const { t } = useTranslation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -58,7 +59,13 @@ const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, styl
           <View style={[styleGlobal.flexDirection_column, styleGlobal.gap_10, styleGlobal.justifyContent_spaceBetween]}>
             {children}
             <View style={[styleGlobal.justifyContent_flexEnd, styleGlobal.flexDirection_row]}>
-              <ButtonCustom text={titleActive} action={active} styleButton={styles.viewButton} />
+              <ButtonCustom
+                text={titleActive}
+                action={active}
+                styleButton={styles.viewButton}
+                disabled={loading}
+                typeButton={loading ? 'disabled' : 'main'}
+              />
             </View>
           </View>
         </View>

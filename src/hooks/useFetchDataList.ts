@@ -10,6 +10,7 @@ const useFetchDataList = <T>(callback: (page: number) => Promise<ResponseCommon<
     const [hasNext, setHasNext] = React.useState<boolean>(false);
     const [page, setPage] = React.useState<number>(1);
     const [total, setTotal] = React.useState<number>(0);
+    const [totalElement, setTotalElement] = React.useState<number | undefined>(0);
 
     const func = React.useCallback(async () => {
         try {
@@ -19,6 +20,7 @@ const useFetchDataList = <T>(callback: (page: number) => Promise<ResponseCommon<
                 Number(response?.paganition?.currentPage || 1) <
                 Number(response?.paganition?.totalPage || 1),
             );
+            setTotalElement(response?.paganition?.totalElement);
             setTotal(Number(response?.paganition?.totalPage) || 0);
             setData(response?.data || []);
         } catch (error) {
@@ -74,6 +76,7 @@ const useFetchDataList = <T>(callback: (page: number) => Promise<ResponseCommon<
         onFetchNoLoading: func,
         onEndReached,
         fetchDefault,
+        totalElement,
         setData,
     };
 };

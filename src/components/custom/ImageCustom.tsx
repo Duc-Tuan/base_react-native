@@ -22,4 +22,4 @@ const ImageCustom: React.FC<IProps> = ({ urlImeg, styleWapper }) => {
   );
 };
 
-export default ImageCustom;
+export default React.memo(ImageCustom);

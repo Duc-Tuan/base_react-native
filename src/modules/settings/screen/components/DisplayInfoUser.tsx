@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
+import { ImageLibraryOptions, launchImageLibrary } from 'react-native-image-picker';
 import React from 'react';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
@@ -11,35 +11,45 @@ import { useTranslation } from 'react-i18next';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
 import { checkNullish } from 'utils/genal';
-import { IUserGlobal } from 'modules/auth/screen/Function';
 import { TouchableOpacity } from 'react-native';
 import { IconCameraV2 } from 'assets/icons';
 import { useBoolean } from 'hooks/useBoolean';
+import { IUser } from 'types/auth-types';
+import { actions as authActions } from 'modules/auth/store';
+import { useAppDispatch } from 'hooks';
 
 interface IProps {
   colorPrimary?: string;
-  user: IUserGlobal;
+  user: IUser;
   isLogin: boolean;
 }
 
 const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   const { t } = useTranslation();
-  const [selectedImage, setSelectedImage] = React.useState<string>('');
+  const [dataImage, setDataImage] = React.useState<string>(user?.userImage);
+  const [selectedImage, setSelectedImage] = React.useState<string>(dataImage);
   const [isPopUp, { on, off, toggle }] = useBoolean();
+  const dispatch = useAppDispatch();
 
   const changeScreen = React.useCallback(() => {
     NavigationService.navigate(PathName.PROFILESCREEN);
   }, []);
 
-  const hiddenPopup = React.useCallback(() => off(), []);
+  const hiddenPopup = React.useCallback(() => {
+    setSelectedImage(dataImage);
+    off();
+  }, []);
 
   const changeLogin = React.useCallback(() => NavigationService.navigate(PathName.LOGINSCREEN), []);
   const changeRegister = React.useCallback(() => NavigationService.navigate(PathName.REGISTERsCREEN), []);
 
-  const footer = [<ButtonCustom text="Cập nhật" />];
+  const footer = React.useCallback(
+    () => [<ButtonCustom text="Cập nhật" action={handleuUpdateImage} />],
+    [selectedImage],
+  );
 
-  const openImagePicker = () => {
-    const options = {
+  const openImagePicker = React.useCallback(() => {
+    const options: ImageLibraryOptions = {
       mediaType: 'photo',
       includeBase64: false,
       maxHeight: 2000,
@@ -56,7 +66,16 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
         setSelectedImage(imageUri);
       }
     });
-  };
+  }, []);
+
+  const handleuUpdateImage = React.useCallback(() => {
+    setDataImage(selectedImage);
+    off();
+  }, [selectedImage]);
+
+  const handleLogout = React.useCallback(() => {
+    dispatch(authActions.logout());
+  }, [dispatch]);
 
   return (
     <>
@@ -73,7 +92,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                       styles.viewImage,
                       { borderColor: colorPrimary },
                     ]}>
-                    <ImageCustom urlImeg={user?.image} styleWapper={[styles.viewImg]} />
+                    <ImageCustom urlImeg={dataImage} styleWapper={[styles.viewImg]} />
                   </View>
                   <View style={[styleGlobal.dFlex_center, StyleSheet.absoluteFillObject, styles.viewCamera]}>
                     <IconCameraV2 fill={colorPrimary} />
@@ -83,9 +102,9 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
 
               <View>
                 <Text style={[styleGlobal.textPrimary, styleGlobal.textFontBold]}>
-                  {checkNullish(user?.name) ?? t('Đang cập nhập...')}
+                  {checkNullish(user?.userNickname) ?? t('Đang cập nhập...')}
                 </Text>
-                <ButtonCustom text="Đăng xuất" styleButton={styles.viewLogout} />
+                <ButtonCustom text="Đăng xuất" styleButton={styles.viewLogout} action={handleLogout} />
               </View>
             </View>
 
@@ -96,10 +115,10 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                 { backgroundColor: hexToRgba(colorPrimary ?? Colors.primary, 0.05) },
               ]}>
               <Text style={[styleGlobal.textPrimary]}>
-                {t('Giới tính')}: {checkNullish(user.gender) ?? t('Đang cập nhập...')}
+                {t('Giới tính')}: {checkNullish(user?.userGender) ?? t('Đang cập nhập...')}
               </Text>
               <Text style={[styleGlobal.textPrimary]}>
-                {t('Năm sinh')}: {checkNullish(user.age) ?? t('Đang cập nhập...')}
+                {t('Năm sinh')}: {checkNullish(user?.userEmail) ?? t('Đang cập nhập...')}
               </Text>
             </View>
           </View>
@@ -123,6 +142,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
           </View>
         </View>
       )}
+
       {isPopUp && (
         <WrapperModal
           isVisible={isPopUp}
@@ -130,7 +150,26 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
           textHeader="Đổi ảnh đại diện"
           isFooter
           footer={footer}>
-          <Text>ahdgasjhd</Text>
+          <TouchableOpacity activeOpacity={0.9} onPress={openImagePicker}>
+            <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column, styleGlobal.paddingVertical_20]}>
+              <View
+                style={[
+                  styleGlobal.border,
+                  styleGlobal.padding_2,
+                  styles.viewImage,
+                  styles.viewImageChange,
+                  { borderColor: colorPrimary },
+                ]}>
+                <ImageCustom urlImeg={selectedImage} styleWapper={[styles.viewImg]} />
+              </View>
+
+              <View style={styleGlobal.paddingVertical_8}>
+                <Text style={styleGlobal.textCenter}>Thay đổi</Text>
+                <Text style={[styleGlobal.textCenter, styleGlobal.textFontSize_12]}>Định dạng ảnh: png, jpg,...</Text>
+                <Text style={[styleGlobal.textCenter, styleGlobal.textFontSize_12]}>Dung lượng ảnh tối đa: 3MB</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         </WrapperModal>
       )}
     </>
@@ -152,6 +191,10 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
     borderWidth: 2,
+  },
+  viewImageChange: {
+    width: 100,
+    height: 100,
   },
   viewImg: {
     borderRadius: 100,

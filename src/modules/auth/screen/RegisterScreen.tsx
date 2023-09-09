@@ -11,9 +11,14 @@ import { styleGlobal } from 'types/StyleGlobal';
 import FormAuth from './FormAuth';
 import { IFormRegister } from './Function';
 import { useTranslation } from 'react-i18next';
+import { isValidEmail } from 'utils/genal';
+import { ApiAuths } from 'assets/api';
+import { useToast } from 'hooks/useToast';
 
 const RegisterScreen = () => {
   const { t } = useTranslation();
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const toast = useToast();
   const {
     control,
     handleSubmit,
@@ -21,17 +26,27 @@ const RegisterScreen = () => {
     formState: { errors },
   } = useForm<IFormRegister>({
     defaultValues: {
-      useName: '',
-      email: '',
+      usename: '',
+      userEmail: '',
       password: '',
       passwordCofirm: '',
     },
   });
 
-  const onSubmit = (data: IFormRegister) => {
-    // console.log(data);
-    return NavigationService.navigate(PathName.HOMESCREEN);
-  };
+  const onSubmit = React.useCallback(async (data: IFormRegister) => {
+    const dataRegister = {
+      usename: data?.usename,
+      password: data?.password,
+      userEmail: data?.userEmail,
+    };
+    setLoading(true);
+    const res = await ApiAuths.register(dataRegister);
+    setLoading(false);
+    toast(res?.status ? 'success' : 'error', res.mess);
+    if (res?.status) {
+      return NavigationService.navigate(PathName.LOGINSCREEN);
+    }
+  }, []);
 
   const isValidPasswordCofirm = React.useCallback((data: string) => {
     if (getValues('password') !== data) {
@@ -41,28 +56,37 @@ const RegisterScreen = () => {
   }, []);
 
   return (
-    <FormAuth title="Đăng ký" active={handleSubmit(onSubmit)} titleActive="Đăng ký" stylesWrapper={styles.customs}>
+    <FormAuth
+      loading={loading}
+      title="Đăng ký"
+      active={handleSubmit(onSubmit)}
+      titleActive="Đăng ký"
+      stylesWrapper={styles.customs}>
       <View style={styles.container}>
         <View style={styles.viewGroup}>
           <Controller
             control={control}
             rules={{
               required: t('Vui lòng không để trống trường này.'),
+              validate: value => {
+                if (isValidEmail(value) === true) return undefined;
+                return isValidEmail(value);
+              },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
                 placeholder={t('Nhập email...')}
-                label={t('Email:')}
+                label={t('Email: ')}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
                 onChange={onChange}
-                inputStyle={errors.email ? { borderColor: Colors.error } : undefined}
+                inputStyle={errors.userEmail ? { borderColor: Colors.error } : undefined}
               />
             )}
-            name="email"
+            name="userEmail"
           />
-          {errors.email && <Text style={styles.viewTextInput}>{errors.email.message}</Text>}
+          {errors.userEmail && <Text style={styles.viewTextInput}>{errors.userEmail.message}</Text>}
         </View>
         <View style={styles.viewGroup}>
           <Controller
@@ -78,12 +102,12 @@ const RegisterScreen = () => {
                 valueText={value}
                 onBlur={onBlur}
                 onChange={onChange}
-                inputStyle={errors.useName ? { borderColor: Colors.error } : undefined}
+                inputStyle={errors.usename ? { borderColor: Colors.error } : undefined}
               />
             )}
-            name="useName"
+            name="usename"
           />
-          {errors.useName && <Text style={styles.viewTextInput}>{errors.useName.message}</Text>}
+          {errors.usename && <Text style={styles.viewTextInput}>{errors.usename.message}</Text>}
         </View>
 
         <View style={styles.viewGroup}>

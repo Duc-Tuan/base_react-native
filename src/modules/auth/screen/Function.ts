@@ -2,16 +2,15 @@
 import { IGeneral } from 'types/product-types';
 
 export interface IFormLogin {
-    useName: string;
+    usename: string;
     password: string;
 }
 
-export interface IFormRegister {
-    email: string;
-    useName: string;
-    password: string;
+export interface IFormRegister extends IFormLogin {
+    userEmail: string;
     passwordCofirm: string;
 }
+
 export interface IChangePassword {
     passwordOld: string;
     passwordNew: string;

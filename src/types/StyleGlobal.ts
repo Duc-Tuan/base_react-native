@@ -258,6 +258,9 @@ export const styleGlobal = StyleSheet.create({
   textFontSize_10: {
     fontSize: 10,
   },
+  textFontSize_12: {
+    fontSize: 12,
+  },
   textFontSize_14: {
     fontSize: 14,
   },
