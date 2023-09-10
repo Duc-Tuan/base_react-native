@@ -84,5 +84,9 @@
   "Thể loại": "Thể loại",
   "Đóng": "Đóng",
   "Thao tác này không thể lấy lại được thông tin khi đã xóa. Bạn có muốn xóa thông tin này!!!": "Thao tác này không thể lấy lại được thông tin khi đã xóa. Bạn có muốn xóa thông tin này!!!",
-  "Tên cửa hàng:": "Tên cửa hàng:"
+  "Tên cửa hàng:": "Tên cửa hàng:",
+  "Đổi mật khẩu thành công.": "Đổi mật khẩu thành công.",
+  "Mật khẩu cũ không chính xác.": "Mật khẩu cũ không chính xác.",
+  "Hệ thống đã xảy ra lỗi. Vui lòng thử lại!!!": "Hệ thống đã xảy ra lỗi. Vui lòng thử lại!!!",
+  "Mật khẩu nhập lại không chính xác.": "Mật khẩu nhập lại không chính xác."
 }

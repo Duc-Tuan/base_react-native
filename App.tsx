@@ -14,6 +14,7 @@ import codePush from 'react-native-code-push';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 dayjs.locale('vi');
 
@@ -25,13 +26,14 @@ import { toastConfig } from './src/configs/toast';
 const NavigationApp = React.lazy(() => import('naviagtion'));
 
 function App(): JSX.Element {
-
   return (
     <Provider store={store}>
       <SafeAreaProvider>
         <ClickOutsideProvider>
           <Suspense fallback={undefined}>
-            <NavigationApp />
+            <ActionSheetProvider>
+              <NavigationApp />
+            </ActionSheetProvider>
           </Suspense>
         </ClickOutsideProvider>
         <Toast config={toastConfig} />

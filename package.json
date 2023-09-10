@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^4.0.1",
     "@react-native-async-storage/async-storage": "^1.19.3",
     "@react-native-community/hooks": "^3.0.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
@@ -32,6 +33,7 @@
     "react-native-code-push": "^8.1.0",
     "react-native-date-picker": "^4.2.14",
     "react-native-extra-dimensions-android": "^1.2.5",
+    "react-native-image-crop-picker": "^0.40.0",
     "react-native-image-picker": "^5.6.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.8.3",

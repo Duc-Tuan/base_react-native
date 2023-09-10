@@ -1,5 +1,3 @@
-import { IUserGlobal } from 'modules/auth/screen/Function';
-import Colors from 'themes/Color';
 import { IGeneral, IOptions } from 'types/product-types';
 /* eslint-disable prettier/prettier */
 export interface ICarts {
@@ -105,67 +103,6 @@ export const dataCarts: ICarts[] | [] = [
         promotion: 10,
     },
 ];
-
-// export const dataLocation: ILocation[] = [
-//     {
-//         code: 'DC00001',
-//         default: true,
-//         item: {
-//             village: '',
-//             Wards: 'Quảng Nghiệp',
-//             District: 'Tứ Kỳ',
-//             city: 'Hải Dương',
-//             addressDetail: '1 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-//             phone: '0123456789',
-//             organ: 'Nhà riêng',
-//             deliveryTime: 'Các ngày trong tuần',
-//         },
-//     },
-//     {
-//         code: 'DC00002',
-//         default: false,
-//         item: {
-//             village: '',
-//             Wards: 'Quảng Nghiệp',
-//             District: 'Tứ Kỳ',
-//             city: 'Hải Dương',
-//             addressDetail: '2 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-//             phone: '0123456789',
-//             organ: 'Cty',
-//             deliveryTime: 'thứ 2 - thứ 6, 8h00 - 17h30',
-//         },
-//     },
-//     {
-//         code: 'DC00003',
-//         default: false,
-//         item: {
-//             village: '',
-//             Wards: 'Quảng Nghiệp',
-//             District: 'Tứ Kỳ',
-//             city: 'Hải Dương',
-//             addressDetail: '3 - Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-//             phone: '0123456789',
-//             organ: 'Cty',
-//             deliveryTime: 'thứ 2 - thứ 7, 8h00 - 17h30',
-//         },
-//     },
-// ];
-
-export const dataUser: IUserGlobal = {
-    _id: 1,
-    id: 1,
-    code: 'US00001',
-    useName: 'nhincaiconcu',
-    name: 'Mr.Tuan',
-    phone: '0123456789',
-    gender: 'Nam',
-    email: 'phamductuan26032002@gmail.com',
-    address: 'Quảng Nghiệp - Tứ Kỳ - Hải Dương',
-    image: 'https://i.pinimg.com/564x/2b/b1/d8/2bb1d82e651c45912e0b66e91bf51aa1.jpg',
-    status: 'active',
-    age: '26/03/2002',
-    color: Colors.primary,
-};
 
 export const optionsOrgan: IOptions[] = [
     {

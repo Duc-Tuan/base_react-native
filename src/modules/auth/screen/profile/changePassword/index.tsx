@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ActivityPenal, ButtonCustom, InputCustom } from 'components';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -7,13 +8,20 @@ import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { IChangePassword } from '../../Function';
 import NavigationService from 'naviagtion/stack/NavigationService';
+import { ApiAuths } from 'assets/api';
+import { useGetAccount } from 'hooks/useGetAccount';
+import { useToast } from 'hooks/useToast';
 
 const ChangePasswordScreen = () => {
   const { t } = useTranslation();
+  const { user } = useGetAccount();
+  const toast = useToast();
+  const [loading, setLoading] = React.useState<boolean>(false);
   const {
     control,
     handleSubmit,
     getValues,
+    reset,
     formState: { errors },
   } = useForm<IChangePassword>({
     defaultValues: {
@@ -23,18 +31,33 @@ const ChangePasswordScreen = () => {
     },
   });
 
-  const onSubmit = React.useCallback(async (data: IChangePassword) => {
-    // console.log(data);
-  }, []);
+  const onSubmit = React.useCallback(
+    async (data: IChangePassword) => {
+      try {
+        const { passwordCofirm, ...orther } = data;
+        setLoading(true);
+        const res = await ApiAuths.changePassword(user?._id, orther);
+        toast(
+          res?.status ? 'success' : 'error',
+          res?.status ? t('Đổi mật khẩu thành công.') : 'Mật khẩu cũ không chính xác.',
+        );
+        res?.status && reset();
+        setLoading(false);
+      } catch (error) {
+        toast('error', t('Hệ thống đã xảy ra lỗi. Vui lòng thử lại!!!'));
+      }
+    },
+    [user, t, toast, reset],
+  );
 
   const isValidPasswordCofirm = React.useCallback(
     (data: string) => {
       if (getValues('passwordNew') !== data) {
-        return 'Mật khẩu nhập lại không chính xác.';
+        return t('Mật khẩu nhập lại không chính xác.');
       }
       return true;
     },
-    [getValues],
+    [getValues, t],
   );
 
   return (
@@ -126,7 +149,13 @@ const ChangePasswordScreen = () => {
               styleButton={styleGlobal.flex_1}
               action={NavigationService.goBack}
             />
-            <ButtonCustom text="Cập nhật" styleButton={styleGlobal.flex_1} action={handleSubmit(onSubmit)} />
+            <ButtonCustom
+              text="Cập nhật"
+              styleButton={styleGlobal.flex_1}
+              action={handleSubmit(onSubmit)}
+              disabled={loading}
+              typeButton={loading ? 'disabled' : 'main'}
+            />
           </View>
         </>
       </ScrollView>

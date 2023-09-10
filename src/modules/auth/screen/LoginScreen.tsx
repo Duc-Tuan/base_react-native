@@ -35,8 +35,6 @@ const LoginScreen = () => {
 
   const onSubmit = React.useCallback(
     async (data: IFormLogin) => {
-      // const token = await AsyncStorage.getItem('token');
-      // setHeaders({ 'x-food-access-token': token });
       setLoading(true);
       await dispatch(authActions.login(data))
         .then(async (data: any) => {

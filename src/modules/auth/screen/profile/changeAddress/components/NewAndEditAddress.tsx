@@ -3,7 +3,7 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityPenal, ButtonCustom, InputCustom } from 'components';
+import { ActivityPenal, ButtonCustom, InputCustom, LoadingOverley } from 'components';
 import { styleGlobal } from 'types/StyleGlobal';
 import Colors from 'themes/Color';
 import { Controller, useForm } from 'react-hook-form';
@@ -130,7 +130,9 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
   }, []);
 
   return (
-    <ActivityPenal title={_id ? `${t('Sửa địa chỉ')} ${dataLocation?.code ?? 'Đang cập nhật...'}` : 'Thêm địa chỉ mới'}>
+    <ActivityPenal
+      title={_id ? `${t('Sửa địa chỉ')} ${dataLocation?.code ?? 'Đang cập nhật...'}` : 'Thêm địa chỉ mới'}
+      isLoading={loading}>
       <ScrollView style={[styleGlobal.padding_14, styles.container, styleGlobal.marginTop_10]}>
         <View>
           <View>

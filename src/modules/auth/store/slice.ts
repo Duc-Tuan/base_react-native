@@ -36,6 +36,12 @@ const user = createSlice({
             state.user = undefined;
         });
         builder.addCase(operations.logout.rejected, () => { });
+        builder.addCase(operations.changeInfo.pending, () => { });
+        builder.addCase(operations.changeInfo.fulfilled, (state, { payload }) => {
+            const { body } = payload;
+            state.user = body;
+        });
+        builder.addCase(operations.changeInfo.rejected, () => { });
     },
 });
 

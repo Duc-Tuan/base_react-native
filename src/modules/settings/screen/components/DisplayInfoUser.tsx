@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native';
-import { ImageLibraryOptions, launchImageLibrary } from 'react-native-image-picker';
+import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+// import { ImageLibraryOptions, launchImageLibrary } from 'react-native-image-picker';
+import ImagePicker, { Image, Options } from 'react-native-image-crop-picker';
 import React from 'react';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
@@ -17,6 +18,9 @@ import { useBoolean } from 'hooks/useBoolean';
 import { IUser } from 'types/auth-types';
 import { actions as authActions } from 'modules/auth/store';
 import { useAppDispatch } from 'hooks';
+import { ApiuploadImage } from 'assets/api';
+import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useToast } from 'hooks/useToast';
 
 interface IProps {
   colorPrimary?: string;
@@ -26,8 +30,14 @@ interface IProps {
 
 const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   const { t } = useTranslation();
-  const [dataImage, setDataImage] = React.useState<string>(user?.userImage);
-  const [selectedImage, setSelectedImage] = React.useState<string>(dataImage);
+  const toast = useToast();
+  const { showActionSheetWithOptions } = useActionSheet();
+  const [dataImage, setDataImage] = React.useState<string | undefined>(user?.userImage);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = React.useState<{ url?: string; file: any }>({
+    url: dataImage ?? '',
+    file: '',
+  });
   const [isPopUp, { on, off, toggle }] = useBoolean();
   const dispatch = useAppDispatch();
 
@@ -36,7 +46,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   }, []);
 
   const hiddenPopup = React.useCallback(() => {
-    setSelectedImage(dataImage);
+    setSelectedImage({ url: dataImage, file: '' });
     off();
   }, []);
 
@@ -44,34 +54,71 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   const changeRegister = React.useCallback(() => NavigationService.navigate(PathName.REGISTERsCREEN), []);
 
   const footer = React.useCallback(
-    () => [<ButtonCustom text="Cập nhật" action={handleuUpdateImage} />],
-    [selectedImage],
+    () => [
+      <ButtonCustom
+        text="Cập nhật"
+        action={handleuUpdateImage}
+        disabled={loading}
+        typeButton={loading ? 'disabled' : 'main'}
+      />,
+    ],
+    [selectedImage, loading],
   );
 
-  const openImagePicker = React.useCallback(() => {
-    const options: ImageLibraryOptions = {
-      mediaType: 'photo',
-      includeBase64: false,
-      maxHeight: 2000,
-      maxWidth: 2000,
-    };
+  const openImagePicker = React.useCallback(async () => {
+    // showActionSheetWithOptions(
+    //   { options: [t('Thư viện ảnh'), t('Chụp ảnh'), t('Đóng')], cancelButtonIndex: 2 },
+    //   async index => {},
+    // );
+    try {
+      let response: Image | undefined;
 
-    launchImageLibrary(options, (response: any) => {
-      if (response.didCancel) {
-        // console.log('User cancelled image picker');
-      } else if (response.error) {
-        // console.log('Image picker error: ', response.error);
-      } else {
-        let imageUri = response.uri || response.assets?.[0]?.uri;
-        setSelectedImage(imageUri);
-      }
-    });
-  }, []);
+      const options: Options = {
+        multiple: false,
+        mediaType: 'photo',
+        includeBase64: true,
+        cropping: true,
+        showCropGuidelines: true,
+        compressImageQuality: 1,
+        cropperCancelText: t('Đóng'),
+        cropperChooseText: t('Chọn'),
+        cropperToolbarTitle: t('Chỉnh sửa ảnh'),
+        width: 512,
+        height: 512,
+      };
+      response = await ImagePicker.openPicker(options);
 
-  const handleuUpdateImage = React.useCallback(() => {
-    setDataImage(selectedImage);
-    off();
-  }, [selectedImage]);
+      // if (index === 0) {
+      //   response = await ImagePicker.openPicker(options);
+      // } else if (index === 1) {
+      //   response = await ImagePicker.openCamera(options);
+      // }
+      setSelectedImage({ url: `data:image/png;base64,${response?.data}`, file: response?.data });
+      on();
+    } catch (error) {}
+  }, [t]);
+
+  const handleuUpdateImage = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await ApiuploadImage.upload({ imageBase64: selectedImage?.file });
+      const data: IUser = {
+        ...user,
+        userImage: res?.downloadURL,
+        userImageMulter: res?.nameFile,
+      };
+      const resUser = await dispatch(authActions.changeInfo(data));
+      setDataImage(res?.downloadURL);
+      toast(
+        resUser?.payload?.status ? 'success' : 'error',
+        resUser?.payload?.status ? t('Cập nhật thông tin thành công.') : t('Cập nhật thông tin thất bại.'),
+      );
+      setLoading(false);
+      off();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [selectedImage, t]);
 
   const handleLogout = React.useCallback(() => {
     dispatch(authActions.logout());
@@ -118,7 +165,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                 {t('Giới tính')}: {checkNullish(user?.userGender) ?? t('Đang cập nhập...')}
               </Text>
               <Text style={[styleGlobal.textPrimary]}>
-                {t('Năm sinh')}: {checkNullish(user?.userEmail) ?? t('Đang cập nhập...')}
+                {t('Năm sinh')}: {checkNullish(user?.userAge) ?? t('Đang cập nhập...')}
               </Text>
             </View>
           </View>
@@ -160,7 +207,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                   styles.viewImageChange,
                   { borderColor: colorPrimary },
                 ]}>
-                <ImageCustom urlImeg={selectedImage} styleWapper={[styles.viewImg]} />
+                <ImageCustom urlImeg={selectedImage?.url} styleWapper={[styles.viewImg]} />
               </View>
 
               <View style={styleGlobal.paddingVertical_8}>

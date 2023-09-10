@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { dataCarts } from 'assets/data';
 import { IconAdd, IconCart, IconClose, IconLeft, IconSearch, IconUser } from 'assets/icons';
 import { PathName } from 'configs';
 import { useBoolean } from 'hooks/useBoolean';
@@ -116,12 +115,12 @@ const HeaderNew: React.FC<IProps> = ({
                   isLogin ? (
                     <View style={[styleGlobal.dFlex_center, styleGlobal.gap_10]}>
                       <View style={[styleGlobal.padding_2, styles.viewIsUser]}>
-                        <ImageCustom urlImeg={undefined} styleWapper={[styles.viewImageUser]} />
+                        <ImageCustom urlImeg={user?.userImage} styleWapper={[styles.viewImageUser]} />
                       </View>
                       <View>
                         <Text style={styles.viewTextOpcity}>{t('Xem chi tiết')}</Text>
                         <Text numberOfLines={1} style={[styleGlobal.textBold, styles.viewTextNameUser]}>
-                          {checkNullish(user?.name) ?? t('Đang cập nhập...')}
+                          {checkNullish(user?.userNickname) ?? t('Đang cập nhập...')}
                         </Text>
                       </View>
                     </View>
@@ -188,7 +187,7 @@ const HeaderNew: React.FC<IProps> = ({
                     styleGlobal.border,
                     styles.notification,
                   ]}>
-                  <Text style={styles.ViewTextnotification}>{dataCarts.length}</Text>
+                  <Text style={styles.ViewTextnotification}>0</Text>
                 </View>
               </TouchableOpacity>
             </View>
