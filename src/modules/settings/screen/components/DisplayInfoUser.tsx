@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
-// import { ImageLibraryOptions, launchImageLibrary } from 'react-native-image-picker';
-import ImagePicker, { Image, Options } from 'react-native-image-crop-picker';
+import { ImageLibraryOptions, launchImageLibrary } from 'react-native-image-picker';
+// import ImagePicker, { Image, Options } from 'react-native-image-crop-picker';
 import React from 'react';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
@@ -67,23 +67,38 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
 
   const openImagePicker = React.useCallback(async () => {
     try {
-      let response: Image | undefined;
-      const options: Options = {
-        multiple: false,
-        mediaType: 'photo',
+      // let response: Image | undefined;
+      // const options: Options = {
+      //   multiple: false,
+      //   mediaType: 'photo',
+      //   includeBase64: true,
+      //   cropping: true,
+      //   showCropGuidelines: true,
+      //   compressImageQuality: 1,
+      //   cropperCancelText: t('Đóng'),
+      //   cropperChooseText: t('Chọn'),
+      //   cropperToolbarTitle: t('Chỉnh sửa ảnh'),
+      //   width: 512,
+      //   height: 512,
+      // };
+      // response = await ImagePicker.openPicker(options);
+      // setSelectedImage({ url: `data:image/png;base64,${response?.data}`, file: response?.data });
+      // on();
+      const options = {
+        maxHeight: 250,
+        maxWidth: 350,
         includeBase64: true,
-        cropping: true,
-        showCropGuidelines: true,
-        compressImageQuality: 1,
-        cropperCancelText: t('Đóng'),
-        cropperChooseText: t('Chọn'),
-        cropperToolbarTitle: t('Chỉnh sửa ảnh'),
-        width: 512,
-        height: 512,
+        storageOptions: {
+          path: 'image',
+        },
       };
-      response = await ImagePicker.openPicker(options);
-      setSelectedImage({ url: `data:image/png;base64,${response?.data}`, file: response?.data });
-      on();
+
+      launchImageLibrary(options, async response => {
+        setSelectedImage({
+          url: `data:image/png;base64,${response?.assets[0]?.base64}`,
+          file: response?.assets[0]?.base64,
+        });
+      });
     } catch (error) {}
   }, [t]);
 
@@ -200,7 +215,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
               </View>
 
               <View style={styleGlobal.paddingVertical_8}>
-                <Text style={(styleGlobal.textCenter, styleGlobal.textPrimary)}>Thay đổi</Text>
+                <Text style={[styleGlobal.textCenter, styleGlobal.textPrimary]}>Thay đổi</Text>
                 <Text
                   style={[
                     styleGlobal.textCenter,
