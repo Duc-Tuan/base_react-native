@@ -31,7 +31,7 @@ interface IProps {
 const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   const { t } = useTranslation();
   const toast = useToast();
-  const { showActionSheetWithOptions } = useActionSheet();
+  // const { showActionSheetWithOptions } = useActionSheet();
   const [dataImage, setDataImage] = React.useState<string | undefined>(user?.userImage);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [selectedImage, setSelectedImage] = React.useState<{ url?: string; file: any }>({
@@ -109,7 +109,6 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
       };
       const resUser = await dispatch(authActions.changeInfo(data));
       setDataImage(res?.downloadURL);
-
       toast(
         resUser?.payload?.status ? 'success' : 'error',
         resUser?.payload?.status ? t('Cập nhật thông tin thành công.') : t('Cập nhật thông tin thất bại.'),
