@@ -109,6 +109,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
       };
       const resUser = await dispatch(authActions.changeInfo(data));
       setDataImage(res?.downloadURL);
+
       toast(
         resUser?.payload?.status ? 'success' : 'error',
         resUser?.payload?.status ? t('Cập nhật thông tin thành công.') : t('Cập nhật thông tin thất bại.'),
