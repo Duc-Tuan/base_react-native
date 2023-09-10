@@ -66,13 +66,8 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
   );
 
   const openImagePicker = React.useCallback(async () => {
-    // showActionSheetWithOptions(
-    //   { options: [t('Thư viện ảnh'), t('Chụp ảnh'), t('Đóng')], cancelButtonIndex: 2 },
-    //   async index => {},
-    // );
     try {
       let response: Image | undefined;
-
       const options: Options = {
         multiple: false,
         mediaType: 'photo',
@@ -87,12 +82,6 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
         height: 512,
       };
       response = await ImagePicker.openPicker(options);
-
-      // if (index === 0) {
-      //   response = await ImagePicker.openPicker(options);
-      // } else if (index === 1) {
-      //   response = await ImagePicker.openCamera(options);
-      // }
       setSelectedImage({ url: `data:image/png;base64,${response?.data}`, file: response?.data });
       on();
     } catch (error) {}
@@ -211,9 +200,23 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
               </View>
 
               <View style={styleGlobal.paddingVertical_8}>
-                <Text style={styleGlobal.textCenter}>Thay đổi</Text>
-                <Text style={[styleGlobal.textCenter, styleGlobal.textFontSize_12]}>Định dạng ảnh: png, jpg,...</Text>
-                <Text style={[styleGlobal.textCenter, styleGlobal.textFontSize_12]}>Dung lượng ảnh tối đa: 3MB</Text>
+                <Text style={(styleGlobal.textCenter, styleGlobal.textPrimary)}>Thay đổi</Text>
+                <Text
+                  style={[
+                    styleGlobal.textCenter,
+                    styleGlobal.textFontSize_12,
+                    { color: hexToRgba(Colors.black, 0.6) },
+                  ]}>
+                  Định dạng ảnh: png, jpg,...
+                </Text>
+                <Text
+                  style={[
+                    styleGlobal.textCenter,
+                    styleGlobal.textFontSize_12,
+                    { color: hexToRgba(Colors.black, 0.6) },
+                  ]}>
+                  Dung lượng ảnh tối đa: 3MB
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
