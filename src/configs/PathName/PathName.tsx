@@ -18,5 +18,6 @@ export const PATHNAME = {
   PROFILESCREEN: 'ProfileScreen',
   NEWANDEDITADDRESSSCREEN: 'NewAndEditAddress',
   CATEGORIESSCREEN: 'CategoriesScreen',
+  RESETPASSWORDSCREEN: 'ScreenResetPassword',
   PRODUCT_DETAIL: (id?: string) => `/product/${id ?? ':roldId'}}`,
 };

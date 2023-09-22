@@ -1,20 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { useAppSelector } from 'hooks';
-import { ItemCart } from 'modules/auth/screen/Function';
+import { ICartsData } from 'types/cart-types';
 
-export const useGetCart = () => {
+const useGetCart = () => {
     const carts = useAppSelector((state: any) => state?.carts?.carts);
     const penddingBuy = useAppSelector((state: any) => state?.carts?.penddingBuy);
 
-    // const fetch = () => {
-    // };
-    // useEffect(() => {
-    //     fetch();
-    // }, []);
-
     const results: {
-        carts: ItemCart[];
-        penddingBuy: ItemCart[];
+        carts: ICartsData[];
+        penddingBuy: ICartsData[];
         cartLength: number;
     } = {
         cartLength: carts.length,
@@ -23,3 +17,5 @@ export const useGetCart = () => {
     };
     return results;
 };
+
+export default useGetCart;

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { useScrollToTop } from '@react-navigation/native';
-import { ICarts } from 'assets/data';
 import { ActivityPenal, ButtonCustom, HeaderNew } from 'components';
 import SwipeListViewCustom from 'components/custom/SwipeListViewCustom';
 import React from 'react';
@@ -11,40 +10,54 @@ import { marginVerticalItemListView, styleGlobal } from 'types/StyleGlobal';
 import { formatCurrency } from 'utils';
 import Item from './Item';
 import ButtonAddCartNull from './buttonAddCartNull.tsx';
+import useGetCart from 'hooks/useGetCart';
+import { ICartsData } from 'types/cart-types';
+import { useAppDispatch } from 'hooks';
+import { actions as actionsCarts } from 'modules/cart/store';
 
 const CartsScreen = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const refScrollView = React.useRef<any>();
   const [selectCheck, setSelectCheck] = React.useState<number[]>([]);
-  const [data, setData] = React.useState<ICarts[]>([]);
+  const [data, setData] = React.useState<ICartsData[]>([]);
+  const { carts } = useGetCart();
+
+  React.useEffect(() => {
+    setData(carts);
+  }, [carts]);
+
   useScrollToTop(refScrollView);
 
   const totalMoney = React.useMemo(() => {
-    const dataNew: ICarts[] = [];
-    data?.map((d: ICarts) => {
+    const dataNew: ICartsData[] = [];
+    data?.map((d: ICartsData) => {
       selectCheck?.map(i => {
-        if (i === d?.id) {
+        if (i === d?._id) {
           return dataNew.push(d);
         }
       });
     });
 
-    return dataNew.reduce((total, curr) => {
-      return (total += curr?.price * curr?.qty);
+    return dataNew.reduce((total: number, curr: ICartsData) => {
+      return (total += curr?.productprice * curr?.qty);
     }, 0);
   }, [selectCheck, data]);
 
   const handleRemoveItem = (data: any) => {
-    // console.log(data);
+    dispatch(actionsCarts.deleteCarts(data));
   };
 
-  const renderChildren = React.useCallback((data: any) => {
-    return (
-      <View style={[marginVerticalItemListView.container]}>
-        <Item data={data?.item} setData={setData} />
-      </View>
-    );
-  }, []);
+  const renderChildren = React.useCallback(
+    (i: any) => {
+      return (
+        <View style={[marginVerticalItemListView.container]}>
+          <Item data={i?.item} />
+        </View>
+      );
+    },
+    [data],
+  );
 
   const renderfooter = React.useCallback(() => {
     return (

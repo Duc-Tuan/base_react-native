@@ -11,7 +11,13 @@ interface IProps {
 const LinearGradientCustom: React.FC<IProps> = ({ children }) => {
   return (
     <LinearGradient
-      colors={[hexToRgba(Colors.primary, 0.6), 'transparent']}
+      colors={[
+        hexToRgba(Colors.primary, 0.6),
+        'transparent',
+        'transparent',
+        'transparent',
+        hexToRgba(Colors.primary, 0.6),
+      ]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.viewLinearGradient}>

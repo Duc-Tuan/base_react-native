@@ -25,6 +25,7 @@ import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
 import { useToast } from 'hooks/useToast';
+import ScreenResetPassword from 'modules/auth/screen/ResetPassword';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -76,6 +77,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.REGISTERsCREEN}
           component={RegisterScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.RESETPASSWORDSCREEN}
+          component={ScreenResetPassword}
         />
         <Stack.Screen options={{ gestureEnabled: false, animation: 'fade' }} name="BottomTab" component={BottomTab} />
         <Stack.Screen

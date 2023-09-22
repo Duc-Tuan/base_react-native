@@ -151,8 +151,8 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
                 <InputCustom
                   required
                   type="phone-pad"
-                  placeholder={t('Nhập số điện thoại...')}
-                  label={t('Số điện thoại:')}
+                  placeholder="098765xxxx"
+                  label={'Số điện thoại:'}
                   close={false}
                   valueText={value}
                   onBlur={onBlur}
@@ -176,8 +176,8 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
                 <InputCustom
-                  placeholder={t('Nhập thời gian nhận hàng...')}
-                  label={t('Thời gian nhận hàng:')}
+                  placeholder="Từ thứ 2 đến thứ 6..."
+                  label="Thời gian nhận hàng:"
                   close={false}
                   valueText={value}
                   onBlur={onBlur}
@@ -341,8 +341,8 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <InputCustom
                   required
-                  placeholder={t('Nhập địa chỉ chi tiết...')}
-                  label={t('Địa chỉ chi tiết:')}
+                  placeholder="Số nhà xxx, phố xxx, ..."
+                  label="Địa chỉ chi tiết:"
                   close={false}
                   valueText={value}
                   onBlur={onBlur}

@@ -24,10 +24,19 @@ interface IProps {
   titleActive: string;
   active: () => void;
   stylesWrapper?: ViewStyle;
+  stylesTitle?: ViewStyle;
   loading?: boolean;
 }
 
-const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, stylesWrapper, loading = false }) => {
+const FormAuth: React.FC<IProps> = ({
+  children,
+  title,
+  titleActive,
+  active,
+  stylesWrapper,
+  loading = false,
+  stylesTitle,
+}) => {
   const { t } = useTranslation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -53,7 +62,7 @@ const FormAuth: React.FC<IProps> = ({ children, title, titleActive, active, styl
         </SafeAreaView>
 
         <View style={[StyleSheet.absoluteFillObject, styles.viewBg]} />
-        <Text style={[StyleSheet.absoluteFillObject, styles.viewText]}>{t(title)}</Text>
+        <Text style={[StyleSheet.absoluteFillObject, styles.viewText, stylesTitle]}>{t(title)}</Text>
 
         <View style={[StyleSheet.absoluteFillObject, styles.main, stylesWrapper]}>
           <View style={[styleGlobal.flexDirection_column, styleGlobal.gap_10, styleGlobal.justifyContent_spaceBetween]}>

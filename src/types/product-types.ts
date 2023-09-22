@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 export interface IGeneral {
-    _id?: string | number;
-    code?: string;
+    _id: string | number;
+    code: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 export interface IOptions {
     value: string | number;

@@ -15,6 +15,7 @@ import { actions as authActions } from '../store';
 import { useToast } from 'hooks/useToast';
 import { useAppDispatch } from 'hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { headersAxios } from 'utils/headersAxios';
 
 const LoginScreen = () => {
   const toast = useToast();
@@ -67,8 +68,8 @@ const LoginScreen = () => {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder={t('Nhập tài khoản...')}
-                label={t('Tài khoản:')}
+                placeholder={'abc...'}
+                label={'Tài khoản:'}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -88,9 +89,9 @@ const LoginScreen = () => {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder="********"
+                placeholder={'********'}
                 secureTextEntry
-                label={t('Mật khẩu:')}
+                label={'Mật khẩu:'}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -104,9 +105,26 @@ const LoginScreen = () => {
         </View>
         <View style={styles.viewGroup}>
           <View
-            style={
-              (styleGlobal.justifyContent_flexStart, styleGlobal.alignItems_center, styleGlobal.flexDirection_row)
-            }>
+            style={[
+              styleGlobal.justifyContent_flexStart,
+              styleGlobal.alignItems_center,
+              styleGlobal.flexDirection_row,
+            ]}>
+            <Text style={styles.viewText}>{t('Quên mật khẩu?')}</Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.viewButtonRegister}
+              onPress={() => NavigationService.navigate(PathName.RESETPASSWORDSCREEN)}>
+              <Text style={styles.viewTextRegister}>{t('Lấy lại mật khẩu.')}</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={[
+              styleGlobal.justifyContent_flexStart,
+              styleGlobal.alignItems_center,
+              styleGlobal.flexDirection_row,
+              styleGlobal.marginTop_8,
+            ]}>
             <Text style={styles.viewText}>{t('Bạn chưa có tài khoản?')}</Text>
             <TouchableOpacity
               activeOpacity={0.8}

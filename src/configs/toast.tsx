@@ -88,7 +88,7 @@ export const toastConfig: ToastConfig = {
           backgroundColor: 'tomato',
         }}>
         <Text>{text1}</Text>
-        <Text>{props.uuid}</Text>
+        <Text numberOfLines={2}>{props.uuid}</Text>
       </View>
     );
   },
@@ -97,7 +97,7 @@ export const toastConfig: ToastConfig = {
 const styles = StyleSheet.create({
   styleCustom: {
     borderLeftWidth: 0,
-    borderRadius: 50,
+    borderRadius: 10,
     paddingBottom: 10,
     paddingTop: 10,
     height: 'auto',

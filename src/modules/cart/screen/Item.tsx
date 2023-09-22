@@ -5,16 +5,20 @@ import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import { IconAdd, IconRemove } from 'assets/icons';
 import { formatCurrency, hexToRgba } from 'utils';
-import { ICarts } from 'assets/data';
 import useDebounce from 'hooks/useDebounce';
+import { ICartsData } from 'types/cart-types';
+import { ImageCustom } from 'components';
+import { cloneDeep } from 'lodash';
+import { useAppDispatch } from 'hooks';
+import { actions as actionsCarts } from 'modules/cart/store';
 
 interface IProps {
-  data: any;
-  setData?: React.Dispatch<React.SetStateAction<ICarts[]>>;
+  data: ICartsData;
 }
 
-const Item: React.FC<IProps> = ({ data, setData }) => {
+const Item: React.FC<IProps> = ({ data }) => {
   const [qty, setQty] = React.useState<number>(data?.qty);
+  const dispatch = useAppDispatch();
 
   const styleCustom = [styleGlobal.alignItems_flexStart, styleGlobal.flexDirection_row, styleGlobal.gap_10];
   const flex = { flex: 1 };
@@ -22,26 +26,19 @@ const Item: React.FC<IProps> = ({ data, setData }) => {
   const valueDebounce = useDebounce(qty, 400);
 
   React.useEffect(() => {
-    setData &&
-      setData((prev: ICarts[]) => {
-        const dataNew: ICarts[] = [...prev];
-        dataNew?.map((d: ICarts) => {
-          if (d?.id === data?.id) {
-            return (d.qty = valueDebounce);
-          }
-        });
-        return dataNew;
-      });
+    const dataNew: ICartsData = cloneDeep(data);
+    dataNew.qty = valueDebounce;
+    dispatch(actionsCarts.addAndUpdateCarts(dataNew));
   }, [valueDebounce]);
 
   return (
     <View style={[...styleCustom, styleGlobal.justifyContent_spaceBetween, styleGlobal.padding_6, styles.container]}>
       <View style={[...styleCustom, styleGlobal.justifyContent_flexStart, flex]}>
-        <Image source={data?.image} style={styles.viewImage} />
+        <ImageCustom urlImeg={data?.productimage} styleWapper={styles.viewImage} />
         <View>
           <Text style={{ fontSize: 12, color: hexToRgba(Colors.black, 0.8) }}>SP0001</Text>
           <Text numberOfLines={2} style={styles.viewTextName}>
-            {data?.name}
+            {data?.productname}
           </Text>
         </View>
       </View>
@@ -55,7 +52,7 @@ const Item: React.FC<IProps> = ({ data, setData }) => {
           flex,
         ]}>
         <Text style={[styles.viewTextName, { color: Colors.primary }]}>
-          {formatCurrency(qty * data?.price, ' vnđ')}
+          {formatCurrency(qty * data?.productprice, ' vnđ')}
         </Text>
         <View
           style={[
@@ -102,6 +99,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 4,
+    objectFit: 'contain',
   },
   viewTextName: {
     fontWeight: '700',

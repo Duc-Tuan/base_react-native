@@ -73,13 +73,13 @@ const SwipeListViewCustom = React.forwardRef<FlatList, IProps>(
           <View style={[styleGlobal.justifyContent_flexStart, styleGlobal.flexDirection_row, styles.viewChecked]}>
             <View style={styleGlobal.dFlex_center}>
               <CheckBox
-                value={selectCheck?.some(i => i === item?.id)}
+                value={selectCheck?.some(i => i === item?._id)}
                 onChange={e => {
                   if (setSelectCheck) {
                     if (e) {
-                      selectCheck?.some(i => i === item?.id) ? undefined : setSelectCheck(prev => [...prev, item?.id]);
+                      selectCheck?.some(i => i === item?._id) ? undefined : setSelectCheck(prev => [...prev, item?._id]);
                     } else {
-                      setSelectCheck(prev => prev.filter(i => i !== item?.id));
+                      setSelectCheck(prev => prev.filter(i => i !== item?._id));
                     }
                   }
                 }}

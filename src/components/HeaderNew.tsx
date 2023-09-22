@@ -16,6 +16,7 @@ import { hexToRgba } from 'utils';
 import { checkNullish } from 'utils/genal';
 import { getStatusBarHeight } from 'utils/iphoneXHelper';
 import { ImageCustom } from 'components';
+import useGetCart from 'hooks/useGetCart';
 
 interface IProps {
   hiddenBack?: boolean;
@@ -54,6 +55,7 @@ const HeaderNew: React.FC<IProps> = ({
   const [text, setText] = React.useState<string>('');
   const textDebounce = useDebounce(text, 500);
   const { user, isLogin } = useGetAccount();
+  const { cartLength } = useGetCart();
 
   React.useEffect(() => {
     if (setTextSearch) {
@@ -187,7 +189,7 @@ const HeaderNew: React.FC<IProps> = ({
                     styleGlobal.border,
                     styles.notification,
                   ]}>
-                  <Text style={styles.ViewTextnotification}>0</Text>
+                  <Text style={styles.ViewTextnotification}>{cartLength}</Text>
                 </View>
               </TouchableOpacity>
             </View>

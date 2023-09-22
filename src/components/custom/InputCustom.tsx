@@ -118,7 +118,7 @@ const InputCustom = (props: Props) => {
           accessible={false}
           style={styles.viewTextInput}
           onChangeText={handleSearch}
-          placeholder={placeholder}
+          placeholder={t(placeholder ?? '')}
           cursorColor={Colors.primary}
           placeholderTextColor={'rgba(0, 0, 0, 0.4)'}
           keyboardType={type ?? undefined}

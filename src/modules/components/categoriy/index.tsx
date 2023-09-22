@@ -20,29 +20,29 @@ const CategoryItem: React.FC<IProps> = ({ data }) => {
         },
       ]}>
       {data?.map((i: any, idx: number) => (
-        // <LinearGradientCustom key={idx}>
-        <View
-          key={idx}
-          style={[
-            styleGlobal.justifyContent_center,
-            styleGlobal.flexDirection_column,
-            styleGlobal.alignItems_center,
-            styleGlobal.padding_10,
-            styles.container,
-          ]}>
-          <View style={styles.viewImage}>
-            <Image
-              style={[styleGlobal.image]}
-              source={{
-                uri: i?.categoryImage,
-              }}
-            />
+        <LinearGradientCustom key={idx}>
+          <View
+            key={idx}
+            style={[
+              styleGlobal.justifyContent_center,
+              styleGlobal.flexDirection_column,
+              styleGlobal.alignItems_center,
+              styleGlobal.padding_10,
+              styles.container,
+            ]}>
+            <View style={styles.viewImage}>
+              <Image
+                style={[styleGlobal.image]}
+                source={{
+                  uri: i?.categoryImage,
+                }}
+              />
+            </View>
+            <Text numberOfLines={1} style={styleGlobal.textFontBold}>
+              {i?.categoryName}
+            </Text>
           </View>
-          <Text numberOfLines={1} style={styleGlobal.textFontBold}>
-            {i?.categoryName}
-          </Text>
-        </View>
-        // </LinearGradientCustom>
+        </LinearGradientCustom>
       ))}
     </View>
   );

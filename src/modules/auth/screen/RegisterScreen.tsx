@@ -75,8 +75,8 @@ const RegisterScreen = () => {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder={t('Nhập email...')}
-                label={t('Email: ')}
+                placeholder={'email@gmail.com, email@yahoo.com, ...'}
+                label={'Email: '}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -96,8 +96,8 @@ const RegisterScreen = () => {
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <InputCustom
-                placeholder={t('Nhập tài khoản...')}
-                label={t('Tài khoản:')}
+                placeholder={'abc...'}
+                label={'Tài khoản:'}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -120,7 +120,7 @@ const RegisterScreen = () => {
               <InputCustom
                 placeholder="********"
                 secureTextEntry
-                label={t('Mật khẩu:')}
+                label={'Mật khẩu:'}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}
@@ -146,7 +146,7 @@ const RegisterScreen = () => {
               <InputCustom
                 placeholder="********"
                 secureTextEntry
-                label={t('Nhập lại mật khẩu:')}
+                label={'Nhập lại mật khẩu:'}
                 close={false}
                 valueText={value}
                 onBlur={onBlur}

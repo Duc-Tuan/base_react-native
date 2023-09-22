@@ -7,25 +7,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IFormLogin } from '../screen/Function';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
+import { getCarts } from 'modules/cart/store/operations';
 
 const urlname: string = 'auths';
 
 export const login = createAsyncThunk<ResponseAuthen, IFormLogin>(
     `${urlname}/login`,
     (body, { rejectWithValue, dispatch }) => {
-        return axiosInstance.post(`${urlname}/login`, body).then(res => {
+        return axiosInstance.post(`${urlname}/login`, body).then(async (res) => {
+            await dispatch(getCarts({ token: res?.token }));
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
     }
 );
 
-export const autologin = createAsyncThunk<ResponseAuthen, IFormLogin>(
+export const autologin = createAsyncThunk<ResponseAuthen>(
     `${urlname}/login`,
     (body, { rejectWithValue, dispatch }) => {
-        return axiosInstance.post(`${urlname}/login`).then(res => {
-            if (res?.status) {
+        return axiosInstance.post(`${urlname}/login`).then(async (res) => {
+            if (res & res?.status) {
                 AsyncStorage.setItem('token', res?.token);
             }
+            await dispatch(getCarts({ token: res?.token }))
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
     }

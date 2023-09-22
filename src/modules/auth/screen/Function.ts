@@ -5,6 +5,14 @@ export interface IFormLogin {
     usename: string;
     password: string;
 }
+export interface IRestPassword {
+    id?: string;
+    code?: string;
+    email?: string;
+    usename?: string;
+    passwordNew?: string;
+    passwordConfirm?: string;
+}
 
 export interface IFormRegister extends IFormLogin {
     userEmail: string;

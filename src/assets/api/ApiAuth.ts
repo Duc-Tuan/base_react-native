@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import * as httpRequest from 'store/axios';
+import { IRestPassword } from 'modules/auth/screen/Function';
 
 const urlname: string = 'auths';
 
@@ -22,7 +23,6 @@ const ApiAuths = {
     }) {
         try {
             const res = await httpRequest.patch(`${urlname}/${id}`, data);
-            console.log(res);
             return res;
         } catch (error: any) {
             const { message, status } = error || {};
@@ -38,6 +38,18 @@ const ApiAuths = {
     }) {
         try {
             const res = await httpRequest.put(`${urlname}/register`, data);
+            return res;
+        } catch (error: any) {
+            const { message, status } = error || {};
+            return { status: status, mess: message ?? 'Đã có lỗi xảy ra!' };
+            // return Promise.reject({ status: status, message: message ?? 'Đã có lỗi xảy ra!' });
+        }
+    },
+
+    //res password
+    async restPassword(data: IRestPassword) {
+        try {
+            const res = await httpRequest.post(`${urlname}/reset`, data);
             return res;
         } catch (error: any) {
             const { message, status } = error || {};
