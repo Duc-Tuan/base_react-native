@@ -29,11 +29,11 @@ export interface Metadata {
 
 export interface IProduct extends IGeneral {
     productCategory?: string;
-    productImage?: string;
+    productImage: string;
     productStatus?: string;
     productUnit?: string;
-    productName?: string;
-    productPrice?: number;
-    productPromotion?: number;
-    productQty?: number;
+    productName: string;
+    productPrice: number;
+    productPromotion: number;
+    productQty: number;
 }

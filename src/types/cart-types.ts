@@ -6,6 +6,7 @@ export interface ResponseCarts extends IGeneral {
 
 export interface ICartsData {
     productId: string | number;
+    code: string;
     _id: string | number;
     productimage?: string;
     productname?: string;

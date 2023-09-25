@@ -36,7 +36,7 @@ const Item: React.FC<IProps> = ({ data }) => {
       <View style={[...styleCustom, styleGlobal.justifyContent_flexStart, flex]}>
         <ImageCustom urlImeg={data?.productimage} styleWapper={styles.viewImage} />
         <View>
-          <Text style={{ fontSize: 12, color: hexToRgba(Colors.black, 0.8) }}>SP0001</Text>
+          <Text style={{ fontSize: 12, color: hexToRgba(Colors.black, 0.8) }}>{data?.code}</Text>
           <Text numberOfLines={2} style={styles.viewTextName}>
             {data?.productname}
           </Text>

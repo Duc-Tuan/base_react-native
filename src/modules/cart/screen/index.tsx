@@ -14,10 +14,13 @@ import useGetCart from 'hooks/useGetCart';
 import { ICartsData } from 'types/cart-types';
 import { useAppDispatch } from 'hooks';
 import { actions as actionsCarts } from 'modules/cart/store';
+import { useToast } from 'hooks/useToast';
+import { cloneDeep } from 'lodash';
 
 const CartsScreen = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const refScrollView = React.useRef<any>();
   const [selectCheck, setSelectCheck] = React.useState<number[]>([]);
   const [data, setData] = React.useState<ICartsData[]>([]);
@@ -44,11 +47,18 @@ const CartsScreen = () => {
     }, 0);
   }, [selectCheck, data]);
 
-  const handleRemoveItem = async (data: any) => {
-    await dispatch(actionsCarts.deleteCarts(data));
-    const dataOld: number[] = [...selectCheck];
-    const dataNew: number[] = dataOld?.filter((i: number) => i !== data._id);
-    setSelectCheck(dataNew);
+  const handleRemoveItem = async (i: any) => {
+    try {
+      const res = await dispatch(actionsCarts.deleteCarts({ productId: i?._id }));
+      const { payload }: any = res;
+      if (payload?.status) {
+        const dataOld = cloneDeep(selectCheck);
+        const dataNews = dataOld?.filter((d: number) => d?.toString() !== i?._id?.toString());
+        setSelectCheck(dataNews);
+      }
+
+      toast(payload?.status ? 'success' : 'error', payload?.mess);
+    } catch (error) {}
   };
 
   const renderChildren = React.useCallback(

@@ -9,6 +9,10 @@ import { styleGlobal, widthFull } from 'types/StyleGlobal';
 import { IProduct } from 'types/product-types';
 import { formatCurrency, hexToRgba } from 'utils';
 import { actions as actionsHeart } from 'modules/heart/store';
+import { actions as actionsCart } from 'modules/cart/store';
+import { useToast } from 'hooks/useToast';
+import { CartsContructor } from './contructor';
+import { assignWith } from 'lodash';
 
 interface IProps {
   data: IProduct;
@@ -16,11 +20,25 @@ interface IProps {
 
 const ProductItem: React.FC<IProps> = ({ data }) => {
   const { dataHearts } = useGetHeart();
+  const toast = useToast();
   const [isHeart, setIsHeart] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const handleAddCart = React.useCallback(() => {
-    console.log(data?._id);
+  const handleAddCart = React.useCallback(async () => {
+    try {
+      const result = new CartsContructor(
+        data?._id,
+        data?.code,
+        data?._id,
+        data?.productImage,
+        data?.productName,
+        data?.productPrice,
+        data?.productPromotion,
+      ).data();
+      const res = await dispatch(actionsCart.postCarts({ data: result }));
+      const { payload }: any = res;
+      toast(payload?.status ? 'success' : 'error', payload?.mess);
+    } catch (error) {}
   }, []);
 
   React.useEffect(() => {
@@ -28,8 +46,11 @@ const ProductItem: React.FC<IProps> = ({ data }) => {
     setIsHeart(isCheck);
   }, [dataHearts]);
 
-  const handleHeart = React.useCallback(() => {
-    dispatch(actionsHeart.postHearts({ id: data?._id }));
+  const handleHeart = React.useCallback(async () => {
+    try {
+      const res = await dispatch(actionsHeart.postHearts({ products_id: data?._id }));
+      toast(res?.payload?.status ? 'success' : 'error', res?.payload?.mess);
+    } catch (error) {}
   }, []);
 
   return (

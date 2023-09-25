@@ -35,9 +35,7 @@ const heart = createSlice({
         builder.addCase(operations.getHearts.rejected, () => { });
         //Cập nhật sản phẩm ưa thích
         builder.addCase(operations.postHearts.pending, () => { });
-        builder.addCase(operations.postHearts.fulfilled, (state, { payload }) => {
-            console.log(payload);
-        });
+        builder.addCase(operations.postHearts.fulfilled, () => { });
         builder.addCase(operations.postHearts.rejected, () => { });
     }
 });

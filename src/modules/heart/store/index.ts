@@ -4,7 +4,7 @@ import slice from './slice';
 
 export const { reducer } = slice;
 
-export const actions = {
+export const actions: any = {
     ...slice.actions,
     ...operations,
 };

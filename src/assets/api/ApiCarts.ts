@@ -9,8 +9,6 @@ const ApiCarts = {
         try {
             await headersAxios();
             const res = await httpRequest.get(`${basePath}`);
-            console.log(res);
-
             return res;
         } catch (error: any) {
             const { message, status } = error || {};

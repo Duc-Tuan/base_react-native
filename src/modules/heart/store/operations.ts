@@ -2,7 +2,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as axiosInstance from 'store/axios';
-import { ResponseHearts } from 'types/haert-type';
+import { ResponseHearts, ResponsePostHearts } from 'types/haert-type';
+import { actions as actionsHeart } from 'modules/heart/store';
 
 const pathCart: string = 'hearts';
 
@@ -14,13 +15,14 @@ export const getHearts = createAsyncThunk<ResponseHearts, { token?: string }>(
     }
 );
 
-export const postHearts = createAsyncThunk<any, { id: string | number }>(
+export const postHearts = createAsyncThunk<ResponsePostHearts, { products_id: string | number }>(
     `${pathCart}/postHearts`,
     async (body, { rejectWithValue, dispatch }) => {
         const token: any = await AsyncStorage.getItem('token');
         axiosInstance.setHeaders({ 'x-food-access-token': token });
         return axiosInstance.post(`${pathCart}`, body).then(res => {
-            console.log('res: ', res);
+            const { status, mess } = res;
+            status && dispatch(actionsHeart.addAndUpdateCarts({ id: body?.products_id }));
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
     }
