@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import * as httpRequest from 'store/axios';
 import { IRestPassword } from 'modules/auth/screen/Function';
+import { IUser } from 'types/auth-types';
 
 const urlname: string = 'auths';
 
@@ -8,6 +9,19 @@ const ApiAuths = {
     async login() {
         try {
             const res = await httpRequest.post(`${urlname}/login`);
+            return res;
+        } catch (error: any) {
+            const { message, status } = error || {};
+            return { status: status, mess: message ?? 'Đã có lỗi xảy ra!' };
+            // return Promise.reject({ status: status, message: message ?? 'Đã có lỗi xảy ra!' });
+        }
+    },
+
+    // Cập nhật thông tin người dùng
+    async updateInfo(data: IUser) {
+        try {
+            const { _id, userImage, ...orther } = data;
+            const res = await httpRequest.patch(`${urlname}/${_id}`, orther);
             console.log(res);
             return res;
         } catch (error: any) {

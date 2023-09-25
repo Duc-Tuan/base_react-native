@@ -8,6 +8,7 @@ import { IFormLogin } from '../screen/Function';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
 import { getCarts } from 'modules/cart/store/operations';
+import { getHearts } from 'modules/heart/store/operations';
 
 const urlname: string = 'auths';
 
@@ -15,6 +16,7 @@ export const login = createAsyncThunk<ResponseAuthen, IFormLogin>(
     `${urlname}/login`,
     (body, { rejectWithValue, dispatch }) => {
         return axiosInstance.post(`${urlname}/login`, body).then(async (res) => {
+            await dispatch(getHearts({ token: res?.token }));
             await dispatch(getCarts({ token: res?.token }));
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
@@ -28,7 +30,8 @@ export const autologin = createAsyncThunk<ResponseAuthen>(
             if (res & res?.status) {
                 AsyncStorage.setItem('token', res?.token);
             }
-            await dispatch(getCarts({ token: res?.token }))
+            await dispatch(getHearts({ token: res?.token }));
+            await dispatch(getCarts({ token: res?.token }));
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
     }

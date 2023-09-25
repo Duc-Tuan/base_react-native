@@ -14,13 +14,16 @@ const initialState: IUserStore = {
     isLogin: false,
 };
 
-const user = createSlice({
+const user: any = createSlice({
     name: 'User',
     initialState,
     reducers: {
         setUser: (state, { payload }: PayloadAction<IUserStore>) => {
             state.isLogin = payload.isLogin;
             state.user = payload.user;
+        },
+        update: (state, { payload }: PayloadAction<IUser>) => {
+            state.user = payload;
         },
     },
     extraReducers: (builder) => {

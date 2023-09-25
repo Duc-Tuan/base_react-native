@@ -21,6 +21,7 @@ import { useAppDispatch } from 'hooks';
 import { ApiuploadImage } from 'assets/api';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useToast } from 'hooks/useToast';
+import dayjs from 'dayjs';
 
 interface IProps {
   colorPrimary?: string;
@@ -84,7 +85,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
       // response = await ImagePicker.openPicker(options);
       // setSelectedImage({ url: `data:image/png;base64,${response?.data}`, file: response?.data });
       // on();
-      const options = {
+      const options: any = {
         maxHeight: 250,
         maxWidth: 350,
         includeBase64: true,
@@ -93,7 +94,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
         },
       };
 
-      launchImageLibrary(options, async response => {
+      launchImageLibrary(options, async (response: any) => {
         setSelectedImage({
           url: `data:image/png;base64,${response?.assets[0]?.base64}`,
           file: response?.assets[0]?.base64,
@@ -166,10 +167,16 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
                 { backgroundColor: hexToRgba(colorPrimary ?? Colors.primary, 0.05) },
               ]}>
               <Text style={[styleGlobal.textPrimary]}>
-                {t('Giới tính')}: {checkNullish(user?.userGender) ?? t('Đang cập nhập...')}
+                {t('Giới tính')}:{' '}
+                <Text style={[styleGlobal.textFontBold]}>
+                  {checkNullish(user?.userGender) ?? t('Đang cập nhập...')}
+                </Text>
               </Text>
               <Text style={[styleGlobal.textPrimary]}>
-                {t('Năm sinh')}: {checkNullish(user?.userAge) ?? t('Đang cập nhập...')}
+                {t('Năm sinh')}:{' '}
+                <Text style={[styleGlobal.textFontBold]}>
+                  {checkNullish(dayjs(user?.userAge).format('DD/MM/YYYY')) ?? t('Đang cập nhập...')}
+                </Text>
               </Text>
             </View>
           </View>

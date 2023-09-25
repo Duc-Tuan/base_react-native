@@ -65,7 +65,7 @@ const MerchentScreen = () => {
             <View style={[styleGlobal.justifyContent_flexStart, styleGlobal.flexDirection_row]}>
               <Text style={styles.viewText}>{dataList.length} / </Text>
               <Text style={styles.viewText}>
-                {totalElement} {t('Sản phẩm')}
+                {totalElement} {t('Sản phẩm từ cửa hàng')}
               </Text>
             </View>
 

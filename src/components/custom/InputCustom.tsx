@@ -37,6 +37,7 @@ type Props = {
   close?: boolean;
   onBlur?: any;
   required?: boolean;
+  disabled?: boolean;
 };
 
 const InputCustom = (props: Props) => {
@@ -57,6 +58,7 @@ const InputCustom = (props: Props) => {
     valueText,
     onBlur,
     required,
+    disabled = false,
   } = props;
   const { t } = useTranslation();
   const [focus, setFocus] = React.useState<boolean>(false);
@@ -98,6 +100,7 @@ const InputCustom = (props: Props) => {
           styleGlobal.dFlex_center,
           styleGlobal.flexDirection_row,
           styleGlobal.border,
+          !disabled ? styleGlobal.boxshadow : undefined,
           styles.container,
           {
             borderColor: focus || value !== '' ? hexToRgba(Colors.primary, 0.6) : 'rgba(0, 0, 0, 0.1)',
@@ -105,6 +108,7 @@ const InputCustom = (props: Props) => {
           {
             justifyContent: 'space-between',
           },
+          { backgroundColor: !disabled ? Colors.white : hexToRgba(Colors.black, 0.1) },
           inputStyle,
         ]}>
         {iconLeft && icon}
@@ -114,6 +118,8 @@ const InputCustom = (props: Props) => {
             setFocused && setFocused(!focus);
             setFocus(true);
           }}
+          selectTextOnFocus={!disabled}
+          editable={!disabled}
           onBlur={onBlur}
           accessible={false}
           style={styles.viewTextInput}
@@ -157,7 +163,6 @@ export default React.memo(InputCustom);
 
 const styles = StyleSheet.create({
   container: {
-    ...styleGlobal.boxshadow,
     shadowOpacity: 0.2,
     borderRadius: 4,
     paddingHorizontal: 4,

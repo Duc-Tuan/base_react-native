@@ -6,11 +6,12 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PathName } from 'configs';
 import { useAppDispatch } from 'hooks';
+import { useToast } from 'hooks/useToast';
 import { LoginScreen, RegisterScreen } from 'modules/auth/screen';
+import ScreenResetPassword from 'modules/auth/screen/ResetPassword';
 import ProfileScreen from 'modules/auth/screen/profile';
 import ChangeAddressScreen from 'modules/auth/screen/profile/changeAddress';
 import NewAndEditAddress from 'modules/auth/screen/profile/changeAddress/components/NewAndEditAddress';
-import ChangeInfoUserScreen from 'modules/auth/screen/profile/changeInfo';
 import ChangePasswordScreen from 'modules/auth/screen/profile/changePassword';
 import { actions as actionAuths } from 'modules/auth/store';
 import CartsScreen from 'modules/cart/screen';
@@ -24,8 +25,6 @@ import { screenOptionsNative } from './shareStack';
 import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
-import { useToast } from 'hooks/useToast';
-import ScreenResetPassword from 'modules/auth/screen/ResetPassword';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -93,11 +92,6 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.CHANGEADDRESSSCREEN}
           component={ChangeAddressScreen}
-        />
-        <Stack.Screen
-          options={{ gestureEnabled: true, animation: 'fade' }}
-          name={PathName.CHANGINFOUSERSCREEN}
-          component={ChangeInfoUserScreen}
         />
         <Stack.Screen
           options={{ gestureEnabled: true, animation: 'fade' }}

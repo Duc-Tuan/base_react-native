@@ -80,6 +80,8 @@
   "Hủy/Trả hàng": "Hủy/Trả hàng",
   "Thanh toán": "Thanh toán",
   "Sản phẩm": "Sản phẩm",
+  "Sản phẩm từ cửa hàng": "Sản phẩm từ cửa hàng",
+  "Sản phẩm ưa thích": "Sản phẩm ưa thích",
   "Xem tất cả": "Xem tất cả",
   "Thể loại": "Thể loại",
   "Đóng": "Đóng",
@@ -96,5 +98,10 @@
   "Lấy lại mật khẩu.": "Lấy lại mật khẩu.",
   "Nhập mã": "Nhập mã",
   "Gửi": "Gửi",
+  "Mã code:": "Mã code:",
+  "Chọn ngày": "Chọn ngày",
+  "Ngày sinh:": "Ngày sinh:",
+  "Tỉnh/ Thành phố": "Tỉnh/ Thành phố",
+  "Vui lòng không để trống.": "Vui lòng không để trống.",
   "Quên mật khẩu?": "Quên mật khẩu?"
 }

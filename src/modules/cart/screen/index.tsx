@@ -44,8 +44,11 @@ const CartsScreen = () => {
     }, 0);
   }, [selectCheck, data]);
 
-  const handleRemoveItem = (data: any) => {
-    dispatch(actionsCarts.deleteCarts(data));
+  const handleRemoveItem = async (data: any) => {
+    await dispatch(actionsCarts.deleteCarts(data));
+    const dataOld: number[] = [...selectCheck];
+    const dataNew: number[] = dataOld?.filter((i: number) => i !== data._id);
+    setSelectCheck(dataNew);
   };
 
   const renderChildren = React.useCallback(
