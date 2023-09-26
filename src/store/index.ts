@@ -4,12 +4,14 @@ import { reducer as cartReducer } from 'modules/cart/store';
 import { reducer as settingReducer } from 'modules/settings/store';
 import { reducer as authReducer } from 'modules/auth/store';
 import { reducer as heartReducer } from 'modules/heart/store';
+import { reducer as paymentReducer } from 'modules/payment/store';
 
 const rootReducer = combineReducers({
   carts: cartReducer,
   settings: settingReducer,
   auth: authReducer,
   heart: heartReducer,
+  payment: paymentReducer,
 });
 
 const store = configureStore({

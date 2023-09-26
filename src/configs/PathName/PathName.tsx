@@ -19,5 +19,6 @@ export const PATHNAME = {
   NEWANDEDITADDRESSSCREEN: 'NewAndEditAddress',
   CATEGORIESSCREEN: 'CategoriesScreen',
   RESETPASSWORDSCREEN: 'ScreenResetPassword',
+  PAYMENTSSCREEN: 'ScreenPayments',
   PRODUCT_DETAIL: (id?: string) => `/product/${id ?? ':roldId'}}`,
 };

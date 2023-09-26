@@ -1,3 +1,4 @@
+import { ILocation } from 'assets/data';
 import { IGeneral } from './product-types';
 
 /* eslint-disable prettier/prettier */
@@ -24,4 +25,7 @@ export interface IUser extends IGeneral {
     userStatus?: string;
     userImage?: string;
     userImageMulter?: string;
+}
+
+export interface ResponseAddress extends ILocation {
 }

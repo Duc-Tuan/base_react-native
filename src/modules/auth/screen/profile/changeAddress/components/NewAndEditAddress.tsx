@@ -70,6 +70,7 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
       setDataLocation(dataAddress);
       setLoading(false);
 
+      setValue('addressNameReceiver', dataAddress?.addressNameReceiver);
       setValue('addressPhoneReceive', dataAddress?.addressPhoneReceive);
       setValue('addressTimeReceive', dataAddress?.addressTimeReceive);
       setValue('addressOrganReceive', dataAddress?.addressOrganReceive);
@@ -134,8 +135,37 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
       title={_id ? `${t('Sửa địa chỉ')} ${dataLocation?.code ?? 'Đang cập nhật...'}` : 'Thêm địa chỉ mới'}
       isLoading={loading}>
       <ScrollView style={[styleGlobal.padding_14, styles.container, styleGlobal.marginTop_10]}>
-        <View>
+        <View style={[styleGlobal.paddingBottom_16]}>
           <View>
+            <Controller
+              control={control}
+              rules={{
+                required: t('Vui lòng không để trống trường này.'),
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <InputCustom
+                  required
+                  placeholder="Phạm Đức Tuấn"
+                  label={'Tên người nhận:'}
+                  close={false}
+                  valueText={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  inputStyle={[
+                    styleGlobal.boxshadow,
+                    styleGlobal.lv1,
+                    errors.addressNameReceiver ? { borderColor: Colors.error } : undefined,
+                  ]}
+                />
+              )}
+              name="addressNameReceiver"
+            />
+            {errors.addressNameReceiver && (
+              <Text style={styles.viewTextInput}>{errors.addressNameReceiver.message}</Text>
+            )}
+          </View>
+
+          <View style={styleGlobal.marginTop_10}>
             <Controller
               control={control}
               rules={{
@@ -367,23 +397,22 @@ const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
             />
           </View>
         </View>
-
-        <View style={[styleGlobal.dflex_spaceBetween, styleGlobal.paddingTop_16]}>
-          <ButtonCustom
-            text="Hủy"
-            typeButton="outline-main"
-            styleButton={styleGlobal.flex_1}
-            action={NavigationService.goBack}
-          />
-          <ButtonCustom
-            text={_id ? 'Cập nhật' : 'Thêm mới'}
-            styleButton={styleGlobal.flex_1}
-            action={handleSubmit(onSubmit)}
-            disabled={loading}
-            typeButton={!loading ? 'main' : 'disabled'}
-          />
-        </View>
       </ScrollView>
+      <View style={[styleGlobal.dflex_spaceBetween, styleGlobal.padding_10]}>
+        <ButtonCustom
+          text="Hủy"
+          typeButton="outline-main"
+          styleButton={styleGlobal.flex_1}
+          action={NavigationService.goBack}
+        />
+        <ButtonCustom
+          text={_id ? 'Cập nhật' : 'Thêm mới'}
+          styleButton={styleGlobal.flex_1}
+          action={handleSubmit(onSubmit)}
+          disabled={loading}
+          typeButton={!loading ? 'main' : 'disabled'}
+        />
+      </View>
     </ActivityPenal>
   );
 };

@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 import * as axiosInstance from 'store/axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IUser, ResponseAuthen } from 'types/auth-types';
+import { IUser, ResponseAddress, ResponseAuthen } from 'types/auth-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IFormLogin } from '../screen/Function';
 import NavigationService from 'naviagtion/stack/NavigationService';
@@ -18,6 +18,7 @@ export const login = createAsyncThunk<ResponseAuthen, IFormLogin>(
         return axiosInstance.post(`${urlname}/login`, body).then(async (res) => {
             await dispatch(getHearts({ token: res?.token }));
             await dispatch(getCarts({ token: res?.token }));
+            await dispatch(addressOrder({ token: res?.token }));
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
     }
@@ -32,6 +33,7 @@ export const autologin = createAsyncThunk<ResponseAuthen>(
             }
             await dispatch(getHearts({ token: res?.token }));
             await dispatch(getCarts({ token: res?.token }));
+            await dispatch(addressOrder({ token: res?.token }));
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
     }
@@ -56,5 +58,13 @@ export const changeInfo = createAsyncThunk<ResponseAuthen, IUser>(
             res.body = body;
             return res;
         }).catch(err => rejectWithValue(err?.response?.data));
+    }
+);
+
+export const addressOrder = createAsyncThunk<ResponseAddress, { token?: string }>(
+    `${urlname}/addressOrder`,
+    (body, { rejectWithValue, dispatch }) => {
+        axiosInstance.setHeaders({ 'x-food-access-token': body?.token });
+        return axiosInstance.get('addressOrders?addressDefault=true').then(res => res[0]).catch(err => rejectWithValue(err?.response?.data));
     }
 );

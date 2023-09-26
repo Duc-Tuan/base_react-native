@@ -11,11 +11,14 @@ import { formatCurrency } from 'utils';
 import Item from './Item';
 import ButtonAddCartNull from './buttonAddCartNull.tsx';
 import useGetCart from 'hooks/useGetCart';
-import { ICartsData } from 'types/cart-types';
+import { ICartsData, IPayments } from 'types/cart-types';
 import { useAppDispatch } from 'hooks';
 import { actions as actionsCarts } from 'modules/cart/store';
 import { useToast } from 'hooks/useToast';
 import { cloneDeep } from 'lodash';
+import { actions as actionsPayment } from 'modules/payment/store';
+import NavigationService from 'naviagtion/stack/NavigationService';
+import { PathName } from 'configs';
 
 const CartsScreen = () => {
   const { t } = useTranslation();
@@ -82,13 +85,34 @@ const CartsScreen = () => {
           styles.containerFooter,
         ]}>
         <Text style={{ color: Colors.black }}>Tổng thanh toán:</Text>
-        <Text style={styles.viewBold}>{formatCurrency(totalMoney, ' vnđ')}</Text>
+        <Text style={[styles.viewBold, { color: Colors.primary }]}>{formatCurrency(totalMoney, ' vnđ')}</Text>
       </View>
     );
   }, [totalMoney]);
 
+  const handlePay = () => {
+    const dataOld: IPayments[] = [];
+    data?.map((d: ICartsData) => {
+      selectCheck?.map((i: any) => {
+        if (d?._id.toString() === i.toString()) {
+          const dataNew: IPayments = {
+            _id: d?._id,
+            name: d?.productname,
+            image: d?.productimage,
+            promotion: d?.productpromotion,
+            qty: d?.qty,
+            price: d?.productprice,
+          };
+          return dataOld.push(dataNew);
+        }
+      });
+    });
+    dispatch(actionsPayment.addPayments(dataOld));
+    return NavigationService.navigate(PathName.PAYMENTSSCREEN);
+  };
+
   return (
-    <ActivityPenal renderHeader={<HeaderNew title={t('Giỏ hàng')} />}>
+    <ActivityPenal renderHeader={<HeaderNew title="Giỏ hàng" />}>
       <View style={styles.container}>
         {data?.length !== 0 ? (
           <View style={styles.viewList}>
@@ -112,6 +136,7 @@ const CartsScreen = () => {
             styleButton={styles.viewButton}
             disabled={selectCheck?.length !== 0 ? false : true}
             typeButton={selectCheck?.length !== 0 ? 'main' : 'disabled'}
+            action={handlePay}
           />
         </View>
       </View>
@@ -126,7 +151,6 @@ const styles = StyleSheet.create({
   containerFooter: { backgroundColor: Colors.white, paddingVertical: 10 },
   viewBold: {
     fontSize: 14,
-    color: Colors.primary,
     fontWeight: '700',
   },
   viewButtonOrder: {

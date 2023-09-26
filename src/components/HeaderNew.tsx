@@ -152,11 +152,11 @@ const HeaderNew: React.FC<IProps> = ({
           </View>
         ) : (
           <Text numberOfLines={1} style={StyleSheet.flatten([styles.textTitle, titleStyle])}>
-            {title}
+            {title && t(title)}
           </Text>
         )}
 
-        <View style={styles.viewRight}>
+        <View style={[styles.viewRight]}>
           {!hiddenSearch && !isOpenSearch && (
             <TouchableOpacity onPress={handleToggleSearch} style={styles.viewButtonActions} activeOpacity={0.8}>
               <IconSearch fill={Colors.white} />

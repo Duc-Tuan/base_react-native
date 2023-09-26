@@ -255,6 +255,10 @@ export const styleGlobal = StyleSheet.create({
     fontWeight: '700',
     color: Colors.textColor,
   },
+  textFontBold_400: {
+    fontWeight: '400',
+    color: Colors.textColor,
+  },
   textFontSize_10: {
     fontSize: 10,
   },
@@ -278,6 +282,9 @@ export const styleGlobal = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
+  },
+  marginTop_4: {
+    marginTop: 4,
   },
   marginTop_8: {
     marginTop: 8,

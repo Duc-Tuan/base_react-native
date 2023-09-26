@@ -25,6 +25,7 @@ import { screenOptionsNative } from './shareStack';
 import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
+import ScreenPayments from 'modules/payment/screen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -127,6 +128,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.CATEGORIESSCREEN}
           component={CategoriesScreen}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.PAYMENTSSCREEN}
+          component={ScreenPayments}
         />
       </Stack.Navigator>
     </NavigationContainer>

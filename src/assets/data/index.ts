@@ -1,6 +1,7 @@
 import { IGeneral, IOptions } from 'types/product-types';
 /* eslint-disable prettier/prettier */
 export interface ILocation extends IGeneral {
+    addressNameReceiver: string;
     addressOrganReceive: string;
     addressPhoneReceive: string;
     addressTimeReceive: string;

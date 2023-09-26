@@ -61,6 +61,10 @@ const Item: React.FC<IProps> = ({ data }) => {
             styleGlobal.flexDirection_row,
             styleGlobal.gap_6,
             styles.changeQty,
+            {
+              backgroundColor: Colors.primary,
+              borderColor: hexToRgba(Colors.primary, 0.6),
+            },
           ]}>
           <TouchableOpacity
             activeOpacity={0.9}
@@ -106,8 +110,6 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   changeQty: {
-    backgroundColor: hexToRgba(Colors.primary, 0.8),
-    borderColor: hexToRgba(Colors.primary, 0.6),
     paddingHorizontal: 2,
     borderWidth: 1,
     borderRadius: 4,

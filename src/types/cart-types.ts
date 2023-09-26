@@ -15,4 +15,13 @@ export interface ICartsData {
     productpromotion?: number;
 }
 
+export interface IPayments {
+    _id: string | number,
+    name?: string,
+    image?: string,
+    promotion?: number,
+    qty: number,
+    price: number,
+}
+
 export interface ICarts extends ResponseCarts { }

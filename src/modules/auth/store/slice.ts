@@ -1,17 +1,19 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as operations from './operations';
+import { ILocation } from 'assets/data';
 import { IUser } from 'types/auth-types';
-import { ICarts, ICartsData } from 'types/cart-types';
+import * as operations from './operations';
 
 interface IUserStore {
     user?: IUser;
     isLogin: boolean;
+    addressOrder?: ILocation;
 }
 
 const initialState: IUserStore = {
     user: undefined,
     isLogin: false,
+    addressOrder: undefined,
 };
 
 const user: any = createSlice({
@@ -48,6 +50,12 @@ const user: any = createSlice({
             state.user = body;
         });
         builder.addCase(operations.changeInfo.rejected, () => { });
+        //Địa chỉ mặc định
+        builder.addCase(operations.addressOrder.pending, () => { });
+        builder.addCase(operations.addressOrder.fulfilled, (state, { payload }) => {
+            state.addressOrder = payload;
+        });
+        builder.addCase(operations.addressOrder.rejected, () => { });
     },
 });
 

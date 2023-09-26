@@ -77,7 +77,9 @@ const SwipeListViewCustom = React.forwardRef<FlatList, IProps>(
                 onChange={e => {
                   if (setSelectCheck) {
                     if (e) {
-                      selectCheck?.some(i => i === item?._id) ? undefined : setSelectCheck(prev => [...prev, item?._id]);
+                      selectCheck?.some(i => i === item?._id)
+                        ? undefined
+                        : setSelectCheck(prev => [...prev, item?._id]);
                     } else {
                       setSelectCheck(prev => prev.filter(i => i !== item?._id));
                     }
@@ -148,7 +150,7 @@ const SwipeListViewCustom = React.forwardRef<FlatList, IProps>(
 
           <TouchableOpacity
             activeOpacity={0.9}
-            style={styles.viewBtnClear}
+            style={[styles.viewBtnClear, { backgroundColor: hexToRgba(Colors.primary, 0.2) }]}
             onPress={() => {
               Animated.timing(animated, { toValue: 1, useNativeDriver: true }).start(() => {
                 animated.setValue(0);
@@ -205,6 +207,5 @@ const styles = StyleSheet.create({
     borderColor: '#EEEEEE',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: hexToRgba(Colors.primary, 0.2),
   },
 });

@@ -98,7 +98,7 @@ const SelectorDate: React.FC<IProps> = ({ styleWrapper, placeholder, onChange, v
           hiddenPopup={hidden}
           footer={actions}>
           <View style={[styleGlobal.padding_10]}>
-            <DatePicker date={date} onDateChange={setDate} mode="date" />
+            <DatePicker date={date} onDateChange={setDate} mode="date" textColor="black" />
           </View>
         </WrapperModal>
       )}
