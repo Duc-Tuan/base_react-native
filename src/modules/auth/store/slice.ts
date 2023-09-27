@@ -27,6 +27,9 @@ const user: any = createSlice({
         update: (state, { payload }: PayloadAction<IUser>) => {
             state.user = payload;
         },
+        updateLocation: (state, { payload }: PayloadAction<ILocation>) => {
+            state.addressOrder = payload;
+        },
     },
     extraReducers: (builder) => {
         //Đăng nhập

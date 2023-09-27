@@ -15,7 +15,7 @@ const payment = createSlice({
     name: 'pay',
     initialState,
     reducers: {
-        addPayments: (state, { payload }: PayloadAction<IPayments[]>) => {
+        addPayments: (state, { payload }: PayloadAction<IPayments[] | []>) => {
             state.penddingBuy = payload;
         },
     },

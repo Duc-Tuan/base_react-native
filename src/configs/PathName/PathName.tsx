@@ -20,5 +20,6 @@ export const PATHNAME = {
   CATEGORIESSCREEN: 'CategoriesScreen',
   RESETPASSWORDSCREEN: 'ScreenResetPassword',
   PAYMENTSSCREEN: 'ScreenPayments',
+  CONDITIONSCREEN: 'ScreenCondition',
   PRODUCT_DETAIL: (id?: string) => `/product/${id ?? ':roldId'}}`,
 };

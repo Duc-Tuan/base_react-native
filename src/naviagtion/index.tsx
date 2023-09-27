@@ -26,6 +26,7 @@ import BottomTab from './stack/BottomTab';
 import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
 import ScreenPayments from 'modules/payment/screen';
+import ScreenCondition from 'modules/settings/screen/conditions';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -133,6 +134,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.PAYMENTSSCREEN}
           component={ScreenPayments}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.CONDITIONSCREEN}
+          component={ScreenCondition}
         />
       </Stack.Navigator>
     </NavigationContainer>

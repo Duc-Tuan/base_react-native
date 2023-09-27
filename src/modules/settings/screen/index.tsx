@@ -1,7 +1,15 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable prettier/prettier */
 import { useScrollToTop } from '@react-navigation/native';
-import { IconAddress, IconCartV2, IconColor, IconLockChangePass, IconOrder, IconShop } from 'assets/icons';
+import {
+  IconAddress,
+  IconCartV2,
+  IconColor,
+  IconCondition,
+  IconLockChangePass,
+  IconOrder,
+  IconShop,
+} from 'assets/icons';
 import ActivityPenal from 'components/ActivityPenal';
 import { PathName } from 'configs';
 import { useColorPrimary } from 'hooks/useColorPrimary';
@@ -59,6 +67,11 @@ const SettingScreen = () => {
             tilte: 'Đổi màu hệ thống',
             screen: PathName.CHANGECOLORSYSTEMSCREEN,
             icon: <IconColor fill={colorPrimary} />,
+          },
+          {
+            tilte: 'Điều khoản mua hàng',
+            screen: PathName.CONDITIONSCREEN,
+            icon: <IconCondition />,
           },
         ],
       },

@@ -19,8 +19,11 @@ interface Props {
   children: JSX.Element;
   isClose?: boolean;
   styleTextHeader?: StyleProp<TextStyle>;
+  styleWrapper?: StyleProp<TextStyle>;
+  styleChidren?: StyleProp<TextStyle>;
   textFooter?: string;
   loading?: boolean;
+  subHeader?: boolean;
 }
 
 const WrapperModal = (props: Props) => {
@@ -37,58 +40,66 @@ const WrapperModal = (props: Props) => {
     styleTextHeader,
     textFooter = 'Đóng',
     loading,
+    styleWrapper,
+    styleChidren,
+    subHeader = false,
   } = props;
   const { t } = useTranslation();
 
   return (
     <Modal
       isVisible={isVisible}
-      style={[styles.container]}
+      style={[styles.container, styleWrapper]}
       onBackdropPress={hiddenPopup}
       swipeDirection={swipeDirection}>
-      <View style={styles.popup}>
-        {isHeader && (
-          <View
-            style={[
-              styleGlobal.flexDirection_row,
-              !isClose ? styleGlobal.justifyContent_center : styleGlobal.justifyContent_spaceBetween,
-              styleGlobal.alignItems_center,
-              styles.header,
-            ]}>
-            <Text style={[styles.textHeader, !isClose && styleGlobal.textCenter, styleTextHeader]} numberOfLines={1}>
-              {t(textHeader ?? 'Đang cập nhập...')}
-            </Text>
-            {isClose && (
-              <TouchableOpacity activeOpacity={0.9} onPress={hiddenPopup}>
-                <IconClose fill={Colors.black} />
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
+      <>
+        {subHeader && <View style={styles.subPopup} />}
+        <View style={[styles.popup, styleChidren]}>
+          {isHeader && (
+            <View
+              style={[
+                styleGlobal.flexDirection_row,
+                !isClose ? styleGlobal.justifyContent_center : styleGlobal.justifyContent_spaceBetween,
+                styleGlobal.alignItems_center,
+                styles.header,
+              ]}>
+              <Text style={[styles.textHeader, !isClose && styleGlobal.textCenter, styleTextHeader]} numberOfLines={1}>
+                {t(textHeader ?? 'Đang cập nhập...')}
+              </Text>
+              {isClose && (
+                <TouchableOpacity activeOpacity={0.9} onPress={hiddenPopup}>
+                  <IconClose fill={Colors.black} />
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
 
-        <View style={styles.textChildren}>{children}</View>
+          <View style={styles.textChildren}>{children}</View>
 
-        {isFooter && (
-          <View
-            style={[
-              styleGlobal.flexDirection_row,
-              styleGlobal.justifyContent_flexEnd,
-              styleGlobal.alignItems_center,
-              styleGlobal.gap_10,
-              styles.footer,
-            ]}>
-            {footer &&
-              footer()?.map((item: React.ReactNode, idx: number) => <React.Fragment key={idx}>{item}</React.Fragment>)}
-            <ButtonCustom
-              disabled={loading}
-              typeButton={!loading ? 'outline-main' : 'disabled-outline'}
-              text={textFooter}
-              styleButton={{ width: 70 }}
-              action={hiddenPopup}
-            />
-          </View>
-        )}
-      </View>
+          {isFooter && (
+            <View
+              style={[
+                styleGlobal.flexDirection_row,
+                styleGlobal.justifyContent_flexEnd,
+                styleGlobal.alignItems_center,
+                styleGlobal.gap_10,
+                styles.footer,
+              ]}>
+              {footer &&
+                footer()?.map((item: React.ReactNode, idx: number) => (
+                  <React.Fragment key={idx}>{item}</React.Fragment>
+                ))}
+              <ButtonCustom
+                disabled={loading}
+                typeButton={!loading ? 'outline-main' : 'disabled-outline'}
+                text={textFooter}
+                styleButton={{ width: 70 }}
+                action={hiddenPopup}
+              />
+            </View>
+          )}
+        </View>
+      </>
     </Modal>
   );
 };
@@ -105,5 +116,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 10,
+  },
+  subPopup: {
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+    width: 150,
+    height: 4,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: 6,
   },
 });
