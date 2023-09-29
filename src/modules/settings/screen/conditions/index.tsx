@@ -8,7 +8,8 @@ const ScreenCondition = () => {
   return (
     <ActivityPenal title="Điều khoản khi mua hàng">
       <View style={[styleGlobal.marginTop_4, styleGlobal.padding_10, styles.container]}>
-        <Text>Các điều khoản sẽ ở trong này</Text>
+        <Text>Bấm vô làm cái mọe gì không biết. Ngứa tay à.</Text>
+        <Text>Chịu không nghĩ thêm được gì nữa rồi.</Text>
       </View>
     </ActivityPenal>
   );

@@ -2,7 +2,7 @@
 import { useScrollToTop } from '@react-navigation/native';
 import { ActivityPenal, ButtonCustom, HeaderNew } from 'components';
 import SwipeListViewCustom from 'components/custom/SwipeListViewCustom';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import Colors from 'themes/Color';
@@ -15,10 +15,11 @@ import { ICartsData, IPayments } from 'types/cart-types';
 import { useAppDispatch } from 'hooks';
 import { actions as actionsCarts } from 'modules/cart/store';
 import { useToast } from 'hooks/useToast';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, filter } from 'lodash';
 import { actions as actionsPayment } from 'modules/payment/store';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
+import { useDebounceCallback } from 'hooks/useDebounceCallback';
 
 const CartsScreen = () => {
   const { t } = useTranslation();
@@ -111,8 +112,21 @@ const CartsScreen = () => {
     return NavigationService.navigate(PathName.PAYMENTSSCREEN);
   };
 
+  const handleSearchChange = (value: string) => {
+    if (value === undefined || value === '') {
+      return setData(carts);
+    }
+    const otps: any = filter(carts, (entity: ICartsData) => {
+      return entity?.productname?.toLowerCase()?.trim()?.includes(value?.toLowerCase()?.trim());
+    });
+    setData(otps);
+  };
+  
   return (
-    <ActivityPenal renderHeader={<HeaderNew title="Giỏ hàng" />}>
+    <ActivityPenal
+      renderHeader={
+        <HeaderNew title="Giỏ hàng" setTextSearch={handleSearchChange} placeholder="Tìm kiếm theo tên sản phẩm..." />
+      }>
       <View style={styles.container}>
         {data?.length !== 0 ? (
           <View style={styles.viewList}>

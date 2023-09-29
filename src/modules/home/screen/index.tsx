@@ -35,7 +35,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <ActivityPenal renderHeader={<HeaderNew hiddenBack isUser placeholder={t('Tìm kiếm tên, mã sản phẩm...')} />}>
+    <ActivityPenal renderHeader={<HeaderNew hiddenBack isUser hiddenSearch />}>
       <ScrollView
         ref={refScrollView}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />}>

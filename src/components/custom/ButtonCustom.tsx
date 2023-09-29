@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   ViewStyle,
   StyleProp,
+  View,
 } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
@@ -24,11 +25,21 @@ type Props = {
   styleText?: StyleProp<TextStyle>;
   typeButton?: 'cancel' | 'error' | 'main' | 'outline-main' | 'warning' | 'nomal' | 'disabled' | 'disabled-outline';
   action?: (data?: any) => void;
+  IconLeft?: any;
 };
 
 const ButtonCustom = (props: Props) => {
   const { t } = useTranslation();
-  const { text, action, typeButton = 'main', styleButton, styleText, hover = false, disabled = false } = props;
+  const {
+    text,
+    action,
+    typeButton = 'main',
+    styleButton,
+    styleText,
+    hover = false,
+    disabled = false,
+    IconLeft,
+  } = props;
   const [isHover, setIsHover] = React.useState<boolean>(false);
   const { colorPrimary } = useColorPrimary();
 
@@ -127,16 +138,19 @@ const ButtonCustom = (props: Props) => {
         styleButton,
       ]}
       disabled={disabled}>
-      <Text
-        style={[
-          {
-            ...colorText(),
-          },
-          styles.textView,
-          styleText,
-        ]}>
-        {t(`${text}`)}
-      </Text>
+      <View style={[styleGlobal.dFlex_center, styleGlobal.gap_6]}>
+        {IconLeft && IconLeft}
+        <Text
+          style={[
+            {
+              ...colorText(),
+            },
+            styles.textView,
+            styleText,
+          ]}>
+          {t(`${text}`)}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

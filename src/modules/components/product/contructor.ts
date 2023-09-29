@@ -10,7 +10,6 @@ export class CartsContructor {
     constructor(
         _id: string | number,
         code: string,
-        productId: string | number,
         productimage: string,
         productname: string,
         productprice: number,
@@ -18,7 +17,7 @@ export class CartsContructor {
     ) {
         this._id = _id;
         this.code = code;
-        this.productId = productId;
+        this.productId = _id;
         this.productimage = productimage;
         this.productname = productname;
         this.productprice = productprice;

@@ -13,6 +13,8 @@ import { actions as actionsCart } from 'modules/cart/store';
 import { useToast } from 'hooks/useToast';
 import { CartsContructor } from './contructor';
 import { assignWith } from 'lodash';
+import NavigationService from 'naviagtion/stack/NavigationService';
+import { PathName } from 'configs';
 
 interface IProps {
   data: IProduct;
@@ -29,7 +31,6 @@ const ProductItem: React.FC<IProps> = ({ data }) => {
       const result = new CartsContructor(
         data?._id,
         data?.code,
-        data?._id,
         data?.productImage,
         data?.productName,
         data?.productPrice,
@@ -53,69 +54,76 @@ const ProductItem: React.FC<IProps> = ({ data }) => {
     } catch (error) {}
   }, []);
 
+  const directional = React.useCallback(() => {
+    return NavigationService.navigate(PathName.PRODUCTDETAILSCREEN, { id: data?._id });
+  }, []);
+
   return (
-    <View
-      style={[
-        styleGlobal.justifyContent_center,
-        styleGlobal.flexDirection_column,
-        styleGlobal.alignItems_center,
-        styleGlobal.boxshadow,
-        styleGlobal.padding_6,
-        styleGlobal.paddingVertical_10,
-        styles.container,
-      ]}>
-      <TouchableOpacity
-        onPress={handleHeart}
-        activeOpacity={0.9}
+    <TouchableOpacity activeOpacity={0.9} onPress={directional}>
+      <View
         style={[
-          styleGlobal.padding_4,
+          styleGlobal.justifyContent_center,
+          styleGlobal.flexDirection_column,
+          styleGlobal.alignItems_center,
           styleGlobal.boxshadow,
-          styles.ViewHeart,
-          { backgroundColor: Colors.white, borderRadius: 50, shadowColor: Colors.black },
+          styleGlobal.padding_6,
+          styleGlobal.paddingVertical_10,
+          styles.container,
         ]}>
-        {isHeart ? <IconHeart fill={Colors.primary} /> : <IconHeartBorder fill={Colors.primary} />}
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleHeart}
+          activeOpacity={0.9}
+          style={[
+            styleGlobal.padding_4,
+            styleGlobal.boxshadow,
+            styles.ViewHeart,
+            { backgroundColor: Colors.white, borderRadius: 50, shadowColor: Colors.black },
+          ]}>
+          {isHeart ? <IconHeart fill={Colors.primary} /> : <IconHeartBorder fill={Colors.primary} />}
+        </TouchableOpacity>
 
-      <View style={styles.viewImage}>
-        <ImageCustom urlImeg={data?.productImage} styleWapper={styles.image} />
-      </View>
+        <View style={styles.viewImage}>
+          <ImageCustom urlImeg={data?.productImage} styleWapper={styles.image} />
+        </View>
 
-      <View style={[styleGlobal.marginTop_8, { width: '100%' }]}>
-        <Text
-          numberOfLines={2}
-          style={[styleGlobal.textFontBold, styleGlobal.paddingHorizontal_4, { textAlign: 'center' }]}>
-          {data?.productName}
-        </Text>
+        <View style={[styleGlobal.marginTop_8, { width: '100%' }]}>
+          <Text
+            numberOfLines={2}
+            style={[styleGlobal.textFontBold, styleGlobal.paddingHorizontal_4, { textAlign: 'center' }]}>
+            {data?.productName}
+          </Text>
 
-        <View style={[styleGlobal.dflex_spaceBetween, styleGlobal.paddingHorizontal_4]}>
-          <View>
-            <Text
-              style={{ color: Colors.primary, textDecorationLine: data?.productPromotion ? 'line-through' : 'none' }}>
-              {formatCurrency(data?.productPrice ?? 0, ' vnđ')}
-            </Text>
-            {data?.productPromotion && (
-              <Text style={{ color: Colors.primary, textDecorationLine: 'line-through' }}>
-                {formatCurrency(
-                  Number(data?.productPrice) - Number(data?.productPrice) / (Number(data?.productPromotion) / 100) ?? 0,
-                  ' vnđ',
-                )}
+          <View style={[styleGlobal.dflex_spaceBetween, styleGlobal.paddingHorizontal_4]}>
+            <View>
+              <Text
+                style={{ color: Colors.primary, textDecorationLine: data?.productPromotion ? 'line-through' : 'none' }}>
+                {formatCurrency(data?.productPrice ?? 0, ' vnđ')}
               </Text>
-            )}
-          </View>
+              {data?.productPromotion && (
+                <Text style={{ color: Colors.primary, textDecorationLine: 'line-through' }}>
+                  {formatCurrency(
+                    Number(data?.productPrice) - Number(data?.productPrice) / (Number(data?.productPromotion) / 100) ??
+                      0,
+                    ' vnđ',
+                  )}
+                </Text>
+              )}
+            </View>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={handleAddCart}
-            style={[
-              styleGlobal.padding_4,
-              styleGlobal.dFlex_center,
-              { backgroundColor: hexToRgba(Colors.primary, 0.2), borderRadius: 50 },
-            ]}>
-            <IconAddCart fill={Colors.primary} />
-          </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={handleAddCart}
+              style={[
+                styleGlobal.padding_4,
+                styleGlobal.dFlex_center,
+                { backgroundColor: hexToRgba(Colors.primary, 0.2), borderRadius: 50 },
+              ]}>
+              <IconAddCart fill={Colors.primary} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

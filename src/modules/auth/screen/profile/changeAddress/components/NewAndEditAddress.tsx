@@ -25,11 +25,11 @@ const options: IOptions[] = [
 ];
 
 interface IProps {
-  route?: NewAddressScreenRouteProp;
+  route: NewAddressScreenRouteProp;
 }
 
-const NewAndEditAddress: React.FC<IProps> = ({ route }) => {
-  const { _id } = route?.params;
+const NewAndEditAddress: React.FC<IProps> = ({ route: { params } }) => {
+  const { _id } = params;
 
   const { t } = useTranslation();
   const toast = useToast();

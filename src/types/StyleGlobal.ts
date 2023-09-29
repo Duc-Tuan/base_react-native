@@ -259,6 +259,10 @@ export const styleGlobal = StyleSheet.create({
     fontWeight: '400',
     color: Colors.textColor,
   },
+  textFontBold_500: {
+    fontWeight: '500',
+    color: Colors.textColor,
+  },
   textFontSize_10: {
     fontSize: 10,
   },

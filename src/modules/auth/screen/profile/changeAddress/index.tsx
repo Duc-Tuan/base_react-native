@@ -10,6 +10,7 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import Colors from 'themes/Color';
 import { styleGlobal } from 'types/StyleGlobal';
 import ItemMenu from './components/ItemMenu';
+import { PATHNAME } from 'configs/PathName/PathName';
 
 const ChangeAddressScreen = () => {
   const refScrollView = React.useRef<any>();
@@ -28,8 +29,13 @@ const ChangeAddressScreen = () => {
 
   const handleDeleteUi = React.useCallback(() => onRefresh(), [onRefresh]);
 
+  const onBackPress = React.useCallback(() => {
+    return NavigationService.navigate(PATHNAME.SETTINGSCREEN);
+  }, []);
+
   return (
     <ActivityPenal
+      onBackPress={onBackPress}
       title="Địa chỉ của tôi"
       styleChildren={styles.container}
       rightIcon={<IconAdd fill={Colors.white} />}

@@ -19,6 +19,7 @@ interface IProps {
   stylesWrapper?: StyleProp<ViewStyle>;
   delayTime?: number;
   autoPlay?: boolean;
+  selector?: number;
 }
 
 const FlatListhorizontal: React.FC<IProps> = ({
@@ -27,9 +28,18 @@ const FlatListhorizontal: React.FC<IProps> = ({
   stylesWrapper,
   delayTime = 3000,
   autoPlay = false,
+  selector = 0,
 }) => {
   const refFlat = React.useRef<any>();
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    setActiveIndex(selector);
+    refFlat.current.scrollToIndex({
+      index: selector,
+      animetion: true,
+    });
+  }, [selector]);
 
   React.useEffect(() => {
     const setTimer = autoPlay

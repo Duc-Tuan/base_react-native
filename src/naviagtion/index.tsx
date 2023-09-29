@@ -15,7 +15,7 @@ import NewAndEditAddress from 'modules/auth/screen/profile/changeAddress/compone
 import ChangePasswordScreen from 'modules/auth/screen/profile/changePassword';
 import { actions as actionAuths } from 'modules/auth/store';
 import CartsScreen from 'modules/cart/screen';
-import CategoriesScreen from 'modules/merchent/screen/CategoriesScreen';
+import CategoriesScreen from 'modules/merchent/screen/categories/CategoriesScreen';
 import ChangeColorSystemScreen from 'modules/settings/screen/changeColorSystem';
 import InfoShopScreen from 'modules/settings/screen/infoShop';
 import OrderScreen from 'modules/settings/screen/order';
@@ -27,6 +27,7 @@ import { RootStackParamList } from './stack/NavigationRoute';
 import NavigationService from './stack/NavigationService';
 import ScreenPayments from 'modules/payment/screen';
 import ScreenCondition from 'modules/settings/screen/conditions';
+import ScreenDetailProduct from 'modules/merchent/screen/detail';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -139,6 +140,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.CONDITIONSCREEN}
           component={ScreenCondition}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.PRODUCTDETAILSCREEN}
+          component={ScreenDetailProduct}
         />
       </Stack.Navigator>
     </NavigationContainer>

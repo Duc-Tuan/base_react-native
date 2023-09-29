@@ -4,6 +4,7 @@ import { ApiProducts } from 'assets/api';
 import { IconFilter } from 'assets/icons';
 import { FlatListComponent, HeaderNew, LoadingOverley } from 'components';
 import ActivityPenal from 'components/ActivityPenal';
+import Nodata from 'components/custom/Nodata';
 import useFetchDataList from 'hooks/useFetchDataList';
 import useGetHeart from 'hooks/useGetHeart';
 import ProductItem from 'modules/components/product';
@@ -19,11 +20,11 @@ const HeartScreen = () => {
   const { dataHearts } = useGetHeart();
   const refScrollView = React.useRef<any>();
   const [data, setData] = React.useState<any[]>([]);
-  const [textSearch, setTextSearch] = React.useState<string>('');
+  const [textSearch, setTextSearch] = React.useState<string>();
 
   const func1 = React.useCallback(
-    (page: number) => ApiProducts.getProductsLike(dataHearts, page, 10).then(res => res),
-    [dataHearts],
+    (page: number) => ApiProducts.getProductsLike(dataHearts, page, 10, textSearch).then(res => res),
+    [dataHearts, textSearch],
   );
 
   const {
@@ -65,43 +66,46 @@ const HeartScreen = () => {
       renderHeader={
         <HeaderNew setTextSearch={setTextSearch} hiddenBack isUser placeholder={t('Tìm kiếm tên, mã sản phẩm...')} />
       }>
-      {loading ? (
+      {/* {loading ? (
         <LoadingOverley visible={loading} />
+      ) : ( */}
+      <View
+        style={[
+          styleGlobal.justifyContent_spaceBetween,
+          styleGlobal.flexDirection_row,
+          styleGlobal.alignItems_center,
+          styleGlobal.padding_10,
+        ]}>
+        <View style={[styleGlobal.justifyContent_flexStart, styleGlobal.flexDirection_row]}>
+          <Text style={styles.viewText}>{dataList.length} / </Text>
+          <Text style={styles.viewText}>
+            {totalElement} {t('Sản phẩm ưa thích')}
+          </Text>
+        </View>
+
+        <View style={[styleGlobal.dFlex_center, styleGlobal.gap_10]}>
+          <Text style={styles.viewText}>{t('Lọc')}</Text>
+          <TouchableOpacity activeOpacity={1} style={[styleGlobal.padding_6, styles.viewFilter]}>
+            <IconFilter fill={Colors.white} width={20} height={20} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      {loading ? (
+        <View style={[styles.listFooterComponent]}>{<ActivityIndicator />}</View>
+      ) : dataList?.length === 0 ? (
+        <Nodata query={textSearch} />
       ) : (
-        <>
-          <View
-            style={[
-              styleGlobal.justifyContent_spaceBetween,
-              styleGlobal.flexDirection_row,
-              styleGlobal.alignItems_center,
-              styleGlobal.padding_10,
-            ]}>
-            <View style={[styleGlobal.justifyContent_flexStart, styleGlobal.flexDirection_row]}>
-              <Text style={styles.viewText}>{dataList.length} / </Text>
-              <Text style={styles.viewText}>
-                {totalElement} {t('Sản phẩm ưa thích')}
-              </Text>
-            </View>
-
-            <View style={[styleGlobal.dFlex_center, styleGlobal.gap_10]}>
-              <Text style={styles.viewText}>{t('Lọc')}</Text>
-              <TouchableOpacity activeOpacity={1} style={[styleGlobal.padding_6, styles.viewFilter]}>
-                <IconFilter fill={Colors.white} width={20} height={20} />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <FlatListComponent
-            data={data}
-            onRefresh={onRefresh}
-            refreshing={refreshing || loading}
-            renderItem={renderItem}
-            styleWrapper={[styleGlobal.padding_10]}
-            listFooterComponent={listFooterComponent}
-            onEndReached={onEndReached}
-          />
-        </>
+        <FlatListComponent
+          data={data}
+          onRefresh={onRefresh}
+          refreshing={refreshing || loading}
+          renderItem={renderItem}
+          styleWrapper={[styleGlobal.padding_10]}
+          listFooterComponent={listFooterComponent}
+          onEndReached={onEndReached}
+        />
       )}
+      {/* )} */}
     </ActivityPenal>
   );
 };

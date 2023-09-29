@@ -21,22 +21,24 @@ const cart = createSlice({
     reducers: {
         addAndUpdateCarts: (state, { payload }: PayloadAction<ICartsData>) => {
             const findIndex = state.carts?.findIndex((i: ICartsData) => i?._id === payload?._id);
+            const dataNew = cloneDeep(state.carts);
 
             if (findIndex !== -1) {
                 state.carts[findIndex] = payload;
             } else {
-                state.carts = [...state.carts, payload];
+                state.carts = [payload, ...dataNew];
             }
         },
         addCarts: (state, { payload }: PayloadAction<ICartsData>) => {
             const findIndex = state.carts?.findIndex((i: ICartsData) => i?._id === payload?._id);
+            const dataNew = cloneDeep(state.carts);
 
             if (findIndex !== -1) {
                 const dataOld = cloneDeep(state.carts[findIndex]);
                 dataOld.qty += payload?.qty;
                 state.carts[findIndex] = dataOld;
             } else {
-                state.carts = [...state.carts, payload];
+                state.carts = [payload, ...dataNew];
             }
         },
         deletCarts: (state, { payload }: PayloadAction<{ id: string | number }>) => {
