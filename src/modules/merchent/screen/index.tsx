@@ -50,7 +50,11 @@ const MerchentScreen: React.FC<IProps> = ({ route: { params } }) => {
   }, [dataList]);
 
   const listFooterComponent = React.useCallback(
-    () => <View style={[hasNext && styles.listFooterComponent]}>{hasNext && <ActivityIndicator />}</View>,
+    () => (
+      <View style={[hasNext && styles.listFooterComponent]}>
+        {hasNext && <ActivityIndicator color={Colors.primary} />}
+      </View>
+    ),
     [hasNext],
   );
 
@@ -127,7 +131,7 @@ const MerchentScreen: React.FC<IProps> = ({ route: { params } }) => {
       )}
 
       {loading ? (
-        <View style={[styles.listFooterComponent]}>{<ActivityIndicator />}</View>
+        <View style={[styles.listFooterComponent]}>{<ActivityIndicator color={Colors.primary} />}</View>
       ) : dataList?.length === 0 ? (
         <Nodata query={query ?? params?.nameCategory} />
       ) : (

@@ -11,7 +11,9 @@ export const getHearts = createAsyncThunk<ResponseHearts, { token?: string }>(
     `${pathCart}/getHearts`,
     async (body, { rejectWithValue, dispatch }) => {
         axiosInstance.setHeaders({ 'x-food-access-token': body?.token });
-        return axiosInstance.get(`${pathCart}`).then(res => res).catch(err => rejectWithValue(err?.response?.data));
+        return axiosInstance.get(`${pathCart}`).then(res => {
+            return String(res) === String(null) ? [] : res;
+        }).catch(err => rejectWithValue(err?.response?.data));
     }
 );
 

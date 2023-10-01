@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { pickBy } from 'lodash';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const httpRequest = axios.create({
   //   baseURL: process.env.API,
@@ -12,8 +11,8 @@ export const get = async (path: string, options = {}) => {
   return response.data;
 };
 
-export const post = async (path: string, options = {}, headers?: any) => {
-  const response = await httpRequest.post(path, options, headers);
+export const post = async (path: string, options = {}) => {
+  const response = await httpRequest.post(path, options);
   return response.data;
 };
 

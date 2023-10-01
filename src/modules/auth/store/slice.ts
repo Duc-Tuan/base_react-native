@@ -8,12 +8,14 @@ interface IUserStore {
     user?: IUser;
     isLogin: boolean;
     addressOrder?: ILocation;
+    token?: string;
 }
 
 const initialState: IUserStore = {
     user: undefined,
     isLogin: false,
     addressOrder: undefined,
+    token: undefined,
 };
 
 const user: any = createSlice({
@@ -37,6 +39,7 @@ const user: any = createSlice({
         builder.addCase(operations.login.fulfilled, (state, { payload }) => {
             state.isLogin = true;
             state.user = payload.data;
+            state.token = payload.token;
         });
         builder.addCase(operations.login.rejected, () => { });
         //Đăng xuất

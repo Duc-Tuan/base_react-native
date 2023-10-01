@@ -49,8 +49,10 @@ const WrapperModal = (props: Props) => {
   return (
     <Modal
       isVisible={isVisible}
+      animationOut="slideOutDown"
       style={[styles.container, styleWrapper]}
       onBackdropPress={hiddenPopup}
+      // onSwipeCancel={hiddenPopup}
       swipeDirection={swipeDirection}>
       <>
         {subHeader && <View style={styles.subPopup} />}

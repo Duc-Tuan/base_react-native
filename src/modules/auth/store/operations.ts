@@ -20,7 +20,11 @@ export const login = createAsyncThunk<ResponseAuthen, IFormLogin>(
             await dispatch(getCarts({ token: res?.token }));
             await dispatch(addressOrder({ token: res?.token }));
             return res;
-        }).catch(err => rejectWithValue(err?.response?.data));
+        }).catch(err => {
+            console.log(err);
+
+            return rejectWithValue(err?.response?.data)
+        });
     }
 );
 

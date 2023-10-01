@@ -36,6 +36,8 @@ const ApiAuths = {
         passwordNew: string,
     }) {
         try {
+            console.log(data);
+
             const res = await httpRequest.patch(`${urlname}/${id}`, data);
             return res;
         } catch (error: any) {

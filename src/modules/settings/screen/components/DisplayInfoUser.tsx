@@ -175,7 +175,7 @@ const DisplayInfoUser: React.FC<IProps> = ({ colorPrimary, user, isLogin }) => {
               <Text style={[styleGlobal.textPrimary]}>
                 {t('Năm sinh')}:{' '}
                 <Text style={[styleGlobal.textFontBold]}>
-                  {checkNullish(dayjs(user?.userAge).format('DD/MM/YYYY')) ?? t('Đang cập nhập...')}
+                  {checkNullish(user?.userAge) ? dayjs(user?.userAge).format('DD/MM/YYYY') : t('Đang cập nhập...')}
                 </Text>
               </Text>
             </View>

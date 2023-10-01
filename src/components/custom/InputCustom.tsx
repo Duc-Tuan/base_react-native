@@ -23,6 +23,7 @@ import { hexToRgba } from 'utils';
 type Props = {
   placeholder?: string;
   inputStyle?: StyleProp<ViewStyle>;
+  stylesWrapper?: StyleProp<ViewStyle>;
   onChange?: (value: string) => void;
   type?: KeyboardType;
   // initialState?: any;
@@ -44,6 +45,7 @@ const InputCustom = (props: Props) => {
   const {
     placeholder,
     inputStyle,
+    stylesWrapper,
     onChange,
     type,
     // initialState,
@@ -74,7 +76,7 @@ const InputCustom = (props: Props) => {
   }, [value, valueText]);
 
   return (
-    <View style={{ position: 'relative' }}>
+    <View style={[{ position: 'relative' }, stylesWrapper]}>
       {label && (
         <Text
           style={{
@@ -134,6 +136,7 @@ const InputCustom = (props: Props) => {
         {value !== '' && !iconRight && close && (
           <TouchableOpacity
             onPress={() => {
+              onChange && onChange('');
               setValue('');
             }}
             style={styles.viewIconRight}>

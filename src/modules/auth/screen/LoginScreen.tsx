@@ -37,6 +37,8 @@ const LoginScreen = () => {
   const onSubmit = React.useCallback(
     async (data: IFormLogin) => {
       setLoading(true);
+      console.log(data);
+      
       await dispatch(authActions.login(data))
         .then(async (data: any) => {
           if (data?.payload?.status) {

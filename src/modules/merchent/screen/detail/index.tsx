@@ -22,7 +22,7 @@ import { useToast } from 'hooks/useToast';
 import { actions as actionsCart } from 'modules/cart/store';
 import { CartsContructor } from 'modules/components/product/contructor';
 import DescAndComments from './descAndComments';
-import Comments from './descAndComments/components/Comments';
+import Comments from './descAndComments/components/comments/Comments';
 import { useBoolean } from 'hooks/useBoolean';
 import IconComment from 'assets/icons/icon_comment';
 
@@ -236,7 +236,7 @@ const ScreenDetailProduct: React.FC<IProps> = ({ route: { params } }) => {
           styleWrapper={styles.ViewPopUp}
           styleTextHeader={[styleGlobal.textFontBold, styleGlobal.textFontSize_16]}
           styleChidren={styles.ViewChidren}>
-          <Comments />
+          <Comments id={id}/>
         </WrapperModal>
       )}
     </>
