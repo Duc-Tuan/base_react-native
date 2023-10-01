@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     height: '100%',
   },
-  ViewContent: { paddingBottom: 30, paddingTop: 10 },
+  ViewContent: { paddingBottom: 30, paddingTop: 10, height: '100%' },
   ViewButton: { width: '100%', position: 'absolute', bottom: 0, left: 0 },
   listFooterComponent: { height: 50, justifyContent: 'center', alignItems: 'center' },
 });

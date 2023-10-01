@@ -21,8 +21,6 @@ export const login = createAsyncThunk<ResponseAuthen, IFormLogin>(
             await dispatch(addressOrder({ token: res?.token }));
             return res;
         }).catch(err => {
-            console.log(err);
-
             return rejectWithValue(err?.response?.data)
         });
     }
