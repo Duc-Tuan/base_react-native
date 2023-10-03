@@ -5,13 +5,16 @@ import { checkNullish } from 'utils/genal';
 interface IProps {
   urlImeg?: string;
   styleWapper?: StyleProp<ImageStyle>;
+  url?: any;
 }
 
-const ImageCustom: React.FC<IProps> = ({ urlImeg, styleWapper }) => {
+const ImageCustom: React.FC<IProps> = ({ urlImeg, styleWapper, url }) => {
   return (
     <Image
       source={
-        checkNullish(urlImeg)
+        url
+          ? url
+          : checkNullish(urlImeg)
           ? {
               uri: urlImeg,
             }

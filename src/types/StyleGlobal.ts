@@ -199,6 +199,9 @@ export const styleGlobal = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 14,
   },
+  paddingVertical_2: {
+    paddingVertical: 2,
+  },
   paddingVertical_4: {
     paddingVertical: 4,
   },

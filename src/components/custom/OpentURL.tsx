@@ -18,7 +18,6 @@ const OpentURL: React.FC<IProps> = ({ title, url, stylesWrapper, children }) => 
     try {
       await Linking.openURL(url);
     } catch (error) {
-      console.log(error);
     }
   }, [url]);
 

@@ -61,6 +61,10 @@ const ScreenPayments = () => {
 
   const handleOrder = React.useCallback(async () => {
     try {
+      if (!address?._id === undefined) {
+        return toast('error', 'Vui lòng chọn địa chỉ nhận hàng trước khi đặt hàng.');
+      }
+
       const data: IOrder = {
         orderTotal: totalmeney,
         orderFeeShipping: shipping,

@@ -28,6 +28,7 @@ import NavigationService from './stack/NavigationService';
 import ScreenPayments from 'modules/payment/screen';
 import ScreenCondition from 'modules/settings/screen/conditions';
 import ScreenDetailProduct from 'modules/merchent/screen/detail';
+import DetailOrderScreen from 'modules/settings/screen/order/screen/detail';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -145,6 +146,11 @@ const NavigationApp = () => {
           options={{ gestureEnabled: true, animation: 'fade' }}
           name={PathName.PRODUCTDETAILSCREEN}
           component={ScreenDetailProduct}
+        />
+        <Stack.Screen
+          options={{ gestureEnabled: true, animation: 'fade' }}
+          name={PathName.DETAILORDERSCREEN}
+          component={DetailOrderScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

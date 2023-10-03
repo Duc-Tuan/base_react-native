@@ -28,7 +28,6 @@ const ApiComments = {
             return res;
         } catch (error: any) {
             const { message, status } = error || {};
-            console.log('message: ', message);
             return Promise.reject({ status: status, message: message ?? 'Đã có lỗi xảy ra!' });
         }
     },

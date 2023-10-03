@@ -22,4 +22,5 @@ export const PATHNAME = {
   PAYMENTSSCREEN: 'PaymentsScreen',
   CONDITIONSCREEN: 'ConditionScreen',
   PRODUCTDETAILSCREEN: 'DetailProductScreen',
+  DETAILORDERSCREEN: 'DetailOrderScreen',
 };

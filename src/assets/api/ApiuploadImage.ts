@@ -19,7 +19,6 @@ const ApiUploadImage = {
     async delete(data: any) {
         try {
             const res = await httpRequest.delet(`${urlname}`, data);
-            console.log(res);
             return res;
         } catch (error: any) {
             const { message, status } = error || {};

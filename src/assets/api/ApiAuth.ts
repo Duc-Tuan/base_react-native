@@ -22,7 +22,6 @@ const ApiAuths = {
         try {
             const { _id, userImage, ...orther } = data;
             const res = await httpRequest.patch(`${urlname}/${_id}`, orther);
-            console.log(res);
             return res;
         } catch (error: any) {
             const { message, status } = error || {};
@@ -36,8 +35,6 @@ const ApiAuths = {
         passwordNew: string,
     }) {
         try {
-            console.log(data);
-
             const res = await httpRequest.patch(`${urlname}/${id}`, data);
             return res;
         } catch (error: any) {
