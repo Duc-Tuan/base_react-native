@@ -163,7 +163,7 @@ const DetailOrderScreen: React.FC<IProps> = ({ route: { params } }) => {
             {/* Chú ý */}
             <View style={[styleGlobal.paddingVertical_8, ...borderB]}>
               <Text style={[styleGlobal.textPrimary, styleGlobal.textFontBold]}>{t('Chú ý')}</Text>
-              <Text style={[styleGlobal.padding_4]}>{dataList?.orderNotif}</Text>
+              <Text style={[styleGlobal.padding_4, styleGlobal.textPrimary]}>{dataList?.orderNotif}</Text>
             </View>
 
             {/* Lịch sử đơn hàng */}

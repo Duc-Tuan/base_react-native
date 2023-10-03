@@ -13,7 +13,7 @@ const Nodata: React.FC<IProps> = ({ query }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={[styleGlobal.dFlex_center, styleGlobal.flex_1]}>
         <View>
-          <Text>{t('Không tìm thấy sản phẩm có kết quả')}:</Text>
+          <Text style={[styleGlobal.textPrimary]}>{t('Không tìm thấy sản phẩm có kết quả')}:</Text>
           <Text style={[styleGlobal.textFontBold, { textAlign: 'center' }]}>{query}</Text>
         </View>
       </View>
