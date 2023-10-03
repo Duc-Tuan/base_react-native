@@ -35,7 +35,7 @@ const FlatListhorizontal: React.FC<IProps> = ({
 
   React.useEffect(() => {
     setActiveIndex(selector);
-    refFlat.current.scrollToIndex({
+    refFlat?.current?.scrollToIndex({
       index: selector,
       animetion: true,
     });
@@ -45,12 +45,12 @@ const FlatListhorizontal: React.FC<IProps> = ({
     const setTimer = autoPlay
       ? setInterval(() => {
           if (activeIndex !== initaldata?.length - 1) {
-            return refFlat.current.scrollToIndex({
+            return refFlat?.current?.scrollToIndex({
               index: activeIndex + 1,
               animetion: true,
             });
           } else {
-            return refFlat.current.scrollToIndex({
+            return refFlat?.current?.scrollToIndex({
               index: 0,
               animetion: true,
             });

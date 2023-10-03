@@ -2,7 +2,7 @@ import LinearGradientCustom from 'components/custom/LinearGradientCustom';
 import { PATHNAME } from 'configs/PathName/PathName';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import React from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native';
 import { styleGlobal, widthFull } from 'types/StyleGlobal';
 
 interface IProps {
@@ -17,6 +17,8 @@ const CategoryItem: React.FC<IProps> = ({ data }) => {
     });
   }, []);
 
+  const ViewColor = Platform.OS === 'android' ? LinearGradientCustom : View;
+
   return (
     <View
       style={[
@@ -29,7 +31,7 @@ const CategoryItem: React.FC<IProps> = ({ data }) => {
       ]}>
       {data?.map((i: any, idx: number) => (
         <TouchableOpacity key={idx} activeOpacity={0.8} onPress={() => handleProducts(i)}>
-          <LinearGradientCustom>
+          <ViewColor>
             <View
               key={idx}
               style={[
@@ -51,7 +53,7 @@ const CategoryItem: React.FC<IProps> = ({ data }) => {
                 {i?.categoryName}
               </Text>
             </View>
-          </LinearGradientCustom>
+          </ViewColor>
         </TouchableOpacity>
       ))}
     </View>

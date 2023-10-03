@@ -43,7 +43,7 @@ const ItemOrder: React.FC<IProps> = ({ data }) => {
             styleGlobal.padding_6,
             {
               borderRadius: 6,
-              borderBottomColor: hexToRgba(Colors.black, 0.1),
+              borderColor: hexToRgba(Colors.black, 0.2),
             },
           ]}>
           <View

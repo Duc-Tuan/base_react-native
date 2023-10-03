@@ -23,17 +23,19 @@ const ApiProducts = {
 
     async getProductsLike(ids?: string[], page?: number, pageSize?: number, query?: string) {
         try {
-            const res = await httpRequest.post(`${basePath}/user-like`, {
-                body: {
-                    ids
-                },
-                params: {
-                    page,
-                    pageSize,
-                    query
-                },
-            });
-            return res;
+            if (ids) {
+                const res = await httpRequest.post(`${basePath}/user-like`, {
+                    body: {
+                        ids
+                    },
+                    params: {
+                        page,
+                        pageSize,
+                        query
+                    },
+                });
+                return res;
+            } return [];
         } catch (error: any) {
             const { message, status } = error || {};
             return Promise.reject({ status: status, message: message ?? 'Đã có lỗi xảy ra!' });

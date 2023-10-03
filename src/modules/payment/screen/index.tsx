@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextStyle, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextStyle, TouchableOpacity, Platform } from 'react-native';
 import React from 'react';
 import useGetPayment from 'hooks/useGetPayment';
 import {
@@ -112,24 +112,26 @@ const ScreenPayments = () => {
                     styles.ViewAddress,
                     { overflow: 'hidden', borderRadius: 4 },
                   ]}>
-                  <LinearGradient
-                    colors={[
-                      hexToRgba(Colors.primary, 0.6),
-                      'transparent',
-                      hexToRgba(Colors.primary, 0.6),
-                      'transparent',
-                      hexToRgba(Colors.primary, 0.6),
-                      'transparent',
-                      hexToRgba(Colors.primary, 0.6),
-                      'transparent',
-                      hexToRgba(Colors.primary, 0.6),
-                      'transparent',
-                      hexToRgba(Colors.primary, 0.6),
-                    ]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.viewLinearGradient}
-                  />
+                  {Platform.OS === 'android' && (
+                    <LinearGradient
+                      colors={[
+                        hexToRgba(Colors.primary, 0.6),
+                        'transparent',
+                        hexToRgba(Colors.primary, 0.6),
+                        'transparent',
+                        hexToRgba(Colors.primary, 0.6),
+                        'transparent',
+                        hexToRgba(Colors.primary, 0.6),
+                        'transparent',
+                        hexToRgba(Colors.primary, 0.6),
+                        'transparent',
+                        hexToRgba(Colors.primary, 0.6),
+                      ]}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 1 }}
+                      style={styles.viewLinearGradient}
+                    />
+                  )}
 
                   <View style={[styleGlobal.padding_6, styles.ViewDetailAddress]}>
                     <View style={[styleGlobal.dflex_spaceBetween]}>

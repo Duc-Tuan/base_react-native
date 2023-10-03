@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     minHeight: 60,
     backgroundColor: Colors.white,
     borderRadius: 6,
+    borderColor: hexToRgba(Colors.black, 0.2),
     // marginBottom: 10,
   },
   viewHeader: {

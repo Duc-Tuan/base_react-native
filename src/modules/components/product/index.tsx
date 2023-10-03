@@ -15,6 +15,7 @@ import { CartsContructor } from './contructor';
 import { assignWith } from 'lodash';
 import NavigationService from 'naviagtion/stack/NavigationService';
 import { PathName } from 'configs';
+import { useGetAccount } from 'hooks/useGetAccount';
 
 interface IProps {
   data: IProduct;
@@ -22,6 +23,7 @@ interface IProps {
 
 const ProductItem: React.FC<IProps> = ({ data }) => {
   const { dataHearts } = useGetHeart();
+  const { token } = useGetAccount();
   const toast = useToast();
   const [isHeart, setIsHeart] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
@@ -49,7 +51,7 @@ const ProductItem: React.FC<IProps> = ({ data }) => {
 
   const handleHeart = React.useCallback(async () => {
     try {
-      const res = await dispatch(actionsHeart.postHearts({ products_id: data?._id }));
+      const res = await dispatch(actionsHeart.postHearts({ products_id: data?._id, tokenProp: token }));
       toast(res?.payload?.status ? 'success' : 'error', res?.payload?.mess);
     } catch (error) {}
   }, []);

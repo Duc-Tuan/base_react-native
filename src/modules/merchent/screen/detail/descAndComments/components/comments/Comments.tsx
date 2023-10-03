@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, RefreshControl, ActivityIndicator, Platform } from 'react-native';
 import React from 'react';
 import { styleGlobal } from 'types/StyleGlobal';
 import ApiComments from 'assets/api/ApiComments';
@@ -93,6 +93,7 @@ const Comments: React.FC<IProps> = ({ id }) => {
       <View
         style={[
           styleGlobal.padding_10,
+          styleGlobal.paddingBottom_20,
           styleGlobal.dFlex_center,
           styleGlobal.justifyContent_flexStart,
           styleGlobal.gap_10,
@@ -108,7 +109,7 @@ const Comments: React.FC<IProps> = ({ id }) => {
         />
         <ButtonCustom
           text="Gửi"
-          styleButton={{ flex: 1, height: '100%' }}
+          styleButton={[styleGlobal.dFlex_center, { flex: 1, height: '100%' }]}
           action={handleSend}
           disabled={loadingPost || !isLogin}
           typeButton={loadingPost || !isLogin ? 'disabled' : 'main'}

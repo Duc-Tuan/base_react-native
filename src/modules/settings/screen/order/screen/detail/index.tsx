@@ -1,4 +1,13 @@
-import { StyleSheet, Text, View, ScrollView, RefreshControl, ActivityIndicator, TextStyle } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  RefreshControl,
+  ActivityIndicator,
+  TextStyle,
+  Platform,
+} from 'react-native';
 import React from 'react';
 import { DetailOrderScreenRouteProp } from 'naviagtion/stack/NavigationRoute';
 import { ActivityPenal, ImageCustom } from 'components';
@@ -229,13 +238,15 @@ const DetailOrderScreen: React.FC<IProps> = ({ route: { params } }) => {
                 </View>
               </View>
             </View>
+
+            <View style={[styles.ViewImagePay, styleGlobal.dFlex_center]}>
+              {!loading && (
+                <ImageCustom url={urlImagePay} styleWapper={{ width: 200, height: 200, objectFit: 'contain' }} />
+              )}
+            </View>
           </View>
         )}
       </ScrollView>
-
-      <View style={[styles.ViewImagePay, styleGlobal.dFlex_center]}>
-        {!loading && <ImageCustom url={urlImagePay} styleWapper={{ width: 200, height: 200, objectFit: 'contain' }} />}
-      </View>
     </ActivityPenal>
   );
 };
@@ -243,13 +254,14 @@ const DetailOrderScreen: React.FC<IProps> = ({ route: { params } }) => {
 export default DetailOrderScreen;
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: Colors.white, height: '100%', marginTop: 8 },
+  container: { backgroundColor: Colors.white, marginTop: 8 },
   ViewImagePay: {
     position: 'absolute',
     left: 0,
     top: 0,
     width: '100%',
     height: '100%',
+    zIndex: 10,
   },
   listFooterComponent: { height: 50, justifyContent: 'center', alignItems: 'center' },
   ViewCir: {

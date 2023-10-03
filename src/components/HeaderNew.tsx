@@ -205,7 +205,7 @@ export default HeaderNew;
 const styles = StyleSheet.create({
   viewHeader: { paddingTop: getStatusBarHeight() },
   viewImage: { width: '100%', height: '100%' },
-  viewContentHeader: { paddingVertical: 10 },
+  viewContentHeader: { paddingBottom: 10 },
   viewBgHeader: {
     // backgroundColor: Colors.primary,
     height: 200,

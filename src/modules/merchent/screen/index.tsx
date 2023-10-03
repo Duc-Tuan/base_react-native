@@ -92,7 +92,8 @@ const MerchentScreen: React.FC<IProps> = ({ route: { params } }) => {
           styleGlobal.justifyContent_spaceBetween,
           styleGlobal.flexDirection_row,
           styleGlobal.alignItems_center,
-          styleGlobal.padding_10,
+          styleGlobal.paddingHorizontal_10,
+          styleGlobal.paddingBottom_10,
         ]}>
         <View style={[styleGlobal.justifyContent_flexStart, styleGlobal.flexDirection_row]}>
           <Text style={styles.viewText}>{dataList.length} / </Text>

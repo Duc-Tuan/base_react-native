@@ -167,6 +167,12 @@ export const styleGlobal = StyleSheet.create({
   paddingBottom_16: {
     paddingBottom: 16,
   },
+  paddingBottom_18: {
+    paddingBottom: 18,
+  },
+  paddingBottom_20: {
+    paddingBottom: 20,
+  },
   padding_2: {
     paddingVertical: 2,
     paddingHorizontal: 2,

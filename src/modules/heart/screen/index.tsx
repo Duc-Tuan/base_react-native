@@ -74,12 +74,13 @@ const HeartScreen = () => {
           styleGlobal.justifyContent_spaceBetween,
           styleGlobal.flexDirection_row,
           styleGlobal.alignItems_center,
-          styleGlobal.padding_10,
+          styleGlobal.paddingHorizontal_10,
+          styleGlobal.paddingBottom_10,
         ]}>
         <View style={[styleGlobal.justifyContent_flexStart, styleGlobal.flexDirection_row]}>
           <Text style={styles.viewText}>{dataList.length} / </Text>
           <Text style={styles.viewText}>
-            {totalElement} {t('Sản phẩm ưa thích')}
+            {totalElement ?? 0} {t('Sản phẩm ưa thích')}
           </Text>
         </View>
 
