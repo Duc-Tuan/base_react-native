@@ -98,7 +98,7 @@ const ScreenPayments = () => {
           {loading ? (
             <View style={[styleGlobal.dFlex_center, styleGlobal.flexDirection_column, styleGlobal.flex_1]}>
               <IconPackOrder width={100} height={100} />
-              <Text style={[styleGlobal.paddingTop_10, styleGlobal.textFontSize_16]}>
+              <Text style={[styleGlobal.paddingTop_10, styleGlobal.textFontSize_16, styleGlobal.textPrimary]}>
                 {t('Vui lòng chờ trong giây lát...')}
               </Text>
             </View>
@@ -152,7 +152,7 @@ const ScreenPayments = () => {
                     <View style={[styleGlobal.marginTop_4]}>
                       {renderAddress(address)?.map((i: menuSub, idx: number) => (
                         <View style={[styleGlobal.dFlex_center, styleGlobal.justifyContent_flexStart]} key={idx}>
-                          <Text>{t(i?.title)} </Text>
+                          <Text style={[styleGlobal.textPrimary]}>{t(i?.title)} </Text>
                           <View style={[styleGlobal.dFlex_center, styleGlobal.justifyContent_flexStart]}>
                             <Text style={[styleGlobal.textFontBold_400]}>{i?.content}</Text>
                           </View>
@@ -300,7 +300,7 @@ const ScreenPayments = () => {
                     styles.ViewDetailAddress,
                     { borderRadius: 4 },
                   ]}>
-                  <Text>
+                  <Text style={[styleGlobal.textPrimary]}>
                     {t(
                       `Khi bạn bấm vào 'Đặt hàng' đồng nghĩa với việc bạn đã đồng ý với 'Điều khoản mua hàng' của chúng tôi.`,
                     )}
@@ -323,6 +323,7 @@ const ScreenPayments = () => {
                   styleGlobal.marginBottom_10,
                   styleGlobal.marginTop_10,
                   styleGlobal.textFontSize_16,
+                  styleGlobal.textPrimary,
                   { padding: 20, textAlign: 'center' },
                 ]}>
                 {t(
@@ -402,7 +403,7 @@ const ItemInfoOrder = (title: string, content: number) => {
         styleGlobal.paddingVertical_4,
         styleGlobal.gap_10,
       ]}>
-      <Text style={{ flex: 1 }}>{title}</Text>
+      <Text style={[styleGlobal.textPrimary, { flex: 1 }]}>{title}</Text>
       <Text style={[styleGlobal.textFontBold, { color: Colors.primary, textAlign: 'right' }]} numberOfLines={1}>
         {formatCurrency(content, ' vnđ')}
       </Text>
